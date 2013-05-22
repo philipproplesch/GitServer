@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SmartHttpController.cs" />
     <Compile Include="ModelBinders\SmartHttpPathBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
