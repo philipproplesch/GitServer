@@ -6,17 +6,22 @@
     {
       if (directory.Type == BrowseDirectoryType.Directory)
       {
-      <i class="icon-li icon-folder-open"></i> @directory.Name
+        <i class="icon-folder-open"></i> @directory.Name
       }
       else if (directory.Type == BrowseDirectoryType.Repository)
       {
-      <i class="icon-li icon-code-fork"></i> <strong>@directory.Name</strong> @:(@Url.CloneUrl(directory.Path))
+        <i class="icon-code-fork"></i> @directory.Name @:(@Url.RepositoryCloneUrl(directory.Path))
+        if (!string.IsNullOrEmpty(directory.Message))
+        {
+          <br/>
+          <i class="icon-comment-alt"></i> @directory.Message
+        }
+        <br/>
       }
-      <br />
       
       if (directory.Directories != null && directory.Directories.Any())
       {
-      @RenderTree(directory.Directories, level + 1)
+        @RenderTree(directory.Directories, level + 1)
       }
     }
   </div>  

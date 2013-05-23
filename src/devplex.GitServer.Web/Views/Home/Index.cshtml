@@ -8,7 +8,9 @@
 <p>
   Since there is (currently) no UI to initialize a new repository, it will be done automagically while cloning it for the first time.
 </p>
-<code>git clone @Url.CloneUrl("/company/our/fancy/project.git")</code>
+<code>git clone @Url.RepositoryCloneUrl("/company/our/fancy/project.git")</code>
+<br/>
+<code>git clone @Url.RepositoryCloneUrl("/***.git")</code>
 
 <h2>Repositories</h2>
 @Html.Partial("_DirectoryTree", Model.Tree)

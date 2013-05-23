@@ -1,21 +1,14 @@
 ﻿using System.IO;
 using GitSharp;
 using GitSharp.Core.Transport;
-using devplex.GitServer.Core.Configuration;
 
 namespace devplex.GitServer.Core.Git
 {
     public class SmartHttpPackage
     {
-        private static string GetRepositoryPath(string path)
-        {
-            var root = Settings.GetValue("GitServer.GitRoot");
-            return Path.Combine(root, path + ".git");
-        }
-
         public static void AdvertiseUploadPack(string path, Stream output)
         {
-            var absolutePath = GetRepositoryPath(path);
+            var absolutePath = RepositoryBrowser.GetRepositoryPath(path);
 
             // TODO: Replace with GUI and throw error/return 404.
             var repository =
@@ -35,7 +28,7 @@ namespace devplex.GitServer.Core.Git
 
         public static void AdvertiseReceivePack(string path, Stream output)
         {
-            var absolutePath = GetRepositoryPath(path);
+            var absolutePath = RepositoryBrowser.GetRepositoryPath(path);
 
             using (var repository = new Repository(absolutePath))
             {
@@ -49,7 +42,7 @@ namespace devplex.GitServer.Core.Git
 
         public static void Upload(string path, Stream input, Stream output)
         {
-            var absolutePath = GetRepositoryPath(path);
+            var absolutePath = RepositoryBrowser.GetRepositoryPath(path);
 
             using (var repository = new Repository(absolutePath))
             {
@@ -61,7 +54,7 @@ namespace devplex.GitServer.Core.Git
 
         public static void Receive(string path, Stream input, Stream output)
         {
-            var absolutePath = GetRepositoryPath(path);
+            var absolutePath = RepositoryBrowser.GetRepositoryPath(path);
 
             using (var repository = new Repository(absolutePath))
             {

@@ -66,6 +66,7 @@
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="FrameworkExtensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="FrameworkExtensions\HttpResponseBaseExtensions.cs" />
+    <Compile Include="Git\RepositoryBrowser.cs" />
     <Compile Include="IO\DirectoryCrawler.cs" />
     <Compile Include="Models\BrowseDirectory.cs" />
     <Compile Include="Models\BrowseDirectoryTree.cs" />
