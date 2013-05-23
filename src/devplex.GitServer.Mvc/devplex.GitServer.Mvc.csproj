@@ -72,8 +72,10 @@
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SmartHttpController.cs" />
+    <Compile Include="FrameworkExtensions\UrlHelperExtensions.cs" />
     <Compile Include="ModelBinders\SmartHttpPathBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DirectoryTreeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
-using devplex.GitServer.Core;
 using devplex.GitServer.Core.FrameworkExtensions;
+using devplex.GitServer.Core.Git;
 using devplex.GitServer.Mvc.ModelBinders;
 
 namespace devplex.GitServer.Mvc.Controllers

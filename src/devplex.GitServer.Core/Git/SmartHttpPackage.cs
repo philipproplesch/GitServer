@@ -3,7 +3,7 @@ using GitSharp;
 using GitSharp.Core.Transport;
 using devplex.GitServer.Core.Configuration;
 
-namespace devplex.GitServer.Core
+namespace devplex.GitServer.Core.Git
 {
     public class SmartHttpPackage
     {

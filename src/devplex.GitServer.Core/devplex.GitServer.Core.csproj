@@ -66,8 +66,12 @@
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="FrameworkExtensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="FrameworkExtensions\HttpResponseBaseExtensions.cs" />
+    <Compile Include="IO\DirectoryCrawler.cs" />
+    <Compile Include="Models\BrowseDirectory.cs" />
+    <Compile Include="Models\BrowseDirectoryTree.cs" />
+    <Compile Include="Models\BrowseDirectoryType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SmartHttpPackage.cs" />
+    <Compile Include="Git\SmartHttpPackage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
