@@ -157,3 +157,4 @@ $RECYCLE.BIN/
 
 # Build artifacts
 out/
+tmp/
