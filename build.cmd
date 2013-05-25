@@ -1,0 +1,1 @@
+powershell -NoProfile -ExecutionPolicy Bypass -Command ".\bld\psake.ps1 .\bld\default.ps1 Build"
