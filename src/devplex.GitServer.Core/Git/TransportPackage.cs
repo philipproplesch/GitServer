@@ -1,10 +1,11 @@
 ﻿using System.IO;
 using GitSharp;
+using GitSharp.Commands;
 using GitSharp.Core.Transport;
 
 namespace devplex.GitServer.Core.Git
 {
-    public class SmartHttpPackage
+    public class TransportPackage
     {
         public static void AdvertiseUploadPack(string path, Stream output)
         {
@@ -62,6 +63,6 @@ namespace devplex.GitServer.Core.Git
                 pack.setBiDirectionalPipe(false);
                 pack.receive(input, output, output);
             }
-        } 
+        }
     }
 }

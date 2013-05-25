@@ -72,7 +72,7 @@
     <Compile Include="Models\BrowseDirectoryTree.cs" />
     <Compile Include="Models\BrowseDirectoryType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Git\SmartHttpPackage.cs" />
+    <Compile Include="Git\TransportPackage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

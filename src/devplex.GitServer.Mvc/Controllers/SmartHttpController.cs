@@ -25,12 +25,12 @@ namespace devplex.GitServer.Mvc.Controllers
 
             if (service.Equals("git-upload-pack", StringComparison.OrdinalIgnoreCase))
             {
-                SmartHttpPackage.AdvertiseUploadPack(
+                TransportPackage.AdvertiseUploadPack(
                     path, Response.OutputStream);
             }
             else if (service.Equals("git-receive-pack", StringComparison.OrdinalIgnoreCase))
             {
-                SmartHttpPackage.AdvertiseReceivePack(
+                TransportPackage.AdvertiseReceivePack(
                     path, Response.OutputStream);
             }
 
@@ -45,7 +45,7 @@ namespace devplex.GitServer.Mvc.Controllers
             Response.Charset = string.Empty;
             Response.WriteNoCache();
 
-            SmartHttpPackage.Receive(
+            TransportPackage.Receive(
                 path, Request.GetRequestStream(), Response.OutputStream);
 
             return new EmptyResult();
@@ -59,7 +59,7 @@ namespace devplex.GitServer.Mvc.Controllers
             Response.Charset = string.Empty;
             Response.WriteNoCache();
 
-            SmartHttpPackage.Upload(
+            TransportPackage.Upload(
                 path, Request.GetRequestStream(), Response.OutputStream);
 
             return new EmptyResult();

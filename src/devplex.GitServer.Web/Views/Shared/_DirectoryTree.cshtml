@@ -13,12 +13,12 @@
         <i class="icon-code-fork"></i> @directory.Name @:(@Url.RepositoryCloneUrl(directory.Path))
         if (!string.IsNullOrEmpty(directory.Message))
         {
-          <br/>
+          <br />
           <i class="icon-comment-alt"></i> @directory.Message
         }
-        <br/>
+        <br />
       }
-      
+
       if (directory.Directories != null && directory.Directories.Any())
       {
         @RenderTree(directory.Directories, level + 1)
