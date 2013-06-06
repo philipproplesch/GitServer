@@ -250,6 +250,21 @@ InuA6gcF1PnH8FNZX7t3ft6TcEFOI8t4eXnELurXZioY99HFfOISeIKNHeyCngGi
 n2Xkw9dJh1tybLEvrG8=
 -----END CERTIFICATE-----
 </textarea>
+<h2>How to create a global ignore file?</h2>
+<p>
+  Open or create the file 
+</p>
+<code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name)\.gitconfig</code>
+<p>Add the following lines:</p>
+<code>
+  [core]
+  excludesfile = C:/Users/@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name)/gitignore.txt
+</code>
+<p>
+  <a href="@Url.Content("~/Content/gitignore.txt")" >Download this file</a> and save it as:
+</p>
+<code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name)\gitignore.txt</code>
+
 
 <h2>How to create a repository?</h2>
 <p>
