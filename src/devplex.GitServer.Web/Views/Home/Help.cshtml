@@ -265,6 +265,12 @@ n2Xkw9dJh1tybLEvrG8=
 </p>
 <code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name)\gitignore.txt</code>
 
+<h2>How to use the windows credential store to remember passwords?</h2>
+<p>
+  Download the latest version of the <a href="http://gitcredentialstore.codeplex.com/">git-credential-winstore.exe</a> application.
+  Run it! If you have GIT in your PATH, it should just work. If you don't, run:
+</p>
+<code>git-credential-winstore -i C:\Program Files (x86)\Git\bin\Git.exe</code>
 
 <h2>How to create a repository?</h2>
 <p>
@@ -274,3 +280,116 @@ n2Xkw9dJh1tybLEvrG8=
 <br/>
 <code>git clone @Url.RepositoryCloneUrl("/***.git")</code>
 
+<h2>How to add files to a repository?</h2>
+<p>
+  Run the following command on the command prompt
+</p>
+<code>git add -A</code>
+
+<h2>How to commit/push files to a repository?</h2>
+<p>
+  Run the following command on the command prompt to commit to the local repository:
+</p>
+<code>git commit --m F:Added a new feature</code>
+<p>
+  Run the following command on the command prompt to push to remote repository:
+</p>
+<code>git push</code>
+
+<h2>How to commit/push files to a repository?</h2>
+<p>
+  Run the following command on the command prompt to commit to the local repository:
+</p>
+<code>git commit --m {YourMessage}</code>
+<p>Use the folloning prefixes:</p>
+<ul>
+  <li>S: Specification</li>
+  <li>F: Feature</li>
+  <li>R: Refactoring</li>
+  <li>B: Bugfix</li>
+</ul>
+<p>
+  Run the following command on the command prompt to push to remote repository:
+</p>
+<code>git push</code>
+
+<h2>How to update a local repository with changes from remote?</h2>
+<p>
+  Run the following command on the command prompt to update the local repository:
+</p>
+<code>git pull -u</code>
+
+<h2>How to show the repository log?</h2>
+<p>
+  Run the following command on the command prompt:
+</p>
+<code>git log --graph --pretty=format:'%Cred%h%Creset: %Creset %s %C(bold blue)<%an> %Cgreen(%cr) %Creset ' --abbrev-commit</code>
+
+
+<h2>How to see modified/added/deleted files?</h2>
+<p>
+  Run the following command on the command prompt:
+</p>
+<code>git status</code>
+
+<h2>How to create a new branch?</h2>
+<p>
+  Run the following command on the command prompt:
+</p>
+<code>git branch {NameOfTheBranch}</code>
+
+
+<h2>How to switch between branches?</h2>
+<p>
+  Run the following command on the command prompt:
+</p>
+<code>git checkout {NameOfTheBranch}</code>
+
+
+<h2>How to merge a branches?</h2>
+<p>
+  Run the following command on the command prompt to swith over to the main branch:
+</p>
+<code>git checkout {NameOfTheMasterBranch}</code>
+<p>
+  Run the following command on the command prompt to merge a branch into the main branch:
+</p>
+<code>git merge {NameOfTheHotfixOrFeatureBranch}</code>
+
+<h2>How to delete a branch?</h2>
+<p>
+  Run the following command on the command prompt to delete a branch:
+</p>
+<code>git branch  -d {NameOfTheBranch}</code>
+
+<h2>How to exit VIM?</h2>
+<p>
+  Run the following command on the command prompt to quit VIM:
+</p>
+<code>[w] + [q]</code>
+
+<h2>How to configure BEyond Compare a visual merge tool?</h2>
+<p>
+  Open or create the file 
+</p>
+<code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name)\.gitconfig</code>
+<p>Add the following lines:</p>
+<code>
+[merge]
+  tool = bc3
+[mergetool.bc3]
+  path = "C:/Program Files (x86)/Beyond Compare 3/bcomp.exe"
+  cmd = "\"C:/Program Files (x86)/Beyond Compare 3/bcomp.exe\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\""
+  trustExitCode = true
+
+[diff]
+  tool = bc3
+[difftool]
+  prompt = false
+[difftool.bc3]
+  cmd = "\"C:/Program Files (x86)/Beyond Compare 3/bcomp.exe\" \"$LOCAL\" \"$REMOTE\""
+</code>
+<p>
+  Run the following command on the command diff a file:
+</p>
+<code>git difftool {PathToFileToDiff}</code>

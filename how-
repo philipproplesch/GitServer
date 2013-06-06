@@ -1,0 +1,15 @@
+* [31m09123ee[m -[33m (HEAD, origin/develop, origin/HEAD, develop)[m F: Added Help, theme and settings for SSL [32m(13 minutes ago) [1;34m<Lennybacon>[m
+* [31m99211af[m -[33m[m F: Added files [32m(14 minutes ago) [1;34m<Lennybacon>[m
+* [31m26f459f[m -[33m[m Added some versioning stuff. [32m(11 days ago) [1;34m<Philip Proplesch>[m
+* [31mb6ce8f8[m -[33m[m Replaced tabs with spaces. [32m(12 days ago) [1;34m<Philip Proplesch>[m
+* [31m8fe2b7c[m -[33m[m Added build.cmd [32m(12 days ago) [1;34m<Philip Proplesch>[m
+* [31m8b04537[m -[33m[m Added build script. [32m(12 days ago) [1;34m<Philip Proplesch>[m
+* [31m8eff9f2[m -[33m[m Displayed latest commit message in tree. [32m(13 days ago) [1;34m<Philip Proplesch>[m
+* [31m4f9ee09[m -[33m[m Rendered a simple repository tree on the start page. [32m(13 days ago) [1;34m<Philip Proplesch>[m
+* [31m6a25e19[m -[33m[m Added some instructions. [32m(2 weeks ago) [1;34m<Philip Proplesch>[m
+* [31mdaadc4d[m -[33m[m Mentioned git-dot-aspx in the readme file. [32m(2 weeks ago) [1;34m<Philip Proplesch>[m
+* [31m4baf688[m -[33m[m Enabled package restore. [32m(2 weeks ago) [1;34m<Philip Proplesch>[m
+* [31me3dd0cd[m -[33m[m Implemented Smart HTTP. Clone and push works fine! [32m(2 weeks ago) [1;34m<Philip Proplesch>[m
+* [31m7490d62[m -[33m[m Removed Web API stuff. [32m(2 weeks ago) [1;34m<Philip Proplesch>[m
+* [31mfa728db[m -[33m[m Initial commit. [32m(2 weeks ago) [1;34m<Philip Proplesch>[m
+* [31md91cf1f[m -[33m[m Create README.md [32m(2 weeks ago) [1;34m<Philip Proplesch>[m
