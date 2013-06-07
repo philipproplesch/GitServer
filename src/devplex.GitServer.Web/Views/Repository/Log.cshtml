@@ -1,0 +1,8 @@
+﻿@model List<CommitMessage>
+
+<ul>
+  @foreach (var commit in Model)
+  {
+<li>@commit.Message (@commit.AuthorName on @commit.Timestamp)</li>
+  }
+</ul>

@@ -31,6 +31,12 @@ namespace devplex.GitServer.Web
             );
 
             routes.MapRoute(
+                name: "RepositoryLog",
+                url: "log/{branch}/{*path}",
+                defaults: new { controller = "Repository", action = "Log" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

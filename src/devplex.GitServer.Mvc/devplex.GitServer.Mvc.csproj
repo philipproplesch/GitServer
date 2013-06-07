@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RepositoryController.cs" />
     <Compile Include="Controllers\SmartHttpController.cs" />
     <Compile Include="FrameworkExtensions\UrlHelperExtensions.cs" />
     <Compile Include="ModelBinders\SmartHttpPathBinder.cs" />

@@ -1,4 +1,15 @@
 ﻿@model DirectoryTree
+@helper RenderBranches(RepositoryDirectory repository)
+{
+  if (repository.Branches != null)
+  {
+    foreach (var branch in repository.Branches)
+    {
+      @Html.ActionLink(branch, "Log", "Repository", new { branch, path = repository.PathWithoutExtension }, null)
+    }
+  }
+}
+
 @helper RenderTree(IEnumerable<ITreeDirectory> directories, int level = 1)
 {
   <div style="margin-left: @(level * 5)px;">
@@ -10,7 +21,9 @@
       }
       else if (directory is RepositoryDirectory)
       {
-      <i class="icon-code-fork"></i> @directory.Name @:(@Url.RepositoryCloneUrl(directory.Path))
+        var repository = directory as RepositoryDirectory;
+        
+      <i class="icon-code-fork"></i> @directory.Name @:(@Url.RepositoryCloneUrl(directory.Path)) @RenderBranches(repository)
       <br />
       }
 
