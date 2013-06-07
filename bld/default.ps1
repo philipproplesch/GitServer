@@ -9,8 +9,8 @@ Properties {
   $tmp = "$bld\..\tmp"
 
   #Versioning
-  $major = 1
-  $minor = 0
+  $major = 0
+  $minor = 1
   $version = "$major.$minor"
 }
 
