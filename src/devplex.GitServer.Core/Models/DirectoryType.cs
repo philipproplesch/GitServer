@@ -1,6 +1,6 @@
 ﻿namespace devplex.GitServer.Core.Models
 {
-    public enum BrowseDirectoryType
+    public enum DirectoryType
     {
         Directory = 0,
         Repository = 1

@@ -10,7 +10,12 @@ namespace devplex.GitServer.Core.Models
 
         public string Message { get; set; }
 
-        public BrowseDirectoryType Type { get; set; }
+        public DirectoryType Type { get; set; }
         public List<BrowseDirectory> Directories { get; set; }
+
+        public BrowseDirectory()
+        {
+            //Directories = new List<BrowseDirectory>();
+        }
     }
 }

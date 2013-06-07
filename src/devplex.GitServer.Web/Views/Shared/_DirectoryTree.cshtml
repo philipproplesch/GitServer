@@ -1,14 +1,14 @@
-﻿@model BrowseDirectoryTree
+﻿@model DirectoryTree
 @helper RenderTree(IEnumerable<BrowseDirectory> directories, int level = 1)
 {
   <div style="margin-left: @(level * 5)px;">
     @foreach (var directory in directories.OrderBy(x => x.Type).ThenBy(x => x.Name))
     {
-      if (directory.Type == BrowseDirectoryType.Directory)
+      if (directory.Type == DirectoryType.Directory)
       {
       <i class="icon-folder-open"></i> @directory.Name
       }
-      else if (directory.Type == BrowseDirectoryType.Repository)
+      else if (directory.Type == DirectoryType.Repository)
       {
       <i class="icon-code-fork"></i> @directory.Name @:(@Url.RepositoryCloneUrl(directory.Path))
         if (!string.IsNullOrEmpty(directory.Message))

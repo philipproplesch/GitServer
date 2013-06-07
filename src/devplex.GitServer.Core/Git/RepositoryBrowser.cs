@@ -22,7 +22,11 @@ namespace devplex.GitServer.Core.Git
                     return string.Empty;
                 }
 
-                var branch = repository.Branches[branchName];
+                var branch =
+                    repository.Branches.ContainsKey("master")
+                        ? repository.Branches["master"]
+                        : repository.Branches.First().Value;
+
                 if (branch != null && branch.CurrentCommit != null)
                 {
                     return branch.CurrentCommit.Message;

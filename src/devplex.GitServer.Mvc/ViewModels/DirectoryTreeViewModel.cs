@@ -4,6 +4,6 @@ namespace devplex.GitServer.Mvc.ViewModels
 {
     public class DirectoryTreeViewModel
     {
-        public BrowseDirectoryTree Tree { get; set; }
+        public DirectoryTree Tree { get; set; }
     }
 }

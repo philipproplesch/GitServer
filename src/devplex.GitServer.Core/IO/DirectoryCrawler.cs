@@ -1,5 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Security;
+using System.Security.AccessControl;
+using System.Security.Permissions;
+using System.Security.Principal;
+using System.Web;
 using devplex.GitServer.Core.Configuration;
 using devplex.GitServer.Core.Git;
 using devplex.GitServer.Core.Models;
@@ -16,11 +22,11 @@ namespace devplex.GitServer.Core.IO
             return Path.Combine(root, path);
         }
 
-        public BrowseDirectoryTree GetTree(string absolutePath)
+        public DirectoryTree GetTree(string absolutePath)
         {
             _repositoryBrowser = new RepositoryBrowser();
 
-            return new BrowseDirectoryTree
+            return new DirectoryTree
             {
                 Directories = GetDirectories(absolutePath)
             };
@@ -32,34 +38,55 @@ namespace devplex.GitServer.Core.IO
 
             var rootDirectoryInfo = new DirectoryInfo(absolutePath);
 
-            foreach (var directoryInfo in rootDirectoryInfo.EnumerateDirectories())
+            try
             {
-                var directory = new BrowseDirectory();
-                directory.Name = directoryInfo.Name;
-                directory.Path = string.Concat(relativePath, "/", directoryInfo.Name);
-
-                if (directoryInfo.Name.EndsWith(".git"))
+                foreach (var directoryInfo in rootDirectoryInfo.EnumerateDirectories())
                 {
-                    directory.Type = BrowseDirectoryType.Repository;
+                    var directory = new BrowseDirectory();
+                    directory.Name = directoryInfo.Name;
 
-                    directory.PathWithoutExtension =
+                    directory.Path =
                         string.Concat(
-                            relativePath,
-                            "/",
-                            directoryInfo.Name.Substring(0, directoryInfo.Name.Length - 4));
+                            relativePath, "/", directoryInfo.Name);
 
-                    directory.Message =
-                        _repositoryBrowser.GetLatestCommitMessage(
-                            "master",
-                            directoryInfo.FullName);
-                }
-                else
-                {
-                    directory.Type = BrowseDirectoryType.Directory;
-                    directory.Directories = GetDirectories(directoryInfo.FullName, directory.Path);
-                }
+                    if (directoryInfo.Name.EndsWith(".git"))
+                    {
+                        directory.Type = DirectoryType.Repository;
 
-                directories.Add(directory);
+                        directory.PathWithoutExtension =
+                            string.Concat(
+                                relativePath,
+                                "/",
+                                directoryInfo.Name.Substring(0, directoryInfo.Name.Length - 4));
+
+                        directory.Message =
+                            _repositoryBrowser.GetLatestCommitMessage(
+                                "master",
+                                directoryInfo.FullName);
+                    }
+                    else
+                    {
+                        directory.Type = DirectoryType.Directory;
+
+                        var subDirectories =
+                            GetDirectories(
+                                directoryInfo.FullName,
+                                directory.Path);
+
+                        if (subDirectories.Count == 0)
+                        {
+                            continue;
+                        }
+
+                        directory.Directories = subDirectories;
+                    }
+
+                    directories.Add(directory);
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                //
             }
 
             return directories;

@@ -69,8 +69,8 @@
     <Compile Include="Git\RepositoryBrowser.cs" />
     <Compile Include="IO\DirectoryCrawler.cs" />
     <Compile Include="Models\BrowseDirectory.cs" />
-    <Compile Include="Models\BrowseDirectoryTree.cs" />
-    <Compile Include="Models\BrowseDirectoryType.cs" />
+    <Compile Include="Models\DirectoryTree.cs" />
+    <Compile Include="Models\DirectoryType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Git\TransportPackage.cs" />
   </ItemGroup>

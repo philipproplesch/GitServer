@@ -2,7 +2,7 @@
 
 namespace devplex.GitServer.Core.Models
 {
-    public class BrowseDirectoryTree
+    public class DirectoryTree
     {
         public List<BrowseDirectory> Directories { get; set; }
     }
