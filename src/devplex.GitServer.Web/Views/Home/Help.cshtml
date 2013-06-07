@@ -288,23 +288,13 @@ n2Xkw9dJh1tybLEvrG8=
 
 <h2>How to commit/push files to a repository?</h2>
 <p>
-  Run the following command on the command prompt to commit to the local repository:
-</p>
-<code>git commit --m F:Added a new feature</code>
-<p>
-  Run the following command on the command prompt to push to remote repository:
-</p>
-<code>git push</code>
-
-<h2>How to commit/push files to a repository?</h2>
-<p>
   Run the following command on the command prompt to add all changes to the commit:
 </p>
 <code>git add --all .</code>
 <p>
   Run the following command on the command prompt to commit to the local repository:
 </p>
-<code>git commit --m {YourMessage}</code>
+<code>git commit -m {YourMessage}</code>
 <p>Use the folloning prefixes:</p>
 <ul>
   <li>S: Specification</li>
@@ -316,6 +306,11 @@ n2Xkw9dJh1tybLEvrG8=
   Run the following command on the command prompt to push to remote repository:
 </p>
 <code>git push</code>
+<p>
+  NOTE: If you just cloned a new empty (bare) repository you MUST run:
+</p>
+<code>git push origin master</code>
+
 
 <h2>How to update a local repository with changes from remote?</h2>
 <p>
@@ -394,10 +389,21 @@ n2Xkw9dJh1tybLEvrG8=
   cmd = "\"C:/Program Files (x86)/Beyond Compare 3/bcomp.exe\" \"$LOCAL\" \"$REMOTE\""
 </code>
 <p>
-  Run the following command on the command diff a file:
+  Run the following command to diff a file:
 </p>
 <code>git difftool {PathToFileToDiff}</code>
 <p>
   Run the following command on the command merge a file:
 </p>
 <code>git mergetool {PathToFileToDiff}</code>
+
+<h2>How to revert/see to a specific version of a file?</h2>
+<p>
+  Run the following command to see to a specific version:
+</p>
+<code>git show {HASH}:./{RelativePathToFile}</code>
+<code>git show HEAD@@{YYYY-MM-DD}:./{RelativePathToFile}</code>
+<p>
+  Run the following command to revert to a specific version:
+</p>
+<code>git checkout {HASH}:./{RelativePathToFile}</code>
