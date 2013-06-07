@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Security;
-using System.Security.AccessControl;
-using System.Security.Permissions;
-using System.Security.Principal;
-using System.Web;
 using devplex.GitServer.Core.Configuration;
-using devplex.GitServer.Core.Git;
 using devplex.GitServer.Core.Models;
 
 namespace devplex.GitServer.Core.IO
 {
     public class DirectoryCrawler
     {
-        private RepositoryBrowser _repositoryBrowser;
-
         public string GetAbsolutePath(string path)
         {
             var root = Settings.GetValue("GitServer.GitRoot");
@@ -24,8 +16,6 @@ namespace devplex.GitServer.Core.IO
 
         public DirectoryTree GetTree(string absolutePath)
         {
-            _repositoryBrowser = new RepositoryBrowser();
-
             return new DirectoryTree
             {
                 Directories = GetDirectories(absolutePath)
@@ -58,11 +48,6 @@ namespace devplex.GitServer.Core.IO
                                 relativePath,
                                 "/",
                                 directoryInfo.Name.Substring(0, directoryInfo.Name.Length - 4));
-
-                        directory.Message =
-                            _repositoryBrowser.GetLatestCommitMessage(
-                                "master",
-                                directoryInfo.FullName);
                     }
                     else
                     {

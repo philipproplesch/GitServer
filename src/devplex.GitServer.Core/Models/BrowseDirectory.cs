@@ -8,14 +8,7 @@ namespace devplex.GitServer.Core.Models
         public string Path { get; set; }
         public string PathWithoutExtension { get; set; }
 
-        public string Message { get; set; }
-
         public DirectoryType Type { get; set; }
         public List<BrowseDirectory> Directories { get; set; }
-
-        public BrowseDirectory()
-        {
-            //Directories = new List<BrowseDirectory>();
-        }
     }
 }

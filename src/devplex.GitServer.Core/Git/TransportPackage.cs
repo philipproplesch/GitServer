@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using GitSharp;
-using GitSharp.Commands;
 using GitSharp.Core.Transport;
 
 namespace devplex.GitServer.Core.Git
@@ -11,7 +10,6 @@ namespace devplex.GitServer.Core.Git
         {
             var absolutePath = RepositoryBrowser.GetRepositoryPath(path);
 
-            // TODO: Replace with GUI and throw error/return 404.
             var repository =
                 !Directory.Exists(absolutePath)
                     ? Repository.Init(absolutePath, true)
