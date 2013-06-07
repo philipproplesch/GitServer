@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using GitSharp;
 using devplex.GitServer.Core.Configuration;
@@ -34,6 +35,14 @@ namespace devplex.GitServer.Core.Git
             }
 
             return string.Empty;
+        }
+
+        public List<string> GetBranches(string path)
+        {
+            using (var repository = new Repository(path))
+            {
+                return repository.Branches.Select(x => x.Key).ToList();
+            }
         }
     }
 }

@@ -2,8 +2,10 @@
 
 namespace devplex.GitServer.Core.Models
 {
-    public class DirectoryTree
+    public class NamespaceDirectory : ITreeDirectory
     {
+        public string Name { get; set; }
+        public string Path { get; set; }
         public List<ITreeDirectory> Directories { get; set; }
     }
 }

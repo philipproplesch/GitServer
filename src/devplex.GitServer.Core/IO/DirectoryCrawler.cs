@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using devplex.GitServer.Core.Configuration;
+using devplex.GitServer.Core.Git;
 using devplex.GitServer.Core.Models;
 
 namespace devplex.GitServer.Core.IO
 {
     public class DirectoryCrawler
     {
+        private RepositoryBrowser _repositoryBrowser;
+
         public string GetAbsolutePath(string path)
         {
             var root = Settings.GetValue("GitServer.GitRoot");
@@ -16,15 +19,17 @@ namespace devplex.GitServer.Core.IO
 
         public DirectoryTree GetTree(string absolutePath)
         {
+            _repositoryBrowser = new RepositoryBrowser();
+
             return new DirectoryTree
             {
                 Directories = GetDirectories(absolutePath)
             };
         }
 
-        public List<BrowseDirectory> GetDirectories(string absolutePath, string relativePath = "")
+        public List<ITreeDirectory> GetDirectories(string absolutePath, string relativePath = "")
         {
-            var directories = new List<BrowseDirectory>();
+            var directories = new List<ITreeDirectory>();
 
             var rootDirectoryInfo = new DirectoryInfo(absolutePath);
 
@@ -32,26 +37,36 @@ namespace devplex.GitServer.Core.IO
             {
                 foreach (var directoryInfo in rootDirectoryInfo.EnumerateDirectories())
                 {
-                    var directory = new BrowseDirectory();
-                    directory.Name = directoryInfo.Name;
-
-                    directory.Path =
-                        string.Concat(
-                            relativePath, "/", directoryInfo.Name);
+                    var name = directoryInfo.Name;
+                    var path = string.Concat(relativePath, "/", name);
 
                     if (directoryInfo.Name.EndsWith(".git"))
                     {
-                        directory.Type = DirectoryType.Repository;
+                        var directory = new RepositoryDirectory
+                        {
+                            Name = name,
+                            Path = path,
+                            PathWithoutExtension =
+                                string.Concat(
+                                    relativePath,
+                                    "/",
+                                    directoryInfo.Name.Substring(
+                                        0, directoryInfo.Name.Length - 4)),
+                            Branches =
+                                _repositoryBrowser.GetBranches(
+                                    directoryInfo.FullName)
+                        };
 
-                        directory.PathWithoutExtension =
-                            string.Concat(
-                                relativePath,
-                                "/",
-                                directoryInfo.Name.Substring(0, directoryInfo.Name.Length - 4));
+                        directories.Add(directory);
                     }
                     else
                     {
-                        directory.Type = DirectoryType.Directory;
+                        var directory =
+                            new NamespaceDirectory
+                            {
+                                Name = name,
+                                Path = path
+                            };
 
                         var subDirectories =
                             GetDirectories(
@@ -64,9 +79,9 @@ namespace devplex.GitServer.Core.IO
                         }
 
                         directory.Directories = subDirectories;
-                    }
 
-                    directories.Add(directory);
+                        directories.Add(directory);
+                    }
                 }
             }
             catch (UnauthorizedAccessException)
