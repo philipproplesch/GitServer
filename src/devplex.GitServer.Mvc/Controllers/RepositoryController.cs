@@ -7,7 +7,7 @@ namespace devplex.GitServer.Mvc.Controllers
 {
     public class RepositoryController : Controller
     {
-        readonly Func<string, bool> isReadMe = fileName =>
+        readonly Func<string, bool> _isReadMe = fileName =>
         {
             fileName = fileName.ToUpper();
 
@@ -28,7 +28,7 @@ namespace devplex.GitServer.Mvc.Controllers
             var model = new RepositoryViewModel();
             model.Path = repositoryPath;
             model.Branches = repositoryBrowser.GetBranches(repositoryPath.AbsoluteRootPath);
-            model.ReadMe = repositoryBrowser.FindFile(repositoryPath, isReadMe);
+            model.ReadMe = repositoryBrowser.FindFile(repositoryPath, _isReadMe);
 
             return View(model);
         }
@@ -51,8 +51,7 @@ namespace devplex.GitServer.Mvc.Controllers
             var model = new TreeViewModel {
                 Branch = branch,
                 RepositoryPath = repositoryPath.RootPath,
-                Tree = repositoryBrowser.GetRepositoryContent(branch, repositoryPath),
-                ReadMe = repositoryBrowser.FindFile(branch, repositoryPath, isReadMe)
+                Tree = repositoryBrowser.GetRepositoryContent(branch, repositoryPath)
             };
 
             return View(model);

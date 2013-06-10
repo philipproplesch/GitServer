@@ -32,9 +32,6 @@
   </div>  
 }
 
-@RenderTree(Model.Tree.Directories)
-
-@if (!string.IsNullOrEmpty(Model.ReadMe))
-{
-  @Html.RenderMarkdown(Model.ReadMe)
-}
+<div class="tree">
+  @RenderTree(Model.Tree.Directories)
+</div>

@@ -1,0 +1,27 @@
+code, pre {
+  font-family: Consolas, 'Lucida Console', 'DejaVu Sans Mono', monospace;
+}
+
+.console {
+  display: block;
+
+  &:before {
+    content: '> ';
+  }
+}
+
+.tree {
+
+  div {
+    margin: 5px 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: $body-icon-color;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

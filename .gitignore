@@ -156,3 +156,6 @@ $RECYCLE.BIN/
 # Build artifacts
 out/
 tmp/
+
+#Sass
+.sass-cache/
