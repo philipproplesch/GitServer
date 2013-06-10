@@ -81,6 +81,24 @@ code, pre {
   text-decoration: underline;
 }
 
+/* line 31, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
+.commits li {
+  margin-bottom: 20px;
+}
+/* line 34, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
+.commits li img {
+  float: left;
+  margin-right: 10px;
+}
+/* line 39, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
+.commits li .commit-info {
+  float: left;
+}
+/* line 43, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
+.commits li .commit-meta {
+  font-size: 0.8em;
+}
+
 /* line 9, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 .clearfix {
   clear: both;

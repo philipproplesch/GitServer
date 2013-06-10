@@ -13,6 +13,13 @@ namespace devplex.GitServer.Web
                         "~/Content/styles.css",
                         "~/Content/Prettify/prettify.css",
                         "~/Content/font-awesome.css"));
+
+            bundles.Add(
+                new ScriptBundle("~/scripts/app")
+                    .Include(
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.timeago.js",
+                        "~/Scripts/devplex.gitserver*"));
         }
     }
 }

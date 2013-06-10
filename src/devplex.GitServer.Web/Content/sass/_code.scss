@@ -25,3 +25,23 @@ code, pre {
     }
   }
 }
+
+.commits {
+
+  li {
+    margin-bottom: 20px;
+
+    img {
+      float: left;
+      margin-right: 10px;
+    }
+
+    .commit-info {
+      float: left; 
+    }
+
+    .commit-meta {
+      font-size: 0.8em;
+    }
+  }
+}
