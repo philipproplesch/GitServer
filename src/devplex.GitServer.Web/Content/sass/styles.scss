@@ -1,0 +1,15 @@
+//@import "compass/reset";
+
+@import "variables";
+@import "global";
+@import "navigation";
+@import "headings";
+@import "code";
+
+.clearfix {
+  clear: both;
+}
+
+i {
+  color: $body-icon-color;
+}

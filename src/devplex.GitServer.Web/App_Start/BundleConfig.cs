@@ -8,7 +8,11 @@ namespace devplex.GitServer.Web
         {
             bundles.Add(
                 new StyleBundle("~/content/css")
-                    .Include("~/Content/font-awesome.css"));
+                    .Include(
+                        "~/Content/normalize.css",
+                        "~/Content/styles.css",
+                        "~/Content/Prettify/prettify.css",
+                        "~/Content/font-awesome.css"));
         }
     }
 }

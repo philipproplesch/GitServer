@@ -6,7 +6,6 @@ namespace devplex.GitServer.Mvc.ViewModels
     {
         public string Branch { get; set; }
         public string RepositoryPath { get; set; }
-        public string ReadMe { get; set; }
 
         public DirectoryTree Tree { get; set; }
     }

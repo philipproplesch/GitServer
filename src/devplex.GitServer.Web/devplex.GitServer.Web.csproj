@@ -115,7 +115,6 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="Content\devplex.gitserver.css" />
     <Content Include="Content\font-awesome-ie7.css" />
     <Content Include="Content\font-awesome-ie7.min.css" />
     <Content Include="Content\font-awesome.css" />
@@ -124,12 +123,13 @@
     <Content Include="Content\gitignore.txt" />
     <Content Include="Content\images\devplex-git-icon.png" />
     <Content Include="Content\images\devplex-git-logo.png" />
+    <Content Include="Content\normalize.css" />
     <Content Include="Content\Prettify\prettify.css" />
     <Content Include="Content\Prettify\Themes\desert.css" />
     <Content Include="Content\Prettify\Themes\doxy.css" />
     <Content Include="Content\Prettify\Themes\sons-of-obsidian.css" />
     <Content Include="Content\Prettify\Themes\sunburst.css" />
-    <Content Include="Content\style-devplex.css" />
+    <Content Include="Content\styles.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Prettify\lang-apollo.js" />
     <Content Include="Scripts\Prettify\lang-basic.js" />
