@@ -27,9 +27,9 @@ namespace devplex.GitServer.Core.IO
             };
         }
 
-        public List<ITreeDirectory> GetDirectories(string absolutePath, string relativePath = "")
+        public List<ITreeObject> GetDirectories(string absolutePath, string relativePath = "")
         {
-            var directories = new List<ITreeDirectory>();
+            var directories = new List<ITreeObject>();
 
             var rootDirectoryInfo = new DirectoryInfo(absolutePath);
 
@@ -78,7 +78,7 @@ namespace devplex.GitServer.Core.IO
                             continue;
                         }
 
-                        directory.Directories = subDirectories;
+                        directory.Objects = subDirectories;
 
                         directories.Add(directory);
                     }

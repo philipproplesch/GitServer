@@ -66,13 +66,18 @@
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="FrameworkExtensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="FrameworkExtensions\HttpResponseBaseExtensions.cs" />
+    <Compile Include="FrameworkExtensions\StringExtensions.cs" />
     <Compile Include="Git\RepositoryBrowser.cs" />
     <Compile Include="IO\DirectoryCrawler.cs" />
+    <Compile Include="Models\BlobDetails.cs" />
     <Compile Include="Models\CommitMessage.cs" />
+    <Compile Include="Models\RepositoryPath.cs" />
+    <Compile Include="Models\TreeDirectory.cs" />
     <Compile Include="Models\NamespaceDirectory.cs" />
     <Compile Include="Models\DirectoryTree.cs" />
-    <Compile Include="Models\ITreeDirectory.cs" />
+    <Compile Include="Models\ITreeObject.cs" />
     <Compile Include="Models\RepositoryDirectory.cs" />
+    <Compile Include="Models\TreeFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Git\TransportPackage.cs" />
   </ItemGroup>

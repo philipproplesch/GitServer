@@ -31,6 +31,30 @@ namespace devplex.GitServer.Web
             );
 
             routes.MapRoute(
+                name: "Repository",
+                url: "repository/{*path}",
+                defaults: new { controller = "Repository", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "RepositoryTree",
+                url: "tree/{branch}/{*path}",
+                defaults: new { controller = "Repository", action = "Tree" }
+            );
+
+            routes.MapRoute(
+                name: "RepositoryBlob",
+                url: "blob/{branch}/{*path}",
+                defaults: new { controller = "Repository", action = "Blob" }
+            );
+
+            routes.MapRoute(
+                name: "RepositoryRawBlob",
+                url: "raw/blob/{branch}/{*path}",
+                defaults: new { controller = "Repository", action = "RawBlob" }
+            );
+
+            routes.MapRoute(
                 name: "RepositoryLog",
                 url: "log/{branch}/{*path}",
                 defaults: new { controller = "Repository", action = "Log" }

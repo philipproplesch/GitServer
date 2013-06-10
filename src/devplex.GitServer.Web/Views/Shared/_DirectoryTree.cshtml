@@ -1,38 +1,40 @@
-﻿@model DirectoryTree
-@helper RenderBranches(RepositoryDirectory repository)
-{
-  if (repository.Branches != null)
-  {
-    foreach (var branch in repository.Branches)
-    {
-      @Html.ActionLink(branch, "Log", "Repository", new { branch, path = repository.PathWithoutExtension }, null)
-    }
-  }
-}
+﻿@model TreeViewModel
 
-@helper RenderTree(IEnumerable<ITreeDirectory> directories, int level = 1)
+@helper RenderTree(IEnumerable<ITreeObject> objects, int level = 1)
 {
   <div style="margin-left: @(level * 5)px;">
-    @foreach (var directory in directories.OrderBy(x => x.GetType()).ThenBy(x => x.Name))
+    @foreach (var obj in objects.OrderBy(x => x.Order).ThenBy(x => x.Name))
     {
-      if (directory is NamespaceDirectory)
+      if (obj is NamespaceDirectory)
       {
-      <i class="icon-folder-open"></i> @directory.Name
+        <i class="icon-folder-open"></i> @obj.Name
       }
-      else if (directory is RepositoryDirectory)
+      else if (obj is TreeDirectory)
       {
-        var repository = directory as RepositoryDirectory;
-        
-      <i class="icon-code-fork"></i> @directory.Name @:(@Url.RepositoryCloneUrl(directory.Path)) @RenderBranches(repository)
-      <br />
+        <i class="icon-folder-close"></i> @Html.ActionLink(obj.Name, "Tree", "Repository", new { branch = Model.Branch, path = string.Concat(Model.RepositoryPath, "/", obj.Path) }, null)<br />
+      }
+      else if (obj is TreeFile)
+      {
+        <i class="icon-file"></i> @Html.ActionLink(obj.Name, "Blob", "Repository", new { branch = Model.Branch, path = string.Concat(Model.RepositoryPath, "/", obj.Path) }, null)<br />
+      }
+      else if (obj is RepositoryDirectory)
+      {
+        <i class="icon-code-fork"></i> 
+          @Html.ActionLink(obj.Name, "Index", "Repository", new{path = obj.Path}, null)
+        <br />
       }
 
-      if (directory.Directories != null && directory.Directories.Any())
+      if (obj.Objects != null && obj.Objects.Any())
       {
-      @RenderTree(directory.Directories, level + 1)
+        @RenderTree(obj.Objects, level + 1)
       }
     }
   </div>  
 }
 
-@RenderTree(Model.Directories)
+@RenderTree(Model.Tree.Directories)
+
+@if (!string.IsNullOrEmpty(Model.ReadMe))
+{
+  @Html.RenderMarkdown(Model.ReadMe)
+}

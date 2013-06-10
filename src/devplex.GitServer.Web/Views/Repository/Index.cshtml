@@ -1,0 +1,16 @@
+﻿@model RepositoryViewModel
+
+<code>git clone @Url.RepositoryCloneUrl(Model.Path.RootPath)</code>
+
+<h2>Browse the repository</h2>
+<ul>
+  @foreach (var branch in Model.Branches)
+  {
+    <li>@Html.ActionLink(branch, "Tree", "Repository", new { branch }, null)</li>
+  }
+</ul>
+
+@if (!string.IsNullOrEmpty(Model.ReadMe))
+{
+  @Html.RenderMarkdown(Model.ReadMe)
+}
