@@ -7,6 +7,8 @@
     <link rel="icon" href="@Url.Content("~/Content/images/devplex-git-icon.png")" type="image/png" />
     <meta name="robots" content="index, nofollow" />
     <link rel="stylesheet" href="@Url.Content("~/Content/style-devplex.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/devplex.gitserver.css")" type="text/css" />
+    <link href="~/Content/Prettify/prettify.css" rel="stylesheet" />
   </head>
   <body>
     <div class="container">
@@ -14,8 +16,8 @@
         <a href="/git/">
           <img src="@Url.Content("~/Content/images/devplex-git-logo.png")" width=75 height=90 border=0 alt="git" />
         </a>
-        @Html.ActionLink("Home", "Index")
-        @Html.ActionLink("Help", "Help")
+        @Html.ActionLink("Home", "Index", "Home")
+        @Html.ActionLink("Help", "Help", "Home")
       </div>
       <div class="main">
           @RenderBody()

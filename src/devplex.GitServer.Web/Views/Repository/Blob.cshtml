@@ -1,0 +1,18 @@
+﻿@model BlobDetails
+@if (Model.IsMarkdown())
+{
+  @Html.RenderMarkdown(Model.Content)
+}
+else if (Model.IsImage())
+{
+  <img src="@Model.RawUrl" alt="" />
+}
+else if (Model.IsBinary())
+{
+  <a href="@Model.RawUrl">Download file</a>
+}
+else
+{
+  <pre class="prettyprint linenums">@Model.Content</pre>
+  <script src="@Url.Content("~/Scripts/Prettify/run_prettify.js?skin=sons-of-obsidian")"></script>
+}

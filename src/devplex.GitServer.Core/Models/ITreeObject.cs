@@ -2,10 +2,12 @@
 
 namespace devplex.GitServer.Core.Models
 {
-    public interface ITreeDirectory
+    public interface ITreeObject
     {
+        int Order { get; }
+
         string Name { get; set; }
         string Path { get; set; }
-        List<ITreeDirectory> Directories { get; set; }
+        List<ITreeObject> Objects { get; set; }
     }
 }

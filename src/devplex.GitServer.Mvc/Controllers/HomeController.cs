@@ -13,7 +13,7 @@ namespace devplex.GitServer.Mvc.Controllers
 
             var tree = crawler.GetTree(absolutePath);
 
-            var model = new DirectoryTreeViewModel
+            var model = new TreeViewModel
                 {
                     Tree = tree
                 };

@@ -120,13 +120,13 @@ a { text-decoration:none; color: #99C17A;}
   margin: 1em 0;
 }
 
-.tag {
+/*.tag {
   color: #999;
   font-size: 70%;
   font-weight: normal;
   margin-left: .5em;
   vertical-align: baseline;
-}
+}*/
 
 .branchhead {
   color: #000;
@@ -274,9 +274,4 @@ ul#graphnodes li .info {
 	font-size: 70%;
 	position: relative;
 	top: -3px;
-}
-
-
-code {
-  
 }

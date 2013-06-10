@@ -1,28 +1,29 @@
-﻿using System.Configuration;
+﻿using System.Text;
 using System.Web.Mvc;
+using devplex.GitServer.Core.Configuration;
 
 namespace devplex.GitServer.Mvc.FrameworkExtensions
 {
-  public static class UrlHelperExtensions
-  {
-    public static string RepositoryCloneUrl(this UrlHelper instance, string path)
+    public static class UrlHelperExtensions
     {
+        public static string RepositoryCloneUrl(this UrlHelper instance, string path)
+        {
+            var request = instance.RequestContext.HttpContext.Request;
 
-      var baseUrl = instance.RequestContext.HttpContext.Request.Url.AbsoluteUri;
-      if (baseUrl.EndsWith("/"))
-      {
-        baseUrl = baseUrl.TrimEnd('/');
-      }
+            var builder = new StringBuilder();
+            builder.Append(Settings.UseSsl ? "https" : "http");
+            builder.Append("://");
+            builder.Append(request.Url.DnsSafeHost);
 
-      if ("TRUE".Equals(
-        ConfigurationManager.AppSettings["GitServer.UseSSL"],
-        System.StringComparison.OrdinalIgnoreCase) &&
-        !baseUrl.Contains("https://"))
-      {
-        baseUrl = baseUrl.Replace("http://", "https://");
-      }
+            if (!string.IsNullOrEmpty(request.ApplicationPath))
+            {
+                builder.Append(request.ApplicationPath);
+            }
 
-      return string.Concat(baseUrl, path);
+            builder.Append("/");
+            builder.Append(path);
+
+            return builder.ToString();
+        }
     }
-  }
 }
