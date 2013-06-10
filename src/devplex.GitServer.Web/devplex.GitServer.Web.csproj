@@ -131,6 +131,11 @@
     <Content Include="Content\Prettify\Themes\sunburst.css" />
     <Content Include="Content\styles.css" />
     <Content Include="Global.asax" />
+    <None Include="Scripts\jquery-2.0.2.intellisense.js" />
+    <Content Include="Scripts\devplex.gitserver.js" />
+    <Content Include="Scripts\jquery-2.0.2.js" />
+    <Content Include="Scripts\jquery-2.0.2.min.js" />
+    <Content Include="Scripts\jquery.timeago.js" />
     <Content Include="Scripts\Prettify\lang-apollo.js" />
     <Content Include="Scripts\Prettify\lang-basic.js" />
     <Content Include="Scripts\Prettify\lang-clj.js" />
@@ -171,6 +176,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="Scripts\jquery-2.0.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\devplex.GitServer.Core\devplex.GitServer.Core.csproj">

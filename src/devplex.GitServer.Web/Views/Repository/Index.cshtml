@@ -8,7 +8,7 @@
 <ul class="no-bullets">
   @foreach (var branch in Model.Branches)
   {
-    <li>@Html.ActionLink(branch, "Tree", "Repository", new { branch }, null)</li>
+    <li>@Html.ActionLink(branch, "Tree", "Repository", new { branch }, null) [@Html.ActionLink("Log", "Log", "Repository", new { branch }, null)]</li>
   }
 </ul>
 

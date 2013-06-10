@@ -25,7 +25,7 @@ namespace devplex.GitServer.Mvc.FrameworkExtensions
                 url = "https://secure.gravatar.com/";
             }
 
-            url += string.Concat("avatar/", hash);
+            url += string.Concat("avatar/", hash, "?s=50");
 
             var tag = new TagBuilder("img");
             tag.Attributes.Add("src", url);
