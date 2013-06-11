@@ -57,7 +57,10 @@ namespace devplex.GitServer.Core.IO
                                     directoryInfo.FullName)
                         };
 
-                        directories.Add(directory);
+                        if (directory.Branches != null && directory.Branches.Count > 0)
+                        {
+                            directories.Add(directory);
+                        }
                     }
                     else
                     {
