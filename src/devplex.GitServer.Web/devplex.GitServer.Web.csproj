@@ -216,7 +216,7 @@
     <Content Include="Views\Shared\_DirectoryTree.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Help.cshtml" />
+    <Content Include="Views\Help\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\DEVPLEX.pubxml" />
