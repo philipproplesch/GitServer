@@ -12,6 +12,7 @@ namespace devplex.GitServer.Web
                         "~/Content/normalize.css",
                         "~/Content/styles.css",
                         "~/Content/Prettify/prettify.css",
+                        "~/Content/Prettify/Themes/sons-of-obsidian.css",
                         "~/Content/font-awesome.css"));
 
             bundles.Add(
@@ -19,6 +20,7 @@ namespace devplex.GitServer.Web
                     .Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery.timeago.js",
+                        "~/Scripts/Prettify/prettify.js",
                         "~/Scripts/devplex.gitserver*"));
         }
     }
