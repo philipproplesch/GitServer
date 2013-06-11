@@ -1,4 +1,6 @@
 ﻿@model BlobDetails
+<a href="@Model.RawUrl">Download file</a>
+<br />
 @if (Model.IsMarkdown())
 {
   @Html.RenderMarkdown(Model.Content)
@@ -9,7 +11,7 @@ else if (Model.IsImage())
 }
 else if (Model.IsBinary())
 {
-  <a href="@Model.RawUrl">Download file</a>
+  
 }
 else
 {
