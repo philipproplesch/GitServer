@@ -21,7 +21,7 @@ Task Compile {
 }
 
 Task Build -depends Clean, IncrementVersion {
-  Exec { msbuild $sln /t:Rebuild /p:Configuration=Release /p:OutDir=$tmp }
+  Exec { msbuild $sln /t:Rebuild /p:Configuration=Release /p:OutDir=$tmp /p:UseWPP_CopyWebApplication=True /p:PipelineDependsOnBuild=False }
   & "$bld\7zip\7za.exe" a -tzip $out\$script:version.zip $tmp\_PublishedWebsites\*
 }
 
