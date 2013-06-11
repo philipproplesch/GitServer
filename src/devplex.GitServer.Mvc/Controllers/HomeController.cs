@@ -20,10 +20,5 @@ namespace devplex.GitServer.Mvc.Controllers
 
             return View(model);
         }
-
-        public ActionResult Help()
-        {
-          return View();
-        }
     }
 }
