@@ -50,7 +50,7 @@ namespace devplex.GitServer.Web
 
             routes.MapRoute(
                 name: "RepositoryRawBlob",
-                url: "raw/blob/{branch}/{*path}",
+                url: "raw/{branch}/{*path}",
                 defaults: new { controller = "Repository", action = "RawBlob" }
             );
 
