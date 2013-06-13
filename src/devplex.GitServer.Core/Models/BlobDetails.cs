@@ -30,6 +30,18 @@ namespace devplex.GitServer.Core.Models
         public bool IsBinary()
         {
             // TODO: Detect binary file.
+            var extension = FileName.ToUpperInvariant();
+            var extensions = new[] {
+                ".EXE",
+                ".PPTX", ".PPT",
+                ".DOC", ".DOCX",
+                ".XLS", ".XLSX",
+                ".SNK",
+                ".ICO"
+            };
+
+            return extensions.Any(extension.EndsWith);
+
             return false;
         }
     }
