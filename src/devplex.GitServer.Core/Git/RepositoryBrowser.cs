@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using GitSharp;
 using devplex.GitServer.Core.Configuration;
+using devplex.GitServer.Core.Extensions;
 using devplex.GitServer.Core.Models;
 
 namespace devplex.GitServer.Core.Git
@@ -14,7 +15,7 @@ namespace devplex.GitServer.Core.Git
         {
             path = path.TrimStart('/', '\\');
 
-            var root = Settings.GetValue("GitServer.GitRoot");
+            var root = Settings.GitRoot;
 
             return path.EndsWith(".git") 
                 ? Path.Combine(root, path)
@@ -120,32 +121,12 @@ namespace devplex.GitServer.Core.Git
 
                 if (!string.IsNullOrEmpty(path.SubPath))
                 {
-                    var segments =
-                        path.SubPath.Split(
-                            new[] { "/" },
-                            StringSplitOptions.RemoveEmptyEntries);
-
-                    var newRoot = root;
-                    foreach (var segment in segments)
+                    root = root.FindSubPath(path.SubPath);
+                    
+                    if (root == null)
                     {
-                        var tree =
-                            newRoot.Trees.FirstOrDefault(
-                                child =>
-                                child.Name.Equals(
-                                    segment,
-                                    StringComparison.Ordinal));
-
-                        if (tree != null)
-                        {
-                            newRoot = tree;
-                        }
-                        else
-                        {
-                            return result;
-                        }
+                        return result;
                     }
-
-                    root = newRoot;
                 }
 
                 foreach (var child in root.Children)
@@ -187,43 +168,10 @@ namespace devplex.GitServer.Core.Git
                 var branch = repository.Branches[branchName];
                 var currentCommit = branch.CurrentCommit;
 
-                var root = currentCommit.Tree;
-
-                var segments =
-                        path.SubPath.Split(
-                            new[] { "/" },
-                            StringSplitOptions.RemoveEmptyEntries)
-                               .ToList();
-
-                var fileName = segments[segments.Count - 1];
-                segments.RemoveAt(segments.Count - 1);
-
-                var newRoot = root;
-                foreach (var segment in segments)
-                {
-                    var tree =
-                        newRoot.Trees.FirstOrDefault(
-                            child =>
-                            child.Name.Equals(
-                                segment,
-                                StringComparison.Ordinal));
-
-                    if (tree != null)
-                    {
-                        newRoot = tree;
-                    }
-                }
-
-                var file =
-                    newRoot.Leaves.FirstOrDefault(
-                        child =>
-                        child.Name.Equals(
-                            fileName,
-                            StringComparison.OrdinalIgnoreCase));
-
+                var file = currentCommit.Tree.FindFile(path.SubPath);
                 if (file != null)
                 {
-                    result.FileName = fileName;
+                    result.FileName = file.Name;
                     //result.Content = file.Data;
                     result.RawContent = file.RawData;
 
@@ -259,29 +207,7 @@ namespace devplex.GitServer.Core.Git
 
                 if (!string.IsNullOrEmpty(path.SubPath))
                 {
-                    var segments =
-                        path.SubPath.Split(
-                            new[] { "/" },
-                            StringSplitOptions.RemoveEmptyEntries)
-                               .ToList();
-
-                    var newRoot = root;
-                    foreach (var segment in segments)
-                    {
-                        var tree =
-                            newRoot.Trees.FirstOrDefault(
-                                child =>
-                                child.Name.Equals(
-                                    segment,
-                                    StringComparison.Ordinal));
-
-                        if (tree != null)
-                        {
-                            newRoot = tree;
-                        }
-                    }
-
-                    root = newRoot;
+                    root = root.FindSubPath(path.SubPath);
                 }
 
                 var file = root.Leaves.FirstOrDefault(x => filter(x.Name));

@@ -10,7 +10,8 @@ namespace devplex.GitServer.Core.FrameworkExtensions
         {
             var contentEncoding = instance.Headers["Content-Encoding"];
 
-            if (!string.IsNullOrEmpty(contentEncoding) && contentEncoding.Equals("gzip"))
+            if (!string.IsNullOrEmpty(contentEncoding) && 
+                contentEncoding.Equals("gzip"))
             {
                 return new GZipInputStream(instance.InputStream);
             }

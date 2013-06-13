@@ -4,7 +4,8 @@ namespace devplex.GitServer.Core.FrameworkExtensions
 {
     public static class HttpResponseBaseExtensions
     {
-        public static void WriteNoCache(this HttpResponseBase instance)
+        public static void WriteNoCache(
+            this HttpResponseBase instance)
         {
             instance.AddHeader(
                 "Cache-Control", "no-cache, no-store, must-revalidate");
@@ -16,7 +17,9 @@ namespace devplex.GitServer.Core.FrameworkExtensions
                 "Expires", "0");
         }
 
-        public static void PacketWrite(this HttpResponseBase instance, string content)
+        public static void PacketWrite(
+            this HttpResponseBase instance, 
+            string content)
         {
             var result =
                 string.Concat(
@@ -26,7 +29,8 @@ namespace devplex.GitServer.Core.FrameworkExtensions
             instance.Write(result);
         }
 
-        public static void PacketFlush(this HttpResponseBase instance)
+        public static void PacketFlush(
+            this HttpResponseBase instance)
         {
             instance.Write("0000");
         }

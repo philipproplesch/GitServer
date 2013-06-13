@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\Settings.cs" />
+    <Compile Include="Extensions\TreeExtensions.cs" />
     <Compile Include="FrameworkExtensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="FrameworkExtensions\HttpResponseBaseExtensions.cs" />
     <Compile Include="FrameworkExtensions\StringExtensions.cs" />
