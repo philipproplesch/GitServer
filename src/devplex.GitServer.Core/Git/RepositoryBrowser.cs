@@ -82,7 +82,7 @@ namespace devplex.GitServer.Core.Git
                     Message = commit.Message,
                     AuthorName = commit.Author.Name,
                     AuthorMailAddress = commit.Author.EmailAddress,
-                    Timestamp = commit.CommitDate.DateTime
+                    Timestamp = commit.CommitDate.UtcDateTime
                 };
 
                 messages.Add(commitMessage);
