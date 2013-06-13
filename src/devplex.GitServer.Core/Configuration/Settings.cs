@@ -10,6 +10,14 @@ namespace devplex.GitServer.Core.Configuration
             return ConfigurationManager.AppSettings[key];
         }
 
+        public static string GitRoot
+        {
+            get
+            {
+                return GetValue("GitServer.GitRoot");
+            }
+        }
+
         public static bool UseSsl
         {
             get

@@ -5,7 +5,9 @@ namespace devplex.GitServer.Core.FrameworkExtensions
 {
     public static class StringExtensions
     {
-         public static string Hash(this string instance, HashAlgorithm algorithm)
+         public static string Hash(
+             this string instance, 
+             HashAlgorithm algorithm)
          {
              var bytes = Encoding.UTF8.GetBytes(instance);
              var hash = algorithm.ComputeHash(bytes);
@@ -19,7 +21,8 @@ namespace devplex.GitServer.Core.FrameworkExtensions
              return builder.ToString();
          }
 
-        public static string MD5(this string instance)
+        public static string MD5(
+            this string instance)
         {
             return instance.Hash(new MD5CryptoServiceProvider());
         }
