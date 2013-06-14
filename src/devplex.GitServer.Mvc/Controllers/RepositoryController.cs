@@ -87,5 +87,15 @@ namespace devplex.GitServer.Mvc.Controllers
 
             return File(content.RawContent, "application/octet-stream", content.FileName);
         }
+
+        public ActionResult ZipArchive(string branch, string path)
+        {
+            var repositoryBrowser = new RepositoryBrowser();
+            var repositoryPath = repositoryBrowser.SplitRepositoryPath(path);
+
+            var archive = repositoryBrowser.GenerateZipArchive(branch, repositoryPath);
+            
+            return File(archive.Data, "application/zip", archive.Name);
+        }
     }
 }

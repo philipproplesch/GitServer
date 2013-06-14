@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using GitSharp;
+using ICSharpCode.SharpZipLib.Core;
+using ICSharpCode.SharpZipLib.Zip;
 using devplex.GitServer.Core.Configuration;
 using devplex.GitServer.Core.Extensions;
 using devplex.GitServer.Core.Models;
@@ -17,9 +19,24 @@ namespace devplex.GitServer.Core.Git
 
             var root = Settings.GitRoot;
 
-            return path.EndsWith(".git") 
+            return path.EndsWith(".git")
                 ? Path.Combine(root, path)
                 : Path.Combine(root, path + ".git");
+        }
+
+        public static string GetProjectName(string path)
+        {
+            const string suffix = ".git";
+
+            if (path.EndsWith(suffix))
+            {
+                var segments = path.Split('/');
+                var last = segments.Last();
+
+                return last.Substring(0, last.Length - suffix.Length);
+            }
+
+            throw new Exception();
         }
 
         public RepositoryPath SplitRepositoryPath(string path)
@@ -29,14 +46,16 @@ namespace devplex.GitServer.Core.Git
             {
                 result.RootPath = path;
                 result.AbsoluteRootPath = GetRepositoryPath(path);
+                result.ProjectName = GetProjectName(path);
 
                 return result;
             }
 
-            var parts = path.Split(new[] {".git/"}, StringSplitOptions.RemoveEmptyEntries);
+            var parts = path.Split(new[] { ".git/" }, StringSplitOptions.RemoveEmptyEntries);
 
             result.RootPath = parts[0] + ".git";
             result.AbsoluteRootPath = GetRepositoryPath(parts[0]);
+            result.ProjectName = GetProjectName(result.RootPath);
 
             if (parts.Length > 1)
             {
@@ -111,7 +130,7 @@ namespace devplex.GitServer.Core.Git
             {
                 Directories = new List<ITreeObject>()
             };
-            
+
             using (var repository = new Repository(path.AbsoluteRootPath))
             {
                 var branch = repository.Branches[branchName];
@@ -122,7 +141,7 @@ namespace devplex.GitServer.Core.Git
                 if (!string.IsNullOrEmpty(path.SubPath))
                 {
                     root = root.FindSubPath(path.SubPath);
-                    
+
                     if (root == null)
                     {
                         return result;
@@ -221,6 +240,73 @@ namespace devplex.GitServer.Core.Git
             {
                 return repository.Branches.Select(x => x.Key).ToList();
             }
+        }
+
+        public ZipArchive GenerateZipArchive(string branchName, RepositoryPath repositoryPath)
+        {
+            var now = DateTime.Now;
+
+            Action<Tree, ZipOutputStream> compressTree = null;
+            compressTree = (tree, output) =>
+                {
+                    var path = tree.Path;
+                    foreach (var child in tree.Children)
+                    {
+                        if (child is Tree)
+                        {
+                            compressTree(child as Tree, output);
+                        }
+                        else if (child is Leaf)
+                        {
+                            var leaf = child as Leaf;
+                            var name = string.Concat(path, "/", leaf.Name).TrimStart('/');
+
+                            var bytes = leaf.RawData;
+
+                            var entry = new ZipEntry(name);
+                            entry.Size = bytes.Length;
+                            //entry.DateTime = leaf.GetLastCommit().CommitDate.DateTime;
+                            entry.DateTime = now;
+
+                            output.PutNextEntry(entry);
+
+                            var buffer = new byte[4096];
+                            using (var ms = new MemoryStream(bytes))
+                            {
+                                StreamUtils.Copy(ms, output, buffer);
+                            }
+                        }
+                    }
+                };
+
+            var archive = new ZipArchive();
+            archive.Name =
+                string.Format(
+                    "{0}-{1}.zip",
+                    repositoryPath.ProjectName,
+                    branchName);
+
+            using (var repository = new Repository(repositoryPath.AbsoluteRootPath))
+            {
+                var branch = repository.Branches[branchName];
+                var currentCommit = branch.CurrentCommit;
+                var root = currentCommit.Tree;
+
+                using (var ms = new MemoryStream())
+                using (var zip = new ZipOutputStream(ms))
+                {
+                    zip.SetLevel(3);
+                    compressTree(root, zip);
+
+                    zip.Finish();
+
+                    ms.Position = 0;
+
+                    archive.Data = ms.ToArray();
+                }
+            }
+
+            return archive;
         }
     }
 }

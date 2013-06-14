@@ -79,6 +79,7 @@
     <Compile Include="Models\ITreeObject.cs" />
     <Compile Include="Models\RepositoryDirectory.cs" />
     <Compile Include="Models\TreeFile.cs" />
+    <Compile Include="Models\ZipArchive.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Git\TransportPackage.cs" />
   </ItemGroup>

@@ -20,7 +20,12 @@ Task Compile {
   Exec { msbuild $sln /t:Build /p:Configuration=Release }
 }
 
-Task Build -depends Clean, IncrementVersion {
+Task Build -depends Clean {
+  Exec { msbuild $sln /t:Rebuild /p:Configuration=Release /p:OutDir=$tmp /p:UseWPP_CopyWebApplication=True /p:PipelineDependsOnBuild=False }
+  & "$bld\7zip\7za.exe" a -tzip $out\build.zip $tmp\_PublishedWebsites\*
+}
+
+Task Release -depends Clean, IncrementVersion {
   Exec { msbuild $sln /t:Rebuild /p:Configuration=Release /p:OutDir=$tmp /p:UseWPP_CopyWebApplication=True /p:PipelineDependsOnBuild=False }
   & "$bld\7zip\7za.exe" a -tzip $out\$script:version.zip $tmp\_PublishedWebsites\*
 }

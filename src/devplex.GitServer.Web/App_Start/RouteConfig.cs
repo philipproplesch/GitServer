@@ -55,6 +55,12 @@ namespace devplex.GitServer.Web
             );
 
             routes.MapRoute(
+                name: "RepositoryZipArchive",
+                url: "zip/{branch}/{*path}",
+                defaults: new { controller = "Repository", action = "ZipArchive" }
+            );
+
+            routes.MapRoute(
                 name: "RepositoryLog",
                 url: "log/{branch}/{*path}",
                 defaults: new { controller = "Repository", action = "Log" }
