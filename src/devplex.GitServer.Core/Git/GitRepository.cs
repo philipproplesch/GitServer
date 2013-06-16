@@ -56,9 +56,24 @@ namespace devplex.GitServer.Core.Git
             get { return _path.RootPath; }
         }
 
+        public string AbsoluteRootPath
+        {
+            get { return _path.AbsoluteRootPath; }
+        }
+
+        public Repository Init()
+        {
+            return Repository.Init(_path.AbsoluteRootPath, true);
+        }
+
+        public Repository Open()
+        {
+            return new Repository(_path.AbsoluteRootPath);
+        }
+
         public IEnumerable<string> GetBranches()
         {
-            using (var repository = new Repository(_path.AbsoluteRootPath))
+            using (var repository = Open())
             {
                 return repository.Branches.Select(x => x.Key).ToList();
             }
@@ -84,7 +99,7 @@ namespace devplex.GitServer.Core.Git
                         list.Add(commitMessage);
                     };
 
-            using (var repository = new Repository(_path.AbsoluteRootPath))
+            using (var repository = Open())
             {
                 var branch = _getBranch(repository, _branchName);
 
@@ -107,7 +122,7 @@ namespace devplex.GitServer.Core.Git
                 Directories = new List<ITreeObject>()
             };
 
-            using (var repository = new Repository(_path.AbsoluteRootPath))
+            using (var repository = Open())
             {
                 var branch = _getBranch(repository, _branchName);
                 var currentCommit = branch.CurrentCommit;
@@ -158,7 +173,7 @@ namespace devplex.GitServer.Core.Git
         {
             var result = new RepositoryBlob();
 
-            using (var repository = new Repository(_path.AbsoluteRootPath))
+            using (var repository = Open())
             {
                 var branch = _getBranch(repository, _branchName);
                 var currentCommit = branch.CurrentCommit;
@@ -185,7 +200,7 @@ namespace devplex.GitServer.Core.Git
 
         public string FindAndReadFile(Func<string, bool> filter)
         {
-            using (var repository = new Repository(_path.AbsoluteRootPath))
+            using (var repository = Open())
             {
                 var branch = _getBranch(repository, _branchName);
 
@@ -254,7 +269,7 @@ namespace devplex.GitServer.Core.Git
                             _branchName)
                 };
 
-            using (var repository = new Repository(_path.AbsoluteRootPath))
+            using (var repository = Open())
             {
                 var branch = _getBranch(repository, _branchName);
                 var currentCommit = branch.CurrentCommit;

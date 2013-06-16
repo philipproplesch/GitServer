@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GitSharp;
 using devplex.GitServer.Core.Models;
 
 namespace devplex.GitServer.Core.Git
@@ -7,6 +8,11 @@ namespace devplex.GitServer.Core.Git
     public interface IGitRepository
     {
         string RootPath { get; }
+        string AbsoluteRootPath { get; }
+
+        Repository Init();
+        Repository Open();
+
         IEnumerable<string> GetBranches();
         IEnumerable<GitCommitMessage> GetCommitMessages();
 

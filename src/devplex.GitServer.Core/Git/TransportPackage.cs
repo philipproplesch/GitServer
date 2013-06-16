@@ -1,7 +1,5 @@
 ﻿using System.IO;
-using GitSharp;
 using GitSharp.Core.Transport;
-using devplex.GitServer.Core.Models;
 
 namespace devplex.GitServer.Core.Git
 {
@@ -9,12 +7,12 @@ namespace devplex.GitServer.Core.Git
     {
         public static void AdvertiseUploadPack(string path, Stream output)
         {
-            var repositoryPath = RepositoryPath.Resolve(path);
+            var gitRepository = new GitRepository(path);
 
             var repository =
-                !Directory.Exists(repositoryPath.AbsoluteRootPath)
-                    ? Repository.Init(repositoryPath.AbsoluteRootPath, true)
-                    : new Repository(repositoryPath.AbsoluteRootPath);
+                Directory.Exists(gitRepository.AbsoluteRootPath)
+                    ? gitRepository.Open()
+                    : gitRepository.Init();
 
             using (repository)
             {
@@ -28,9 +26,9 @@ namespace devplex.GitServer.Core.Git
 
         public static void AdvertiseReceivePack(string path, Stream output)
         {
-            var repositoryPath = RepositoryPath.Resolve(path);
+            var gitRepository = new GitRepository(path);
 
-            using (var repository = new Repository(repositoryPath.AbsoluteRootPath))
+            using (var repository = gitRepository.Open())
             {
                 var pack = new ReceivePack(repository);
 
@@ -42,9 +40,9 @@ namespace devplex.GitServer.Core.Git
 
         public static void Upload(string path, Stream input, Stream output)
         {
-            var repositoryPath = RepositoryPath.Resolve(path);
+            var gitRepository = new GitRepository(path);
 
-            using (var repository = new Repository(repositoryPath.AbsoluteRootPath))
+            using (var repository = gitRepository.Open())
             {
                 var pack = new UploadPack(repository);
                 pack.setBiDirectionalPipe(false);
@@ -54,9 +52,9 @@ namespace devplex.GitServer.Core.Git
 
         public static void Receive(string path, Stream input, Stream output)
         {
-            var repositoryPath = RepositoryPath.Resolve(path);
+            var gitRepository = new GitRepository(path);
 
-            using (var repository = new Repository(repositoryPath.AbsoluteRootPath))
+            using (var repository = gitRepository.Open())
             {
                 var pack = new ReceivePack(repository);
                 pack.setBiDirectionalPipe(false);
