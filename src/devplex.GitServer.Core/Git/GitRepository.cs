@@ -79,7 +79,8 @@ namespace devplex.GitServer.Core.Git
             }
         }
 
-        public IEnumerable<GitCommitMessage> GetCommitMessages()
+        public IEnumerable<GitCommitMessage> GetCommitMessages(
+            int skip, int take)
         {
             var result = new List<GitCommitMessage>();
 
@@ -112,7 +113,7 @@ namespace devplex.GitServer.Core.Git
                 }
             }
 
-            return result;
+            return result.Skip(skip).Take(take);
         }
 
         public RepositoryTree GetRepositoryContent()
@@ -198,7 +199,8 @@ namespace devplex.GitServer.Core.Git
             }
         }
 
-        public string FindAndReadFile(Func<string, bool> filter)
+        public string FindAndReadFile(
+            Func<string, bool> filter)
         {
             using (var repository = Open())
             {

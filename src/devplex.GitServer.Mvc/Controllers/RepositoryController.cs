@@ -11,7 +11,8 @@ namespace devplex.GitServer.Mvc.Controllers
             _isReadMe = fileName =>
                         fileName.ToUpperInvariant().StartsWith("README");
 
-        public ActionResult Index(string path)
+        public ActionResult Index(
+            string path)
         {
             var repository = new GitRepository(path);
 
@@ -25,10 +26,11 @@ namespace devplex.GitServer.Mvc.Controllers
             return View(model);
         }
 
-        public ActionResult Log(string branch, string path)
+        public ActionResult Log(
+            string branch, string path, int skip = 0, int take = 50)
         {
             var repository = new GitRepository(path, branch);
-            return View(repository.GetCommitMessages());
+            return View(repository.GetCommitMessages(skip, take));
         }
 
         public ActionResult Tree(string branch, string path)
@@ -45,7 +47,8 @@ namespace devplex.GitServer.Mvc.Controllers
             return View(model);
         }
 
-        public ActionResult Blob(string branch, string path)
+        public ActionResult Blob(
+            string branch, string path)
         {
             var repository = new GitRepository(path, branch);
 
@@ -60,7 +63,8 @@ namespace devplex.GitServer.Mvc.Controllers
             return View(content);
         }
 
-        public ActionResult RawBlob(string branch, string path)
+        public ActionResult RawBlob(
+            string branch, string path)
         {
             var repository = new GitRepository(path, branch);
 
@@ -73,7 +77,8 @@ namespace devplex.GitServer.Mvc.Controllers
             return File(content.RawContent, "application/octet-stream", content.FileName);
         }
 
-        public ActionResult ZipArchive(string branch, string path)
+        public ActionResult ZipArchive(
+            string branch, string path)
         {
             var repository = new GitRepository(path, branch);
             var archive = repository.GenerateZipArchive();
