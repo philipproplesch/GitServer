@@ -3,8 +3,8 @@ using devplex.GitServer.Core.Common;
 
 namespace devplex.GitServer.Core.Models
 {
-    public class RepositoryTree
+    public class DirectoryTree
     {
-        public List<IRepositoryObject> Directories { get; set; }
+        public List<ITreeObject> Directories { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using GitSharp;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
+using devplex.GitServer.Core.Common;
 using devplex.GitServer.Core.Extensions;
 using devplex.GitServer.Core.Models;
 
@@ -79,15 +80,15 @@ namespace devplex.GitServer.Core.Git
             }
         }
 
-        public IEnumerable<GitCommitMessage> GetCommitMessages(
+        public IEnumerable<CommitMessage> GetCommitMessages(
             int skip, int take)
         {
-            var result = new List<GitCommitMessage>();
+            var result = new List<CommitMessage>();
 
-            Action<List<GitCommitMessage>, Commit>
+            Action<List<CommitMessage>, Commit>
                 addCommitMessage = (list, commit) =>
                     {
-                        var commitMessage = new GitCommitMessage
+                        var commitMessage = new CommitMessage
                             {
                                 Hash = commit.Hash,
                                 ShortHash = commit.ShortHash,
@@ -120,7 +121,7 @@ namespace devplex.GitServer.Core.Git
         {
             var result = new RepositoryTree
             {
-                Directories = new List<ITreeObject>()
+                Directories = new List<IRepositoryObject>()
             };
 
             using (var repository = Open())
@@ -146,22 +147,32 @@ namespace devplex.GitServer.Core.Git
                     if (child.IsBlob && child is Leaf)
                     {
                         var leaf = child as Leaf;
+
+                        var commit = leaf.GetLastCommit();
+                            
                         result.Directories.Add(
                             new TreeFile
                             {
                                 Name = leaf.Name,
-                                Path = leaf.Path
+                                Path = leaf.Path,
+                                Message = commit.Message,
+                                CommitDate = commit.CommitDate.DateTime,
                             });
                     }
                     // Is directory?
                     else if (child is Tree)
                     {
                         var tree = child as Tree;
+
+                        var commit = tree.GetLastCommit();
+
                         result.Directories.Add(
                             new TreeDirectory
                             {
                                 Name = tree.Name,
-                                Path = tree.Path
+                                Path = tree.Path,
+                                Message = commit.Message,
+                                CommitDate = commit.CommitDate.DateTime,
                             });
                     }
                 }

@@ -1,21 +1,14 @@
-﻿@model TreeViewModel
+﻿@using devplex.GitServer.Core.Common
+@model TreeViewModel
 
 @helper RenderTree(IEnumerable<ITreeObject> objects, int level = 1)
 {
   <div style="margin-left: @(level * 5)px;">
-    @foreach (var obj in objects.OrderBy(x => x.Order).ThenBy(x => x.Name))
+    @foreach (var obj in objects.OrderBy(x => x.Name))
     {
       if (obj is NamespaceDirectory)
       {
         <i class="icon-folder-open"></i> @obj.Name
-      }
-      else if (obj is TreeDirectory)
-      {
-        <i class="icon-folder-close"></i> @Html.ActionLink(obj.Name, "Tree", "Repository", new { branch = Model.Branch, path = string.Concat(Model.RepositoryPath, "/", obj.Path) }, null)<br />
-      }
-      else if (obj is TreeFile)
-      {
-        <i class="icon-file"></i> @Html.ActionLink(obj.Name, "Blob", "Repository", new { branch = Model.Branch, path = string.Concat(Model.RepositoryPath, "/", obj.Path) }, null)<br />
       }
       else if (obj is RepositoryDirectory)
       {

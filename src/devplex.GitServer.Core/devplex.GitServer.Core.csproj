@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\IRepositoryObject.cs" />
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Extensions\RepositoryBlobExtensions.cs" />
     <Compile Include="Extensions\TreeExtensions.cs" />
@@ -73,12 +74,13 @@
     <Compile Include="Git\IGitRepository.cs" />
     <Compile Include="IO\DirectoryCrawler.cs" />
     <Compile Include="Models\RepositoryBlob.cs" />
-    <Compile Include="Models\GitCommitMessage.cs" />
+    <Compile Include="Models\CommitMessage.cs" />
     <Compile Include="Models\RepositoryPath.cs" />
+    <Compile Include="Models\RepositoryTree.cs" />
     <Compile Include="Models\TreeDirectory.cs" />
     <Compile Include="Models\NamespaceDirectory.cs" />
-    <Compile Include="Models\RepositoryTree.cs" />
-    <Compile Include="Models\ITreeObject.cs" />
+    <Compile Include="Models\DirectoryTree.cs" />
+    <Compile Include="Common\ITreeObject.cs" />
     <Compile Include="Models\RepositoryDirectory.cs" />
     <Compile Include="Models\TreeFile.cs" />
     <Compile Include="Models\ZipArchive.cs" />

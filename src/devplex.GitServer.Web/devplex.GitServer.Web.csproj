@@ -178,6 +178,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-2.0.2.min.map" />
+    <Content Include="Views\Shared\_RepositoryTree.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\devplex.GitServer.Core\devplex.GitServer.Core.csproj">

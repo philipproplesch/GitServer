@@ -2,7 +2,7 @@
 
 namespace devplex.GitServer.Core.Models
 {
-    public class GitCommitMessage
+    public class CommitMessage
     {
         public string Hash { get; set; }
         public string ShortHash { get; set; }

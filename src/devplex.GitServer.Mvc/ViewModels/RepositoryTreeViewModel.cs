@@ -2,6 +2,6 @@
 
 namespace devplex.GitServer.Mvc.ViewModels
 {
-    public class TreeViewModel : BaseTreeViewModel<DirectoryTree>
+    public class RepositoryTreeViewModel : BaseTreeViewModel<RepositoryTree>
     { }
 }

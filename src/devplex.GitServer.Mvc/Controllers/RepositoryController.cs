@@ -37,7 +37,7 @@ namespace devplex.GitServer.Mvc.Controllers
         {
             var repository = new GitRepository(path, branch);
 
-            var model = new TreeViewModel
+            var model = new RepositoryTreeViewModel
                 {
                     Branch = branch,
                     RepositoryPath = repository.RootPath,

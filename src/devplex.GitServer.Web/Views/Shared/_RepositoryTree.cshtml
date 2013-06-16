@@ -1,0 +1,21 @@
+﻿@model RepositoryTreeViewModel
+
+<table>
+  @foreach (var element in Model.Tree.Directories.OrderBy(x => x.Order).ThenBy(x => x.Name))
+  {
+    <tr>
+      <td>
+        @if (element is TreeDirectory)
+        {
+        <i class="icon-folder-close"></i>@Html.ActionLink(element.Name, "Tree", "Repository", new { branch = Model.Branch, path = string.Concat(Model.RepositoryPath, "/", element.Path) }, null)<br />
+        }
+        else if (element is TreeFile)
+        {
+        <i class="icon-file"></i>@Html.ActionLink(element.Name, "Blob", "Repository", new { branch = Model.Branch, path = string.Concat(Model.RepositoryPath, "/", element.Path) }, null)<br />
+        }
+      </td>
+      <td><time datetime="@element.CommitDate.ToString("yyyy-MM-ddTHH:mm:ssZ")">@element.CommitDate</time></td>
+      <td>@element.Message</td>
+    </tr>
+  }
+</table>

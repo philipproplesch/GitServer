@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using devplex.GitServer.Core.Common;
 using devplex.GitServer.Core.Configuration;
 using devplex.GitServer.Core.Git;
 using devplex.GitServer.Core.Models;
@@ -16,9 +17,9 @@ namespace devplex.GitServer.Core.IO
             return Path.Combine(root, path);
         }
 
-        public RepositoryTree GetTree(string absolutePath)
+        public DirectoryTree GetTree(string absolutePath)
         {
-            return new RepositoryTree
+            return new DirectoryTree
             {
                 Directories = GetDirectories(absolutePath)
             };
