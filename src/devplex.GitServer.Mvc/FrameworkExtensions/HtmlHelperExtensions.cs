@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using MarkdownSharp;
-using devplex.GitServer.Core.Configuration;
 using devplex.GitServer.Core.FrameworkExtensions;
 
 namespace devplex.GitServer.Mvc.FrameworkExtensions
@@ -20,7 +19,7 @@ namespace devplex.GitServer.Mvc.FrameworkExtensions
             var hash = mailAddress.MD5();
 
             var url = "http://www.gravatar.com/";
-            if (Settings.UseSsl)
+            if (instance.ViewContext.HttpContext.Request.IsSecureConnection)
             {
                 url = "https://secure.gravatar.com/";
             }

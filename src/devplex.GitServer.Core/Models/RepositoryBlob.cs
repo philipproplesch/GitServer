@@ -2,7 +2,7 @@
 
 namespace devplex.GitServer.Core.Models
 {
-    public class BlobDetails
+    public class RepositoryBlob
     {
         public string FileName { get; set; }
         public string Content { get; set; }
@@ -41,8 +41,6 @@ namespace devplex.GitServer.Core.Models
             };
 
             return extensions.Any(extension.EndsWith);
-
-            return false;
         }
     }
 }

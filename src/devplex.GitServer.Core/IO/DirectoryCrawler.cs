@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using devplex.GitServer.Core.Configuration;
 using devplex.GitServer.Core.Git;
 using devplex.GitServer.Core.Models;
@@ -9,19 +10,15 @@ namespace devplex.GitServer.Core.IO
 {
     public class DirectoryCrawler
     {
-        private RepositoryBrowser _repositoryBrowser;
-
         public string GetAbsolutePath(string path)
         {
             var root = Settings.GitRoot;
             return Path.Combine(root, path);
         }
 
-        public DirectoryTree GetTree(string absolutePath)
+        public RepositoryTree GetTree(string absolutePath)
         {
-            _repositoryBrowser = new RepositoryBrowser();
-
-            return new DirectoryTree
+            return new RepositoryTree
             {
                 Directories = GetDirectories(absolutePath)
             };
@@ -42,6 +39,8 @@ namespace devplex.GitServer.Core.IO
 
                     if (directoryInfo.Name.EndsWith(".git"))
                     {
+                        var repository = new GitRepository(path);
+
                         var directory = new RepositoryDirectory
                         {
                             Name = name,
@@ -52,12 +51,10 @@ namespace devplex.GitServer.Core.IO
                                     "/",
                                     directoryInfo.Name.Substring(
                                         0, directoryInfo.Name.Length - 4)),
-                            Branches =
-                                _repositoryBrowser.GetBranches(
-                                    directoryInfo.FullName)
+                            Branches = repository.GetBranches()
                         };
 
-                        if (directory.Branches != null && directory.Branches.Count > 0)
+                        if (directory.Branches != null && directory.Branches.Any())
                         {
                             directories.Add(directory);
                         }

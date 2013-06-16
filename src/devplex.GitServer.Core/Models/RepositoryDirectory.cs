@@ -10,6 +10,6 @@ namespace devplex.GitServer.Core.Models
         public List<ITreeObject> Objects { get; set; }
 
         public string PathWithoutExtension { get; set; }
-        public List<string> Branches { get; set; }
+        public IEnumerable<string> Branches { get; set; }
     }
 }

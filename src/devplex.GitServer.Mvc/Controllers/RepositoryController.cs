@@ -7,62 +7,49 @@ namespace devplex.GitServer.Mvc.Controllers
 {
     public class RepositoryController : Controller
     {
-        readonly Func<string, bool> _isReadMe = fileName =>
-        {
-            fileName = fileName.ToUpper();
-
-            if (fileName.Contains("."))
-            {
-                var segments = fileName.Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries);
-                fileName = segments[0];
-            }
-
-            return fileName.StartsWith("README");
-        };
+        private readonly Func<string, bool>
+            _isReadMe = fileName =>
+                        fileName.ToUpperInvariant().StartsWith("README");
 
         public ActionResult Index(string path)
         {
-            var repositoryBrowser = new RepositoryBrowser();
-            var repositoryPath = repositoryBrowser.SplitRepositoryPath(path);
+            var repository = new GitRepository(path);
 
-            var model = new RepositoryViewModel();
-            model.Path = repositoryPath;
-            model.Branches = repositoryBrowser.GetBranches(repositoryPath.AbsoluteRootPath);
-            model.ReadMe = repositoryBrowser.FindFile(repositoryPath, _isReadMe);
+            var model = new RepositoryViewModel
+                {
+                    Path = repository.RootPath,
+                    Branches = repository.GetBranches(),
+                    ReadMe = repository.FindAndReadFile(_isReadMe)
+                };
 
             return View(model);
         }
 
         public ActionResult Log(string branch, string path)
         {
-            var repositoryBrowser = new RepositoryBrowser();
-            var repositoryPath = repositoryBrowser.SplitRepositoryPath(path);
-
-            var messages = repositoryBrowser.GetCommitMessages(branch, repositoryPath);
-
-            return View(messages);
+            var repository = new GitRepository(path, branch);
+            return View(repository.GetCommitMessages());
         }
 
         public ActionResult Tree(string branch, string path)
         {
-            var repositoryBrowser = new RepositoryBrowser();
-            var repositoryPath = repositoryBrowser.SplitRepositoryPath(path);
+            var repository = new GitRepository(path, branch);
 
-            var model = new TreeViewModel {
-                Branch = branch,
-                RepositoryPath = repositoryPath.RootPath,
-                Tree = repositoryBrowser.GetRepositoryContent(branch, repositoryPath)
-            };
+            var model = new TreeViewModel
+                {
+                    Branch = branch,
+                    RepositoryPath = repository.RootPath,
+                    Tree = repository.GetRepositoryContent()
+                };
 
             return View(model);
         }
 
         public ActionResult Blob(string branch, string path)
         {
-            var repositoryBrowser = new RepositoryBrowser();
-            var repositoryPath = repositoryBrowser.SplitRepositoryPath(path);
+            var repository = new GitRepository(path, branch);
 
-            var content = repositoryBrowser.GetBlobContent(branch, repositoryPath);
+            var content = repository.GetBlobContent();
             if (content == null)
             {
                 return HttpNotFound();
@@ -75,11 +62,9 @@ namespace devplex.GitServer.Mvc.Controllers
 
         public ActionResult RawBlob(string branch, string path)
         {
-            var repositoryBrowser = new RepositoryBrowser();
-            var repositoryPath = repositoryBrowser.SplitRepositoryPath(path);
+            var repository = new GitRepository(path, branch);
 
-            var content = repositoryBrowser.GetBlobContent(branch, repositoryPath);
-
+            var content = repository.GetBlobContent();
             if (content == null)
             {
                 return HttpNotFound();
@@ -90,10 +75,8 @@ namespace devplex.GitServer.Mvc.Controllers
 
         public ActionResult ZipArchive(string branch, string path)
         {
-            var repositoryBrowser = new RepositoryBrowser();
-            var repositoryPath = repositoryBrowser.SplitRepositoryPath(path);
-
-            var archive = repositoryBrowser.GenerateZipArchive(branch, repositoryPath);
+            var repository = new GitRepository(path, branch);
+            var archive = repository.GenerateZipArchive();
             
             return File(archive.Data, "application/zip", archive.Name);
         }

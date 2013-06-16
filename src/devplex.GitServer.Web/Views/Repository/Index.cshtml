@@ -1,14 +1,14 @@
 ﻿@model RepositoryViewModel
-<h1>@Model.Path.RootPath</h1>
+<h1>@Model.Path</h1>
 
 <h2>Clone this repository</h2>
-<code class="console">git clone @Url.RepositoryCloneUrl(Model.Path.RootPath)</code>
+<code class="console">git clone @Url.RepositoryCloneUrl(Model.Path)</code>
 
 <h2>Browse the repository</h2>
 <ul class="no-bullets">
   @foreach (var branch in Model.Branches)
   {
-    <li>@Html.ActionLink(branch, "Tree", "Repository", new { branch }, null) [@Html.ActionLink("Log", "Log", "Repository", new { branch }, null)] [@Html.ActionLink("Zip", "ZipArchive", "Repository", new { branch, path = Model.Path.RootPath }, null)]</li>
+    <li>@Html.ActionLink(branch, "Tree", "Repository", new { branch }, null) [@Html.ActionLink("Log", "Log", "Repository", new { branch }, null)] [@Html.ActionLink("Zip", "ZipArchive", "Repository", new { branch, path = Model.Path }, null)]</li>
   }
 </ul>
 

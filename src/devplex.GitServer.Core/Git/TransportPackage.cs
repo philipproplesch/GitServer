@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using GitSharp;
 using GitSharp.Core.Transport;
+using devplex.GitServer.Core.Models;
 
 namespace devplex.GitServer.Core.Git
 {
@@ -8,12 +9,12 @@ namespace devplex.GitServer.Core.Git
     {
         public static void AdvertiseUploadPack(string path, Stream output)
         {
-            var absolutePath = RepositoryBrowser.GetRepositoryPath(path);
+            var repositoryPath = RepositoryPath.Resolve(path);
 
             var repository =
-                !Directory.Exists(absolutePath)
-                    ? Repository.Init(absolutePath, true)
-                    : new Repository(absolutePath);
+                !Directory.Exists(repositoryPath.AbsoluteRootPath)
+                    ? Repository.Init(repositoryPath.AbsoluteRootPath, true)
+                    : new Repository(repositoryPath.AbsoluteRootPath);
 
             using (repository)
             {
@@ -27,9 +28,9 @@ namespace devplex.GitServer.Core.Git
 
         public static void AdvertiseReceivePack(string path, Stream output)
         {
-            var absolutePath = RepositoryBrowser.GetRepositoryPath(path);
+            var repositoryPath = RepositoryPath.Resolve(path);
 
-            using (var repository = new Repository(absolutePath))
+            using (var repository = new Repository(repositoryPath.AbsoluteRootPath))
             {
                 var pack = new ReceivePack(repository);
 
@@ -41,9 +42,9 @@ namespace devplex.GitServer.Core.Git
 
         public static void Upload(string path, Stream input, Stream output)
         {
-            var absolutePath = RepositoryBrowser.GetRepositoryPath(path);
+            var repositoryPath = RepositoryPath.Resolve(path);
 
-            using (var repository = new Repository(absolutePath))
+            using (var repository = new Repository(repositoryPath.AbsoluteRootPath))
             {
                 var pack = new UploadPack(repository);
                 pack.setBiDirectionalPipe(false);
@@ -53,9 +54,9 @@ namespace devplex.GitServer.Core.Git
 
         public static void Receive(string path, Stream input, Stream output)
         {
-            var absolutePath = RepositoryBrowser.GetRepositoryPath(path);
+            var repositoryPath = RepositoryPath.Resolve(path);
 
-            using (var repository = new Repository(absolutePath))
+            using (var repository = new Repository(repositoryPath.AbsoluteRootPath))
             {
                 var pack = new ReceivePack(repository);
                 pack.setBiDirectionalPipe(false);
