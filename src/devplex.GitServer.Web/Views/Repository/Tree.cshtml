@@ -13,27 +13,6 @@
 </div>
 <div class="row">
   <div class="large-12 columns">
-    <table style="width: 100%;">
-      @foreach (var element in Model.Tree.Directories.OrderBy(x => x.Order).ThenBy(x => x.Name))
-      {
-        <tr>
-          @if (element is TreeDirectory)
-          {
-            <td class="tree-icon"><i class="icon-folder-close"></i></td>
-            <td>@Html.ActionLink(element.Name, "Tree", "Repository", new { branch = Model.Branch, path = string.Concat(Model.RepositoryPath, "/", element.Path) }, null)</td>
-          }
-          else if (element is TreeFile)
-          {
-            <td class="tree-icon"><i class="icon-file"></i></td>
-            <td>@Html.ActionLink(element.Name, "Blob", "Repository", new { branch = Model.Branch, path = string.Concat(Model.RepositoryPath, "/", element.Path) }, null)</td>
-          }
-          @if (element.CommitDate.HasValue)
-          {
-            <td><time datetime="@element.CommitDate.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")">@element.CommitDate.Value</time></td>
-            <td>@element.Message</td>
-          }
-        </tr>
-      }
-    </table>
+    @Html.Partial("_RepositoryTree", Model)
   </div>
 </div>

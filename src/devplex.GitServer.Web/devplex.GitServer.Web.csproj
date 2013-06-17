@@ -197,6 +197,7 @@
     <Content Include="Views\Shared\_TopBar.cshtml" />
     <Content Include="Scripts\devplex.gitserver.js" />
     <Content Include="Views\Shared\_RepositoryNavigation.cshtml" />
+    <Content Include="Views\Shared\_RepositoryTree.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\devplex.GitServer.Core\devplex.GitServer.Core.csproj">

@@ -154,16 +154,19 @@ namespace devplex.GitServer.Core.Git
                                 Path = leaf.Path
                             };
 
-                        //var commit = leaf.GetLastCommit();
-                        //if (commit != null)
-                        //{
-                        //    file.Message = commit.Message;
-                        //    file.CommitDate = commit.CommitDate.UtcDateTime;
-                        //}
-                        //else
-                        //{
-                        //    file.CommitDate = currentCommit.CommitDate.UtcDateTime;
-                        //}
+                        if (includeCommitDetails)
+                        {
+                            var commit = leaf.GetLastCommit();
+                            if (commit != null)
+                            {
+                                file.Message = commit.Message;
+                                file.CommitDate = commit.CommitDate.UtcDateTime;
+                            }
+                            else
+                            {
+                                file.CommitDate = currentCommit.CommitDate.UtcDateTime;
+                            }
+                        }
 
                         result.Directories.Add(file);
                     }
@@ -178,16 +181,19 @@ namespace devplex.GitServer.Core.Git
                                 Path = tree.Path
                             };
 
-                        //var commit = tree.GetLastCommit();
-                        //if (commit != null)
-                        //{
-                        //    directory.Message = commit.Message;
-                        //    directory.CommitDate = commit.CommitDate.UtcDateTime;
-                        //}
-                        //else
-                        //{
-                        //    directory.CommitDate = currentCommit.CommitDate.UtcDateTime;
-                        //}
+                        if (includeCommitDetails)
+                        {
+                            var commit = tree.GetLastCommit();
+                            if (commit != null)
+                            {
+                                directory.Message = commit.Message;
+                                directory.CommitDate = commit.CommitDate.UtcDateTime;
+                            }
+                            else
+                            {
+                                directory.CommitDate = currentCommit.CommitDate.UtcDateTime;
+                            }
+                        }
 
                         result.Directories.Add(directory);
                     }

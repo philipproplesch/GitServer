@@ -33,7 +33,8 @@ namespace devplex.GitServer.Mvc.Controllers
             return View(repository.GetCommitMessages(skip, take));
         }
 
-        public ActionResult Tree(string branch, string path)
+        public ActionResult Tree(
+            string branch, string path, bool commits = false)
         {
             var repository = new GitRepository(path, branch);
 
@@ -41,8 +42,13 @@ namespace devplex.GitServer.Mvc.Controllers
                 {
                     Branch = branch,
                     RepositoryPath = repository.RootPath,
-                    Tree = repository.GetRepositoryContent(false)
+                    Tree = repository.GetRepositoryContent(commits)
                 };
+
+            if (commits)
+            {
+                return PartialView("_RepositoryTree", model);
+            }
 
             return View(model);
         }
