@@ -30,3 +30,8 @@
 .small-headline {
   font-size: 1.4375em;
 }
+
+/* line 33, D:/_Projects/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+pre.prettyprint {
+  font-size: 0.8em;
+}
