@@ -15,7 +15,7 @@ namespace devplex.GitServer.Mvc.FrameworkExtensions
             builder.Append("://");
             builder.Append(request.Url.DnsSafeHost);
 
-            if (!string.IsNullOrEmpty(request.ApplicationPath))
+            if (request.ApplicationPath != "/")
             {
                 builder.Append(request.ApplicationPath);
             }
