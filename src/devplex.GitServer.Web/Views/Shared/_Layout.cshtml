@@ -11,6 +11,12 @@
 <body>
   @Html.Partial("_TopBar")
   @RenderBody()
+  <div class="row">
+    <div class="large-12 columns">
+      <hr />
+      <small>devplex.GitServer @Html.Version()</small>
+    </div>
+  </div>
   @Scripts.Render("~/scripts/app")
   <script>
     $(document).foundation();
