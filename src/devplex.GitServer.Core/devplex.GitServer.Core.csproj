@@ -73,6 +73,7 @@
     <Compile Include="Git\GitRepository.cs" />
     <Compile Include="Git\IGitRepository.cs" />
     <Compile Include="IO\DirectoryCrawler.cs" />
+    <Compile Include="Models\ReducedCommit.cs" />
     <Compile Include="Models\RepositoryBlob.cs" />
     <Compile Include="Models\CommitMessage.cs" />
     <Compile Include="Models\RepositoryPath.cs" />

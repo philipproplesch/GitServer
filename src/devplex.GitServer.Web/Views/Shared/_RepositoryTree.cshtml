@@ -13,10 +13,10 @@
         <td class="tree-icon"><i class="icon-file"></i></td>
         <td>@Html.ActionLink(element.Name, "Blob", "Repository", new { branch = Model.Branch, path = string.Concat(Model.RepositoryPath, "/", element.Path) }, null)</td>
       }
-      @if (element.CommitDate.HasValue)
+      @if (element.Commit != null && element.Commit.CommitDate.HasValue)
       {
-        <td><time datetime="@element.CommitDate.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")">@element.CommitDate.Value</time></td>
-        <td>@element.Message</td>
+        <td><time datetime="@element.Commit.CommitDate.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")">@element.Commit.CommitDate.Value</time></td>
+        <td>@element.Commit.Message [@element.Commit.CommitAuthor]</td>
       }
     </tr>
   }

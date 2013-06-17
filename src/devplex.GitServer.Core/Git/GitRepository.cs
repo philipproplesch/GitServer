@@ -154,12 +154,19 @@ namespace devplex.GitServer.Core.Git
                             var commit = leaf.GetLastCommit();
                             if (commit != null)
                             {
-                                file.Message = commit.Message;
-                                file.CommitDate = commit.CommitDate.UtcDateTime;
+                                file.Commit = new ReducedCommit {
+                                    Message = commit.Message,
+                                    CommitAuthor = commit.Committer.Name,
+                                    CommitDate = commit.CommitDate.UtcDateTime,
+                                };
                             }
                             else
                             {
-                                file.CommitDate = currentCommit.CommitDate.UtcDateTime;
+                                file.Commit = new ReducedCommit {
+                                    Message = currentCommit.Message,
+                                    CommitAuthor = currentCommit.Committer.Name,
+                                    CommitDate = currentCommit.CommitDate.UtcDateTime,
+                                };
                             }
                         }
 
@@ -181,12 +188,19 @@ namespace devplex.GitServer.Core.Git
                             var commit = tree.GetLastCommit();
                             if (commit != null)
                             {
-                                directory.Message = commit.Message;
-                                directory.CommitDate = commit.CommitDate.UtcDateTime;
+                                directory.Commit = new ReducedCommit {
+                                    Message = commit.Message,
+                                    CommitAuthor = commit.Committer.Name,
+                                    CommitDate = commit.CommitDate.UtcDateTime,
+                                };
                             }
                             else
                             {
-                                directory.CommitDate = currentCommit.CommitDate.UtcDateTime;
+                                directory.Commit = new ReducedCommit {
+                                    Message = currentCommit.Message,
+                                    CommitAuthor = currentCommit.Committer.Name,
+                                    CommitDate = currentCommit.CommitDate.UtcDateTime,
+                                };
                             }
                         }
 
