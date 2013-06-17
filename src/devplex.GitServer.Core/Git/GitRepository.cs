@@ -39,11 +39,6 @@ namespace devplex.GitServer.Core.Git
 
         public GitRepository(string requestedPath, string branchName)
         {
-            if (string.IsNullOrEmpty(branchName))
-            {
-                branchName = "master";
-            }
-
             _branchName = branchName;
             _path = RepositoryPath.Resolve(requestedPath);
         }
