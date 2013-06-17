@@ -158,11 +158,11 @@ namespace devplex.GitServer.Core.Git
                         if (commit != null)
                         {
                             file.Message = commit.Message;
-                            file.CommitDate = commit.CommitDate.DateTime;
+                            file.CommitDate = commit.CommitDate.UtcDateTime;
                         }
                         else
                         {
-                            file.CommitDate = currentCommit.CommitDate.DateTime;
+                            file.CommitDate = currentCommit.CommitDate.UtcDateTime;
                         }
 
                         result.Directories.Add(file);
@@ -182,11 +182,11 @@ namespace devplex.GitServer.Core.Git
                         if (commit != null)
                         {
                             directory.Message = commit.Message;
-                            directory.CommitDate = commit.CommitDate.DateTime;
+                            directory.CommitDate = commit.CommitDate.UtcDateTime;
                         }
                         else
                         {
-                            directory.CommitDate = currentCommit.CommitDate.DateTime;
+                            directory.CommitDate = currentCommit.CommitDate.UtcDateTime;
                         }
 
                         result.Directories.Add(directory);
