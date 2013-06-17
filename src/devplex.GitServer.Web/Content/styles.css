@@ -1,110 +1,22 @@
-/* line 1, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_global.scss */
-body {
-  color: white;
-  background-color: black;
-  font-size: 1em;
-  font-family: "Source Sans Pro", sans-serif;
-  font-weight: lighter;
+/* line 3, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+.name h1 {
+  background-image: url("/Content/images/devplex-git-icon_30x30.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 25px;
 }
 
-/* line 10, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_global.scss */
-p {
-  margin: 10px 0;
-}
-
-/* line 14, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_global.scss */
-a {
-  color: #a27ac1;
-  text-decoration: none;
-}
-/* line 18, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_global.scss */
-a:hover {
-  text-decoration: underline;
-}
-
-/* line 23, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_global.scss */
-.main {
-  padding: 10px 20px;
-}
-
-/* line 27, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_global.scss */
-.no-bullets {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/* line 1, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_navigation.scss */
-.site-navigation {
-  background-color: #333333;
-  padding: 10px 20px;
-}
-/* line 5, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_navigation.scss */
-.site-navigation ul {
-  margin-top: 10px;
-}
-/* line 8, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_navigation.scss */
-.site-navigation ul li {
-  float: left;
-}
-
-/* line 1, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_headings.scss */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: lighter;
-}
-
-/* line 1, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
-code, pre {
-  font-family: Consolas, "Lucida Console", "DejaVu Sans Mono", monospace;
-}
-
-/* line 5, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
+/* line 11, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 .console {
-  display: block;
+  margin-bottom: 40px;
 }
-/* line 8, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
-.console:before {
+/* line 14, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+.console code {
+  background: #000000;
+  color: #FFFFFF;
+  padding: 10px;
+}
+/* line 19, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+.console code:before {
   content: '> ';
-}
-
-/* line 15, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
-.tree div {
-  margin: 5px 0;
-}
-/* line 19, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
-.tree a {
-  text-decoration: none;
-  color: #99c17a;
-}
-/* line 23, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
-.tree a:hover {
-  text-decoration: underline;
-}
-
-/* line 31, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
-.commits li {
-  margin-bottom: 20px;
-}
-/* line 34, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
-.commits li img {
-  float: left;
-  margin-right: 10px;
-}
-/* line 39, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
-.commits li .commit-info {
-  float: left;
-}
-/* line 43, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/_code.scss */
-.commits li .commit-meta {
-  font-size: 0.8em;
-}
-
-/* line 9, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
-.clearfix {
-  clear: both;
-}
-
-/* line 13, D:/Dropbox/DEV/_2013/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
-i {
-  color: #99c17a;
 }

@@ -1,18 +1,23 @@
 ﻿@model IEnumerable<CommitMessage>
-
-<ul class="no-bullets commits">
-  @foreach (var commit in Model)
-  {
-    <li>
-      @Html.Gravatar(commit.AuthorMailAddress)
-      <div class="commit-info">
-        @commit.Message
-        <div class="commit-meta">
-          <time datetime="@commit.Timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ")">@commit.Timestamp</time> by @commit.AuthorName
-        </div>
-      </div>
-      <div class="clearfix"></div>
-    </li>
-  }
-</ul>
-
+<div class="row">
+  <div class="large-12 columns">
+    <table style="width: 100%;">
+      @foreach (var commit in Model)
+      {
+        <tr>
+          <td>
+            @Html.Gravatar(commit.AuthorMailAddress)
+          </td>
+          <td>
+            <div class="commit-message">
+              @commit.Message
+            </div>
+            <div class="commit-timestamp">
+              <time datetime="@commit.Timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ")">@commit.Timestamp</time> by @commit.AuthorName
+            </div>
+          </td>
+        </tr>
+      }
+    </table>
+  </div>
+</div>

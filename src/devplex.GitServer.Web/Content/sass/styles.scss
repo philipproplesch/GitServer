@@ -1,15 +1,23 @@
-//@import "compass/reset";
+.name {
 
-@import "variables";
-@import "global";
-@import "navigation";
-@import "headings";
-@import "code";
-
-.clearfix {
-  clear: both;
+  h1 {
+    background-image: url('/Content/images/devplex-git-icon_30x30.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 25px;
+  }
 }
 
-i {
-  color: $body-icon-color;
+.console {
+  margin-bottom: 40px;
+
+  code {
+    background: #000000;
+    color: #FFFFFF;
+    padding: 10px;    
+
+    &:before {
+      content: '> ';
+    }
+  }
 }

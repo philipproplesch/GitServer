@@ -1,19 +1,26 @@
 ﻿@model RepositoryBlob
-<a href="@Model.RawUrl">Download file</a>
-<br />
-@if (Model.IsMarkdown())
-{
-  @Html.RenderMarkdown(Model.Content)
-}
-else if (Model.IsImage())
-{
-  <img src="@Model.RawUrl" alt="" />
-}
-else if (Model.IsBinary())
-{
-  
-}
-else
-{
-  <pre class="prettyprint linenums">@Model.Content</pre>
-}
+<div class="row">
+  <div class="large-12 columns">
+    <a href="@Model.RawUrl">Download file</a>
+    <br />
+    @if (Model.IsMarkdown())
+    {
+      @Html.RenderMarkdown(Model.Content)
+    }
+    else if (Model.IsImage())
+    {
+      <img src="@Model.RawUrl" alt="" />
+    }
+    else if (Model.IsBinary())
+    {
+
+    }
+    else
+    {
+      <pre class="prettyprint linenums">@Model.Content</pre>
+      <script>
+        prettyPrint();
+      </script>
+    }
+  </div>
+</div>
