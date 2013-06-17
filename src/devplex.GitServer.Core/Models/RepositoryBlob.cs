@@ -8,5 +8,8 @@
         public byte[] RawContent { get; set; }
 
         public string RawUrl { get; set; }
+
+        public string Branch { get; set; }
+        public string RepositoryPath { get; set; }
     }
 }

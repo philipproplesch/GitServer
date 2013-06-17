@@ -16,7 +16,7 @@ namespace devplex.GitServer.Core.Git
         IEnumerable<string> GetBranches();
         IEnumerable<CommitMessage> GetCommitMessages(int skip, int take);
 
-        RepositoryTree GetRepositoryContent();
+        RepositoryTree GetRepositoryContent(bool includeCommitDetails);
         RepositoryBlob GetBlobContent();
         string FindAndReadFile(Func<string, bool> filter);
 

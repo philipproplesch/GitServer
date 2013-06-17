@@ -1,8 +1,25 @@
 ﻿@model RepositoryBlob
 <div class="row">
   <div class="large-12 columns">
-    <a href="@Model.RawUrl">Download file</a>
-    <br />
+    <h1 class="small-h1">@Model.FileName</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="section-container horizontal-nav" data-section="horizontal-nav">
+      @Html.Partial("_RepositoryNavigation")
+      <section>
+        <p class="title" data-section-title>
+          <a href="@Model.RawUrl">
+            <i class="icon-download"></i><span class="section-name">Download file</span>
+          </a>
+        </p>
+      </section>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
     @if (Model.IsMarkdown())
     {
       @Html.RenderMarkdown(Model.Content)
@@ -13,14 +30,11 @@
     }
     else if (Model.IsBinary())
     {
-
+      <text>// No preview available</text>
     }
     else
     {
       <pre class="prettyprint linenums">@Model.Content</pre>
-      <script>
-        prettyPrint();
-      </script>
     }
   </div>
 </div>

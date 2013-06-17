@@ -1,24 +1,13 @@
 ﻿@model RepositoryTreeViewModel
 <div class="row">
   <div class="large-12 columns">
-    <h1>@Model.RepositoryPath</h1>
+    <h1 class="small-h1">@Model.RepositoryPath</h1>
   </div>
 </div>
 <div class="row">
   <div class="large-12 columns">
     <div class="section-container horizontal-nav" data-section="horizontal-nav">
-      <section>
-        <p class="title" data-section-title>@Html.ActionLink("Overview", "Index", "Repository", new { path = Model.RepositoryPath }, null)</p>
-      </section>
-      <section>
-        <p class="title" data-section-title>@Html.ActionLink("Files", "Tree", "Repository", new { branch = Model.Branch, path = Model.RepositoryPath }, null)</p>
-      </section>
-      <section>
-        <p class="title" data-section-title>@Html.ActionLink("Commits", "Log", "Repository", new { branch = Model.Branch, path = Model.RepositoryPath }, null)</p>
-      </section>
-      <section>
-        <p class="title" data-section-title>@Html.ActionLink("Zip", "ZipArchive", "Repository", new { branch = Model.Branch, path = Model.RepositoryPath }, null)</p>
-      </section>
+      @Html.Partial("_RepositoryNavigation")
     </div>
   </div>
 </div>
@@ -30,16 +19,19 @@
         <tr>
           @if (element is TreeDirectory)
           {
-            <td><i class="icon-folder-close"></i></td>
+            <td class="tree-icon"><i class="icon-folder-close"></i></td>
             <td>@Html.ActionLink(element.Name, "Tree", "Repository", new { branch = Model.Branch, path = string.Concat(Model.RepositoryPath, "/", element.Path) }, null)</td>
           }
           else if (element is TreeFile)
           {
-            <td><i class="icon-file"></i></td>
+            <td class="tree-icon"><i class="icon-file"></i></td>
             <td>@Html.ActionLink(element.Name, "Blob", "Repository", new { branch = Model.Branch, path = string.Concat(Model.RepositoryPath, "/", element.Path) }, null)</td>
           }
-          <td><time datetime="@element.CommitDate.ToString("yyyy-MM-ddTHH:mm:ssZ")">@element.CommitDate</time></td>
-          <td>@element.Message</td>
+          @if (element.CommitDate.HasValue)
+          {
+            <td><time datetime="@element.CommitDate.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")">@element.CommitDate.Value</time></td>
+            <td>@element.Message</td>
+          }
         </tr>
       }
     </table>

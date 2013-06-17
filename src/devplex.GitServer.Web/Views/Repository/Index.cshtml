@@ -1,11 +1,17 @@
 ﻿@model RepositoryViewModel
 <div class="row">
-  <div class="large-12 columns">
-    <h1>@Model.Path</h1>
+  <div class="large-3 columns">
+    <ul class="side-nav">
+      @foreach (var branch in Model.Branches)
+      {
+        <li class="active">@Html.ActionLink(branch, "Tree", "Repository", new { branch }, null)</li>
+        <li class="divider"></li>
+      }
+    </ul>
   </div>
-</div>
-<div class="row">
   <div class="large-9 columns">
+    <h1 class="small-h1">@Model.Path</h1>
+    
     <div class="console">
       <code>git clone @Url.RepositoryCloneUrl(Model.Path)</code>
     </div>
@@ -15,13 +21,5 @@
       @Html.RenderMarkdown(Model.ReadMe)
     }
   </div>
-  <div class="large-3 columns">
-    <ul class="side-nav">
-      @foreach (var branch in Model.Branches)
-      {
-        <li class="active">@Html.ActionLink(branch, "Tree", "Repository", new { branch }, null)</li>
-        <li class="divider"></li>
-      }
-    </ul>
   </div>
 </div>

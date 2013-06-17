@@ -10,14 +10,16 @@
 
 .console {
   margin-bottom: 40px;
-
-  code {
-    background: #000000;
-    color: #FFFFFF;
-    padding: 10px;    
-
-    &:before {
-      content: '> ';
-    }
-  }
 }
+
+.tree-icon {
+  width: 20px;
+}
+
+.log-user-image {
+  width: 70px;
+}
+
+ .section-name {
+  margin-left: 5px; 
+ }

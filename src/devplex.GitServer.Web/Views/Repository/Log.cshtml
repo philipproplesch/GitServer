@@ -5,7 +5,7 @@
       @foreach (var commit in Model)
       {
         <tr>
-          <td>
+          <td class="log-user-image">
             @Html.Gravatar(commit.AuthorMailAddress)
           </td>
           <td>

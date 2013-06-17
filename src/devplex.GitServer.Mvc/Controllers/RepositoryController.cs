@@ -41,7 +41,7 @@ namespace devplex.GitServer.Mvc.Controllers
                 {
                     Branch = branch,
                     RepositoryPath = repository.RootPath,
-                    Tree = repository.GetRepositoryContent()
+                    Tree = repository.GetRepositoryContent(false)
                 };
 
             return View(model);

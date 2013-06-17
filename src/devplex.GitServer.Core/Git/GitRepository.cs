@@ -117,7 +117,7 @@ namespace devplex.GitServer.Core.Git
             return result.Skip(skip).Take(take);
         }
 
-        public RepositoryTree GetRepositoryContent()
+        public RepositoryTree GetRepositoryContent(bool includeCommitDetails)
         {
             var result = new RepositoryTree
             {
@@ -200,6 +200,8 @@ namespace devplex.GitServer.Core.Git
         public RepositoryBlob GetBlobContent()
         {
             var result = new RepositoryBlob();
+            result.Branch = _branchName;
+            result.RepositoryPath = _path.RootPath;
 
             using (var repository = Open())
             {

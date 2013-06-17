@@ -16,6 +16,6 @@ namespace devplex.GitServer.Core.Models
         public List<ITreeObject> Objects { get; set; }
 
         public string Message { get; set; }
-        public DateTime CommitDate { get; set; }
+        public DateTime? CommitDate { get; set; }
     }
 }
