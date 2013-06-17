@@ -16,12 +16,11 @@ namespace devplex.GitServer.Mvc.Controllers
         {
             var repository = new GitRepository(path);
 
-            var model = new RepositoryViewModel
-                {
-                    Path = repository.RootPath,
-                    Branches = repository.GetBranches(),
-                    ReadMe = repository.FindAndReadFile(_isReadMe)
-                };
+            var model = new RepositoryViewModel {
+                RepositoryPath = repository.RootPath,
+                Branches = repository.GetBranches(),
+                ReadMe = repository.FindAndReadFile(_isReadMe)
+            };
 
             return View(model);
         }
@@ -30,7 +29,14 @@ namespace devplex.GitServer.Mvc.Controllers
             string branch, string path, int skip = 0, int take = 50)
         {
             var repository = new GitRepository(path, branch);
-            return View(repository.GetCommitMessages(skip, take));
+
+            var model = new CommitHistoryViewModel {
+                Branch = branch,
+                RepositoryPath = repository.RootPath,
+                Commits = repository.GetCommitMessages(skip, take)
+            };
+
+            return View(model);
         }
 
         public ActionResult Tree(
@@ -38,12 +44,11 @@ namespace devplex.GitServer.Mvc.Controllers
         {
             var repository = new GitRepository(path, branch);
 
-            var model = new RepositoryTreeViewModel
-                {
-                    Branch = branch,
-                    RepositoryPath = repository.RootPath,
-                    Tree = repository.GetRepositoryContent(commits)
-                };
+            var model = new RepositoryTreeViewModel {
+                Branch = branch,
+                RepositoryPath = repository.RootPath,
+                Tree = repository.GetRepositoryContent(commits)
+            };
 
             if (commits)
             {

@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\BaseRepositoryDetails.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RepositoryController.cs" />
@@ -82,7 +83,8 @@
     <Compile Include="FrameworkExtensions\UrlHelperExtensions.cs" />
     <Compile Include="ModelBinders\SmartHttpPathBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\BaseTreeViewModel.cs" />
+    <Compile Include="Common\BaseTreeViewModel.cs" />
+    <Compile Include="ViewModels\CommitHistoryViewModel.cs" />
     <Compile Include="ViewModels\RepositoryTreeViewModel.cs" />
     <Compile Include="ViewModels\RepositoryViewModel.cs" />
     <Compile Include="ViewModels\TreeViewModel.cs" />

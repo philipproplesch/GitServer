@@ -15,6 +15,6 @@
     }
   };
 
-  new devplex.gitserver.Tree();
+  var repositoryTree = new devplex.gitserver.Tree();
 
 }(window.jQuery));

@@ -15,14 +15,14 @@
 <section>
   <p class="title" data-section-title>
     <a href="@Url.Action("Log", "Repository", new { branch = Model.Branch, path = Model.RepositoryPath }, null)">
-      <i class="icon-file-text"></i><span class="section-name">Commits</span>
+      <i class="icon-time"></i><span class="section-name">Commits</span>
     </a>
   </p>
 </section>
 <section>
   <p class="title" data-section-title>
     <a href="@Url.Action("ZipArchive", "Repository", new { branch = Model.Branch, path = Model.RepositoryPath }, null)">
-      <i class="icon-archive"></i><span class="section-name">Zip</span>
+      <i class="icon-archive"></i><span class="section-name">Download as Zip</span>
     </a>
   </p>
 </section>

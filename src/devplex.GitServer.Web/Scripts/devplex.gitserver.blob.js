@@ -7,6 +7,6 @@
     }
   };
 
-  new devplex.gitserver.Blob();
+  var repositoryBlob = new devplex.gitserver.Blob();
 
 }(window.jQuery));
