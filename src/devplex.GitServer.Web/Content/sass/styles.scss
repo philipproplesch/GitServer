@@ -1,7 +1,9 @@
+@import "settings";
+
 .name {
 
   h1 {
-    background-image: url('/Content/images/devplex-git-icon_30x30.png');
+    background-image: url('images/devplex-git-icon_30x30.png');
     background-repeat: no-repeat;
     background-position: left center;
     padding-left: 25px;
@@ -22,4 +24,8 @@
 
  .section-name {
   margin-left: 5px; 
+ }
+
+ .small-h1 {
+  font-size: emCalc(23px);
  }
