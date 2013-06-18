@@ -10,15 +10,29 @@
     </ul>
   </div>
   <div class="large-9 columns">
-    <h1 class="small-headline">@Model.RepositoryPath</h1>
-    <div class="console">
-      <code>git clone @Url.RepositoryCloneUrl(Model.RepositoryPath)</code>
+    <div class="row">
+      <div class="large-12 columns">
+        <h1 class="small-headline">@Model.RepositoryPath</h1>
+      </div>
     </div>
+
+    <div class="row collapse">
+      <div class="small-3 large-2 columns">
+        <span class="prefix">git clone</span>
+      </div>
+      <div class="small-9 large-10 columns">
+        <input type="text" value="@Url.RepositoryCloneUrl(Model.RepositoryPath)" readonly="readonly">
+      </div>
+    </div>
+
     @if (!string.IsNullOrEmpty(Model.ReadMe))
     {
-      <hr/>
-      @Html.RenderMarkdown(Model.ReadMe)
+      <div class="row">
+        <div class="large-12 columns">
+          <hr />
+          @Html.RenderMarkdown(Model.ReadMe)
+        </div>
+      </div>
     }
-  </div>
   </div>
 </div>

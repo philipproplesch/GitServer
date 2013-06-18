@@ -84,6 +84,9 @@
     <Compile Include="ModelBinders\SmartHttpPathBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\BaseTreeViewModel.cs" />
+    <Compile Include="Viewers\ImageViewer.cs" />
+    <Compile Include="Viewers\MarkdownViewer.cs" />
+    <Compile Include="Viewers\RawViewer.cs" />
     <Compile Include="ViewModels\CommitHistoryViewModel.cs" />
     <Compile Include="ViewModels\RepositoryTreeViewModel.cs" />
     <Compile Include="ViewModels\RepositoryViewModel.cs" />

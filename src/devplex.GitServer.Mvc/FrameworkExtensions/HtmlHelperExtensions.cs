@@ -1,12 +1,61 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
 using MarkdownSharp;
+using devplex.GitServer.Core.Common;
+using devplex.GitServer.Core.Configuration;
+using devplex.GitServer.Core.Extensions;
 using devplex.GitServer.Core.FrameworkExtensions;
 using devplex.GitServer.Core.Git;
+using devplex.GitServer.Core.Models;
+using devplex.GitServer.Mvc.Viewers;
 
 namespace devplex.GitServer.Mvc.FrameworkExtensions
 {
     public static class HtmlHelperExtensions
     {
+        public static MvcHtmlString RenderViewer(
+             this HtmlHelper instance, RepositoryBlob blob)
+        {
+            Func<Type, IContentViewer> createInstance =
+                type => (IContentViewer) Activator.CreateInstance(type);
+
+            if (blob.IsBinary())
+            {
+                return new MvcHtmlString("// NO PREVIEW AVAILABLE");
+            }
+
+            var fileName = blob.FileName.ToUpper();
+
+            var viewers = Settings.Section.Viewers;
+
+            IContentViewer contentViewer = null;
+            foreach (ViewerElement viewer in viewers)
+            {
+                foreach (ViewerExtensionElement element in viewer.Extensions)
+                {
+                    var extension = element.Extension.ToUpper();
+                    if (fileName.EndsWith(extension))
+                    {
+                        contentViewer = createInstance(viewer.Type);
+                        break;
+                    }
+
+                    if (contentViewer != null)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (contentViewer == null)
+            {
+                contentViewer = createInstance(viewers.FallbackViewerType);
+            }
+
+            return contentViewer.Render(blob);
+        }
+
          public static MvcHtmlString RenderMarkdown(
              this HtmlHelper instance, string input)
          {

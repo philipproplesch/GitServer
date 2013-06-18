@@ -20,21 +20,6 @@
 </div>
 <div class="row">
   <div class="large-12 columns">
-    @if (Model.IsMarkdown())
-    {
-      @Html.RenderMarkdown(Model.Content)
-    }
-    else if (Model.IsImage())
-    {
-      <img src="@Model.RawUrl" alt="" />
-    }
-    else if (Model.IsBinary())
-    {
-      <text>// No preview available</text>
-    }
-    else
-    {
-      <pre class="prettyprint linenums">@Model.Content</pre>
-    }
+    @Html.RenderViewer(Model)
   </div>
 </div>

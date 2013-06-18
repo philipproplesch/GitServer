@@ -1,4 +1,4 @@
-/* line 5, D:/_Projects/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+/* line 5, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 .name h1 {
   background-image: url("images/devplex-git-icon_30x30.png");
   background-repeat: no-repeat;
@@ -6,32 +6,27 @@
   padding-left: 25px;
 }
 
-/* line 13, D:/_Projects/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
-.console {
-  margin-bottom: 40px;
-}
-
-/* line 17, D:/_Projects/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+/* line 13, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 .tree-icon {
   width: 20px;
 }
 
-/* line 21, D:/_Projects/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+/* line 17, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 .log-user-image {
   width: 70px;
 }
 
-/* line 25, D:/_Projects/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+/* line 21, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 .section-name {
   margin-left: 5px;
 }
 
-/* line 29, D:/_Projects/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+/* line 25, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 .small-headline {
   font-size: 1.4375em;
 }
 
-/* line 33, D:/_Projects/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+/* line 29, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 pre.prettyprint {
   font-size: 0.8em;
 }
