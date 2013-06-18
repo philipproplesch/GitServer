@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using devplex.GitServer.Core.Common;
 using devplex.GitServer.Core.Models;
 
@@ -8,12 +9,12 @@ namespace devplex.GitServer.Mvc.Viewers
     {
         public MvcHtmlString Render(RepositoryBlob blob)
         {
-            var builder = new TagBuilder("pre");
-            builder.AddCssClass("prettyprint linenums");
+            var tag = new TagBuilder("pre");
+            tag.AddCssClass("prettyprint linenums");
 
-            builder.InnerHtml = blob.Content;
+            tag.InnerHtml = HttpUtility.HtmlEncode(blob.Content);
 
-            return new MvcHtmlString(builder.ToString(TagRenderMode.Normal));
+            return new MvcHtmlString(tag.ToString(TagRenderMode.Normal));
         }
     }
 }

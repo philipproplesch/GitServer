@@ -68,8 +68,10 @@
     <Compile Include="Common\IContentViewer.cs" />
     <Compile Include="Configuration\GitServerSection.cs" />
     <Compile Include="Configuration\Settings.cs" />
+    <Compile Include="Configuration\ViewerElement.cs" />
     <Compile Include="Configuration\ViewerElementCollection.cs" />
-    <Compile Include="Extensions\RepositoryBlobExtensions.cs" />
+    <Compile Include="Configuration\ExtensionCollection.cs" />
+    <Compile Include="Configuration\ExtensionElement.cs" />
     <Compile Include="Extensions\TreeExtensions.cs" />
     <Compile Include="FrameworkExtensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="FrameworkExtensions\HttpResponseBaseExtensions.cs" />

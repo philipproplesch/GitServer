@@ -50,7 +50,7 @@ namespace devplex.GitServer.Core.Models
         {
             relativePath = relativePath.TrimStart('/', '\\');
 
-            var root = Settings.GitRoot;
+            var root = Settings.Section.RepositoryPath;
 
             return
                 relativePath.EndsWith(GitDirectory)

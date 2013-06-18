@@ -8,11 +8,11 @@ namespace devplex.GitServer.Mvc.Viewers
     {
         public MvcHtmlString Render(RepositoryBlob blob)
         {
-            var builder = new TagBuilder("img");
-            builder.Attributes.Add("src", blob.RawUrl);
-            builder.Attributes.Add("alt", blob.FileName);
+            var tag = new TagBuilder("img");
+            tag.Attributes.Add("src", blob.RawUrl);
+            tag.Attributes.Add("alt", blob.FileName);
 
-            return new MvcHtmlString(builder.ToString(TagRenderMode.SelfClosing));
+            return new MvcHtmlString(tag.ToString(TagRenderMode.SelfClosing));
         }
     }
 }

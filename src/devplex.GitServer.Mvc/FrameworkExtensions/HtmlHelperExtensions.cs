@@ -4,11 +4,9 @@ using System.Web.Mvc;
 using MarkdownSharp;
 using devplex.GitServer.Core.Common;
 using devplex.GitServer.Core.Configuration;
-using devplex.GitServer.Core.Extensions;
 using devplex.GitServer.Core.FrameworkExtensions;
 using devplex.GitServer.Core.Git;
 using devplex.GitServer.Core.Models;
-using devplex.GitServer.Mvc.Viewers;
 
 namespace devplex.GitServer.Mvc.FrameworkExtensions
 {
@@ -20,38 +18,32 @@ namespace devplex.GitServer.Mvc.FrameworkExtensions
             Func<Type, IContentViewer> createInstance =
                 type => (IContentViewer) Activator.CreateInstance(type);
 
-            if (blob.IsBinary())
+            Func<string, ExtensionCollection, bool> matchesExtension =
+                (fileName, extensions) => {
+                    fileName = fileName.ToUpper();
+
+                    return extensions
+                        .Cast<ExtensionElement>()
+                        .Select(element => element.Extension.ToUpper())
+                        .Any(extension => fileName.EndsWith(extension));
+                };
+
+
+            var section = Settings.Section;
+            if (matchesExtension(blob.FileName, section.Extensions))
             {
                 return new MvcHtmlString("// NO PREVIEW AVAILABLE");
             }
 
-            var fileName = blob.FileName.ToUpper();
+            var viewers = section.Viewers;
 
-            var viewers = Settings.Section.Viewers;
-
-            IContentViewer contentViewer = null;
-            foreach (ViewerElement viewer in viewers)
-            {
-                foreach (ViewerExtensionElement element in viewer.Extensions)
-                {
-                    var extension = element.Extension.ToUpper();
-                    if (fileName.EndsWith(extension))
-                    {
-                        contentViewer = createInstance(viewer.Type);
-                        break;
-                    }
-
-                    if (contentViewer != null)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            if (contentViewer == null)
-            {
-                contentViewer = createInstance(viewers.FallbackViewerType);
-            }
+            var contentViewer =
+                viewers
+                    .Cast<ViewerElement>()
+                    .Where(viewer => matchesExtension(blob.FileName, viewer.Extensions))
+                    .Select(viewer => createInstance(viewer.Type))
+                    .FirstOrDefault() ??
+                createInstance(viewers.FallbackViewerType);
 
             return contentViewer.Render(blob);
         }

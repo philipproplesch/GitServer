@@ -11,7 +11,7 @@ namespace devplex.GitServer.Mvc.FrameworkExtensions
             var request = instance.RequestContext.HttpContext.Request;
 
             var builder = new StringBuilder();
-            builder.Append(Settings.UseSsl ? "https" : "http");
+            builder.Append(Settings.Section.UseSsl ? "https" : "http");
             builder.Append("://");
             builder.Append(request.Url.DnsSafeHost);
 

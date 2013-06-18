@@ -193,7 +193,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Shared\_TopBar.cshtml" />
     <Content Include="Scripts\devplex.gitserver.js" />
     <Content Include="Views\Shared\_RepositoryNavigation.cshtml" />

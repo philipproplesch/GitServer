@@ -13,7 +13,7 @@ namespace devplex.GitServer.Core.IO
     {
         public string GetAbsolutePath(string path)
         {
-            var root = Settings.GitRoot;
+            var root = Settings.Section.RepositoryPath;
             return Path.Combine(root, path);
         }
 
