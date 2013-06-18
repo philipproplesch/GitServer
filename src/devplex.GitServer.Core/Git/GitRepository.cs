@@ -233,6 +233,11 @@ namespace devplex.GitServer.Core.Git
                     result.RawContent = file.RawData;
                     //result.Content = file.Data;
 
+                    result.FileSize =
+                        string.Format(
+                            "{0:0.###} kb",
+                            ((double) file.RawData.LongLength/1024));
+
                     using (var ms = new MemoryStream(file.RawData))
                     using (var reader = new StreamReader(ms, true))
                     {

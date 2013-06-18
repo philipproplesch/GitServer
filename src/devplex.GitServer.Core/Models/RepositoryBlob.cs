@@ -9,6 +9,11 @@
 
         public string RawUrl { get; set; }
 
+        public string FileSize { get; set; }
+
+        public int Lines { get; set; }
+        public int SourceLines { get; set; }
+
         public string Branch { get; set; }
         public string RepositoryPath { get; set; }
     }
