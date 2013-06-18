@@ -13,29 +13,31 @@ namespace devplex.GitServer.Core.Git
 {
     public class GitRepository : IGitRepository
     {
+        private static readonly object _s_obj = new object();
+
         private readonly string _branchName;
         private readonly RepositoryPath _path;
 
         private readonly Func<Repository, string, Branch> _getBranch =
             (repository, branchName) =>
+            {
+                if (repository.Branches.ContainsKey(branchName))
                 {
-                    if (repository.Branches.ContainsKey(branchName))
-                    {
-                        return repository.Branches[branchName];
-                    }
+                    return repository.Branches[branchName];
+                }
 
-                    if (repository.CurrentBranch != null)
-                    {
-                        return repository.CurrentBranch;
-                    }
+                if (repository.CurrentBranch != null)
+                {
+                    return repository.CurrentBranch;
+                }
 
-                    if (repository.Branches.Count > 0)
-                    {
-                        return repository.Branches.First().Value;
-                    }
+                if (repository.Branches.Count > 0)
+                {
+                    return repository.Branches.First().Value;
+                }
 
-                    return null;
-                };
+                return null;
+            };
 
         public GitRepository(string requestedPath, string branchName)
         {
@@ -119,96 +121,97 @@ namespace devplex.GitServer.Core.Git
                 Directories = new List<IRepositoryObject>()
             };
 
-            using (var repository = Open())
+            lock (_s_obj)
             {
-                var branch = _getBranch(repository, _branchName);
-                var currentCommit = branch.CurrentCommit;
-                
-                var root = currentCommit.Tree;
-
-                if (!string.IsNullOrEmpty(_path.SubPath))
+                using (var repository = Open())
                 {
-                    root = root.FindSubPath(_path.SubPath);
+                    var branch = _getBranch(repository, _branchName);
+                    var currentCommit = branch.CurrentCommit;
 
-                    if (root == null)
+                    var root = currentCommit.Tree;
+
+                    if (!string.IsNullOrEmpty(_path.SubPath))
                     {
-                        return result;
+                        root = root.FindSubPath(_path.SubPath);
+
+                        if (root == null)
+                        {
+                            return result;
+                        }
                     }
-                }
 
-                foreach (var child in root.Children)
-                {
-                    // Is file?
-                    if (child.IsBlob && child is Leaf)
+                    foreach (var child in root.Children)
                     {
-                        var leaf = child as Leaf;
-                        
-                        var file = new TreeFile
-                            {
+                        // Is file?
+                        if (child.IsBlob && child is Leaf)
+                        {
+                            var leaf = child as Leaf;
+
+                            var file = new TreeFile {
                                 Name = leaf.Name,
                                 Path = leaf.Path
                             };
 
-                        if (includeCommitDetails)
-                        {
-                            var commit = leaf.GetLastCommit();
-                            if (commit != null)
+                            if (includeCommitDetails)
                             {
-                                file.Commit = new ReducedCommit {
-                                    Message = commit.Message,
-                                    CommitAuthor = commit.Committer.Name,
-                                    CommitDate = commit.CommitDate.UtcDateTime,
-                                };
+                                var commit = leaf.GetLastCommit();
+                                if (commit != null)
+                                {
+                                    file.Commit = new ReducedCommit {
+                                        Message = commit.Message,
+                                        CommitAuthor = commit.Committer.Name,
+                                        CommitDate = commit.CommitDate.UtcDateTime,
+                                    };
+                                }
+                                else
+                                {
+                                    file.Commit = new ReducedCommit {
+                                        Message = currentCommit.Message,
+                                        CommitAuthor = currentCommit.Committer.Name,
+                                        CommitDate = currentCommit.CommitDate.UtcDateTime,
+                                    };
+                                }
                             }
-                            else
-                            {
-                                file.Commit = new ReducedCommit {
-                                    Message = currentCommit.Message,
-                                    CommitAuthor = currentCommit.Committer.Name,
-                                    CommitDate = currentCommit.CommitDate.UtcDateTime,
-                                };
-                            }
+
+                            result.Directories.Add(file);
                         }
+                            // Is directory?
+                        else if (child is Tree)
+                        {
+                            var tree = child as Tree;
 
-                        result.Directories.Add(file);
-                    }
-                    // Is directory?
-                    else if (child is Tree)
-                    {
-                        var tree = child as Tree;
-
-                        var directory = new TreeDirectory
-                            {
+                            var directory = new TreeDirectory {
                                 Name = tree.Name,
                                 Path = tree.Path
                             };
 
-                        if (includeCommitDetails)
-                        {
-                            var commit = tree.GetLastCommit();
-                            if (commit != null)
+                            if (includeCommitDetails)
                             {
-                                directory.Commit = new ReducedCommit {
-                                    Message = commit.Message,
-                                    CommitAuthor = commit.Committer.Name,
-                                    CommitDate = commit.CommitDate.UtcDateTime,
-                                };
+                                var commit = tree.GetLastCommit();
+                                if (commit != null)
+                                {
+                                    directory.Commit = new ReducedCommit {
+                                        Message = commit.Message,
+                                        CommitAuthor = commit.Committer.Name,
+                                        CommitDate = commit.CommitDate.UtcDateTime,
+                                    };
+                                }
+                                else
+                                {
+                                    directory.Commit = new ReducedCommit {
+                                        Message = currentCommit.Message,
+                                        CommitAuthor = currentCommit.Committer.Name,
+                                        CommitDate = currentCommit.CommitDate.UtcDateTime,
+                                    };
+                                }
                             }
-                            else
-                            {
-                                directory.Commit = new ReducedCommit {
-                                    Message = currentCommit.Message,
-                                    CommitAuthor = currentCommit.Committer.Name,
-                                    CommitDate = currentCommit.CommitDate.UtcDateTime,
-                                };
-                            }
+
+                            result.Directories.Add(directory);
                         }
-
-                        result.Directories.Add(directory);
                     }
-                }
 
-                return result;
+                    return result;
+                }
             }
         }
 
