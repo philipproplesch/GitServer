@@ -15,6 +15,7 @@ namespace devplex.GitServer.Core.Git
 
         IEnumerable<string> GetBranches();
         IEnumerable<CommitMessage> GetCommitMessages(int skip, int take);
+        object GetCommitDetails(string hash);
 
         RepositoryTree GetRepositoryContent(bool includeCommitDetails);
         RepositoryBlob GetBlobContent();

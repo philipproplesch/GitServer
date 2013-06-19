@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using devplex.GitServer.Core.Configuration;
+using devplex.GitServer.Core.Git;
 using devplex.GitServer.Core.Models;
 
 namespace devplex.GitServer.Core.IO
@@ -46,7 +47,7 @@ namespace devplex.GitServer.Core.IO
             var directories = new List<OrganizationRepository>();
             GetRepositories(directories, root, organization);
 
-            return directories.OrderByDescending(x => x.Name);
+            return directories.OrderBy(x => x.Name);
         }
 
         private void GetRepositories(
@@ -57,12 +58,14 @@ namespace devplex.GitServer.Core.IO
             if (directory.Name.EndsWith(".git"))
             {
                 // Repository
-                var path = RepositoryPath.Resolve(relativePath);
+                var repository = new GitRepository(relativePath);
+                
 
                 directories.Add(
                     new OrganizationRepository
                         {
-                            Name = path.RootPath
+                            Name = repository.RootPath,
+                            HasBranches = repository.GetBranches().Any()
                         });
             }
             else
@@ -70,6 +73,15 @@ namespace devplex.GitServer.Core.IO
                 // Namespace
                 foreach (var subDirectory in directory.EnumerateDirectories())
                 {
+                    try
+                    {
+                        subDirectory.EnumerateDirectories();
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        continue;
+                    }
+
                     var path = string.Concat(relativePath, "/", subDirectory.Name);
                     GetRepositories(directories, subDirectory, path);
                 }

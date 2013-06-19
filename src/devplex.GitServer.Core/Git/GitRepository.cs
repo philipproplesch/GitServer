@@ -114,6 +114,16 @@ namespace devplex.GitServer.Core.Git
             return result.Skip(skip).Take(take);
         }
 
+        public object GetCommitDetails(string hash)
+        {
+            using (var repository = Open())
+            {
+                var commit = repository.Get<Commit>(hash);
+            }
+
+            return null;
+        }
+
         public RepositoryTree GetRepositoryContent(bool includeCommitDetails)
         {
             var result = new RepositoryTree
@@ -158,6 +168,8 @@ namespace devplex.GitServer.Core.Git
                                 if (commit != null)
                                 {
                                     file.Commit = new ReducedCommit {
+                                        Hash = commit.Hash,
+                                        ShortHash = commit.ShortHash,
                                         Message = commit.Message,
                                         CommitAuthor = commit.Committer.Name,
                                         CommitDate = commit.CommitDate.UtcDateTime,
@@ -166,6 +178,8 @@ namespace devplex.GitServer.Core.Git
                                 else
                                 {
                                     file.Commit = new ReducedCommit {
+                                        Hash = currentCommit.Hash,
+                                        ShortHash = currentCommit.ShortHash,
                                         Message = currentCommit.Message,
                                         CommitAuthor = currentCommit.Committer.Name,
                                         CommitDate = currentCommit.CommitDate.UtcDateTime,
@@ -191,6 +205,8 @@ namespace devplex.GitServer.Core.Git
                                 if (commit != null)
                                 {
                                     directory.Commit = new ReducedCommit {
+                                        Hash = commit.Hash,
+                                        ShortHash = commit.ShortHash,
                                         Message = commit.Message,
                                         CommitAuthor = commit.Committer.Name,
                                         CommitDate = commit.CommitDate.UtcDateTime,
@@ -199,6 +215,8 @@ namespace devplex.GitServer.Core.Git
                                 else
                                 {
                                     directory.Commit = new ReducedCommit {
+                                        Hash = currentCommit.Hash,
+                                        ShortHash = currentCommit.ShortHash,
                                         Message = currentCommit.Message,
                                         CommitAuthor = currentCommit.Committer.Name,
                                         CommitDate = currentCommit.CommitDate.UtcDateTime,

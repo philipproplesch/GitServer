@@ -22,7 +22,7 @@
           </td>
           <td>
             <div class="commit-message">
-              @commit.Message
+              @Html.ActionLink(commit.Message, "Commit", new { hash = commit.Hash })
             </div>
             <div class="commit-timestamp">
               <time datetime="@commit.Timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ")">@commit.Timestamp</time> by @commit.AuthorName

@@ -39,6 +39,17 @@ namespace devplex.GitServer.Mvc.Controllers
             return View(model);
         }
 
+        public ActionResult Commit(
+            string hash, string path)
+        {
+            var repository = new GitRepository(path);
+            repository.GetCommitDetails(hash);
+
+            // TODO
+
+            return HttpNotFound("TODO ;)");
+        }
+
         public ActionResult Tree(
             string branch, string path, bool commits = false)
         {

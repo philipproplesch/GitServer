@@ -3,5 +3,6 @@
     public class OrganizationRepository
     {
         public string Name { get; set; }
+        public bool HasBranches { get; set; }
     }
 }

@@ -16,7 +16,9 @@
       @if (element.Commit != null && element.Commit.CommitDate.HasValue)
       {
         <td><time datetime="@element.Commit.CommitDate.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")">@element.Commit.CommitDate.Value</time></td>
-        <td>@element.Commit.Message [@element.Commit.CommitAuthor]</td>
+        <td>
+          @Html.ActionLink(element.Commit.Message, "Commit", "Repository", new { hash = element.Commit.Hash }, null) [@element.Commit.CommitAuthor]
+        </td>
       }
     </tr>
   }
