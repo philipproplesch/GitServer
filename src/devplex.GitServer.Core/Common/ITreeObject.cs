@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace devplex.GitServer.Core.Common
+﻿namespace devplex.GitServer.Core.Common
 {
     public interface ITreeObject
     {
@@ -8,7 +6,5 @@ namespace devplex.GitServer.Core.Common
 
         string Name { get; set; }
         string Path { get; set; }
-
-        List<ITreeObject> Objects { get; set; }
     }
 }

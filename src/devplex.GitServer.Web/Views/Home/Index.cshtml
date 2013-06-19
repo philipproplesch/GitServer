@@ -1,7 +1,26 @@
-﻿@model TreeViewModel
+﻿@model RepositoriesViewModel
 <div class="row">
   <div class="large-12 columns">
     <h2>Repositories</h2>
-    @Html.Partial("_DirectoryTree", Model)
+    <form class="custom">
+      <select id="organization">
+        <option selected="selected" disabled="disabled">Select an organization</option>
+        @foreach (var organization in Model.Organizations)
+        {
+          <option>@organization.Key</option>
+        }
+      </select>
+    </form>
+    @foreach (var organization in Model.Organizations)
+    {
+      <div id="organization_@(organization.Key)" class="repositories">
+        <ul>
+          @foreach (var repository in organization.Value)
+          {
+            <li>@Html.ActionLink(repository.Name, "Index", "Repository", new { path = repository.Name }, null)</li>
+          }
+        </ul>
+      </div>
+    }
   </div>
 </div>

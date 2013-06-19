@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using devplex.GitServer.Core.IO;
 using devplex.GitServer.Mvc.ViewModels;
 
@@ -9,13 +10,14 @@ namespace devplex.GitServer.Mvc.Controllers
         public ActionResult Index()
         {
             var crawler = new DirectoryCrawler();
-            var absolutePath = crawler.GetAbsolutePath(string.Empty);
 
-            var tree = crawler.GetTree(absolutePath);
-
-            var model = new TreeViewModel
+            var model = new RepositoriesViewModel
                 {
-                    Tree = tree
+                    Organizations = crawler
+                        .GetOrganizations()
+                        .ToDictionary(
+                            organisation => organisation,
+                            crawler.GetRepositoriesByOrganization)
                 };
 
             return View(model);

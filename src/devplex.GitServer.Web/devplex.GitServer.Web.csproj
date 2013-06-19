@@ -236,9 +236,6 @@
     <Content Include="Content\font\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_DirectoryTree.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Help\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

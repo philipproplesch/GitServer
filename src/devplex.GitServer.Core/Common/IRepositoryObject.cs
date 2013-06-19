@@ -1,5 +1,4 @@
-﻿using System;
-using devplex.GitServer.Core.Models;
+﻿using devplex.GitServer.Core.Models;
 
 namespace devplex.GitServer.Core.Common
 {

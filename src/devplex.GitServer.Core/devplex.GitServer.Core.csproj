@@ -79,16 +79,14 @@
     <Compile Include="Git\GitRepository.cs" />
     <Compile Include="Git\IGitRepository.cs" />
     <Compile Include="IO\DirectoryCrawler.cs" />
+    <Compile Include="Models\OrganizationRepository.cs" />
     <Compile Include="Models\ReducedCommit.cs" />
     <Compile Include="Models\RepositoryBlob.cs" />
     <Compile Include="Models\CommitMessage.cs" />
     <Compile Include="Models\RepositoryPath.cs" />
     <Compile Include="Models\RepositoryTree.cs" />
     <Compile Include="Models\TreeDirectory.cs" />
-    <Compile Include="Models\NamespaceDirectory.cs" />
-    <Compile Include="Models\DirectoryTree.cs" />
     <Compile Include="Common\ITreeObject.cs" />
-    <Compile Include="Models\RepositoryDirectory.cs" />
     <Compile Include="Models\TreeFile.cs" />
     <Compile Include="Models\ZipArchive.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

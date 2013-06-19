@@ -7,26 +7,35 @@
 }
 
 /* line 13, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+.repositories {
+  display: none;
+}
+/* line 16, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+.repositories ul {
+  list-style: none;
+}
+
+/* line 21, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 .tree-icon {
   width: 20px;
 }
 
-/* line 17, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+/* line 25, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 .log-user-image {
   width: 70px;
 }
 
-/* line 21, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+/* line 29, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 .section-name {
   margin-left: 5px;
 }
 
-/* line 25, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+/* line 33, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 .small-headline {
   font-size: 1.4375em;
 }
 
-/* line 29, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
+/* line 37, D:/_Projects/_GitHub/GitServer/src/devplex.GitServer.Web/Content/sass/styles.scss */
 pre.prettyprint {
   font-size: 0.8em;
 }

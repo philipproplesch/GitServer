@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using devplex.GitServer.Core.Common;
+﻿using devplex.GitServer.Core.Common;
 
 namespace devplex.GitServer.Core.Models
 {
@@ -12,7 +11,6 @@ namespace devplex.GitServer.Core.Models
 
         public string Name { get; set; }
         public string Path { get; set; }
-        public List<ITreeObject> Objects { get; set; }
 
         public ReducedCommit Commit { get; set; }
     }

@@ -2,95 +2,78 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using devplex.GitServer.Core.Common;
 using devplex.GitServer.Core.Configuration;
-using devplex.GitServer.Core.Git;
 using devplex.GitServer.Core.Models;
 
 namespace devplex.GitServer.Core.IO
 {
     public class DirectoryCrawler
     {
-        public string GetAbsolutePath(string path)
+        public IEnumerable<string> GetOrganizations()
         {
-            var root = Settings.Section.RepositoryPath;
-            return Path.Combine(root, path);
-        }
+            var root = new DirectoryInfo(Settings.Section.RepositoryPath);
 
-        public DirectoryTree GetTree(string absolutePath)
-        {
-            return new DirectoryTree
+            foreach (var directory in root.EnumerateDirectories())
             {
-                Directories = GetDirectories(absolutePath)
-            };
+                try
+                {
+                    directory.EnumerateDirectories();
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    continue;
+                }
+
+                yield return directory.Name;
+            }
         }
 
-        public List<ITreeObject> GetDirectories(string absolutePath, string relativePath = "")
+        public IEnumerable<OrganizationRepository> GetRepositoriesByOrganization(
+            string organization)
         {
-            var directories = new List<ITreeObject>();
-
-            var rootDirectoryInfo = new DirectoryInfo(absolutePath);
+            var path = Path.Combine(Settings.Section.RepositoryPath, organization);
+            var root = new DirectoryInfo(path);
 
             try
             {
-                foreach (var directoryInfo in rootDirectoryInfo.EnumerateDirectories())
-                {
-                    var name = directoryInfo.Name;
-                    var path = string.Concat(relativePath, "/", name);
-
-                    if (directoryInfo.Name.EndsWith(".git"))
-                    {
-                        var repository = new GitRepository(path);
-
-                        var directory = new RepositoryDirectory
-                        {
-                            Name = name,
-                            Path = path,
-                            PathWithoutExtension =
-                                string.Concat(
-                                    relativePath,
-                                    "/",
-                                    directoryInfo.Name.Substring(
-                                        0, directoryInfo.Name.Length - 4)),
-                            Branches = repository.GetBranches()
-                        };
-
-                        if (directory.Branches != null && directory.Branches.Any())
-                        {
-                            directories.Add(directory);
-                        }
-                    }
-                    else
-                    {
-                        var directory =
-                            new NamespaceDirectory
-                            {
-                                Name = name,
-                                Path = path
-                            };
-
-                        var subDirectories =
-                            GetDirectories(
-                                directoryInfo.FullName,
-                                directory.Path);
-
-                        if (subDirectories.Count == 0)
-                        {
-                            continue;
-                        }
-
-                        directory.Objects = subDirectories;
-
-                        directories.Add(directory);
-                    }
-                }
+                root.EnumerateDirectories();
             }
             catch (UnauthorizedAccessException)
             {
-                //
+                return null;
             }
 
-            return directories;
+            var directories = new List<OrganizationRepository>();
+            GetRepositories(directories, root, organization);
+
+            return directories.OrderByDescending(x => x.Name);
+        }
+
+        private void GetRepositories(
+            ICollection<OrganizationRepository> directories,
+            DirectoryInfo directory,
+            string relativePath)
+        {
+            if (directory.Name.EndsWith(".git"))
+            {
+                // Repository
+                var path = RepositoryPath.Resolve(relativePath);
+
+                directories.Add(
+                    new OrganizationRepository
+                        {
+                            Name = path.RootPath
+                        });
+            }
+            else
+            {
+                // Namespace
+                foreach (var subDirectory in directory.EnumerateDirectories())
+                {
+                    var path = string.Concat(relativePath, "/", subDirectory.Name);
+                    GetRepositories(directories, subDirectory, path);
+                }
+            }
         }
     }
 }
