@@ -2,13 +2,18 @@
 
   $('#organization').on 'change', ->
 
-    list = $ '#repositories ul'
+    repositories = $ '#repositories'
+
+    spinner = $ '.spinner', repositories
+    spinner.show()
+
+    list = $ 'ul', repositories
     list.children().remove()
 
     organization = $ ':selected', this
     url = window.fetchRepositoriesUrl + '/' + organization.text()
     
-    $.getJSON url, (data) ->      
+    $.getJSON url, (data) ->
       $.each data, (index, repository) ->
         a = $('<a />')
         a.attr 'href', repository.Path
@@ -18,5 +23,7 @@
 
         a.appendTo li
         li.appendTo list
+
+        spinner.hide()
 
 )(window.jQuery)

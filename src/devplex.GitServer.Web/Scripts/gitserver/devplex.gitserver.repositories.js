@@ -1,8 +1,11 @@
 ﻿
 (function($) {
   return $('#organization').on('change', function() {
-    var list, organization, url;
-    list = $('#repositories ul');
+    var list, organization, repositories, spinner, url;
+    repositories = $('#repositories');
+    spinner = $('.spinner', repositories);
+    spinner.show();
+    list = $('ul', repositories);
     list.children().remove();
     organization = $(':selected', this);
     url = window.fetchRepositoriesUrl + '/' + organization.text();
@@ -14,7 +17,8 @@
         a.text(repository.Name);
         li = $('<li />');
         a.appendTo(li);
-        return li.appendTo(list);
+        li.appendTo(list);
+        return spinner.hide();
       });
     });
   });

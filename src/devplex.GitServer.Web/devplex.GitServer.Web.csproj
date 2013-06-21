@@ -222,6 +222,7 @@
     <Content Include="Views\Shared\_RepositoryNavigation.cshtml" />
     <Content Include="Views\Shared\_RepositoryTree.cshtml" />
     <Content Include="Scripts\gitserver\devplex.gitserver.blob.coffee" />
+    <None Include="Properties\PublishProfiles\WATTO.pubxml" />
     <None Include="Scripts\gitserver\devplex.gitserver.coffee" />
     <Content Include="Scripts\gitserver\devplex.gitserver.tree.coffee" />
     <Content Include="Scripts\gitserver\devplex.gitserver.repositories.coffee" />
