@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using devplex.GitServer.Core.FrameworkExtensions;
 using devplex.GitServer.Core.Git;
 using devplex.GitServer.Mvc.ModelBinders;
+using devplex.GitServer.Transport;
 
 namespace devplex.GitServer.Mvc.Controllers
 {

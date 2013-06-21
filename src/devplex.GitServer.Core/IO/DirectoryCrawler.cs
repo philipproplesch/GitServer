@@ -59,7 +59,6 @@ namespace devplex.GitServer.Core.IO
             {
                 // Repository
                 var repository = new GitRepository(relativePath);
-                
 
                 directories.Add(
                     new OrganizationRepository

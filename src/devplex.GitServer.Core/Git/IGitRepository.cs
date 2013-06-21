@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using GitSharp;
+using LibGit2Sharp;
 using devplex.GitServer.Core.Models;
 
 namespace devplex.GitServer.Core.Git

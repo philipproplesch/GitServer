@@ -99,6 +99,10 @@
       <Project>{B8EC032E-31E5-4186-82F5-2E0FF03722E7}</Project>
       <Name>devplex.GitServer.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\devplex.GitServer.Transport\devplex.GitServer.Transport.csproj">
+      <Project>{340CEAE8-CB34-47E4-B4F8-0D22802ADCCC}</Project>
+      <Name>devplex.GitServer.Transport</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

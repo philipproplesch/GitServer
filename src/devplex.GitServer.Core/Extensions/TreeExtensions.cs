@@ -1,70 +1,85 @@
 ﻿using System;
-using System.Linq;
-using GitSharp;
+using System.IO;
+using LibGit2Sharp;
+using devplex.GitServer.Core.Models;
 
 namespace devplex.GitServer.Core.Extensions
 {
     public static class TreeExtensions
     {
-         public static Tree FindSubPath(this Tree instance, string subPath)
-         {
-             var segments =
-                        subPath.Split(
-                            new[] { "/" },
-                            StringSplitOptions.RemoveEmptyEntries);
-
-             var newRoot = instance;
-             foreach (var segment in segments)
-             {
-                 var tree =
-                     newRoot.Trees.FirstOrDefault(
-                         child =>
-                         child.Name.Equals(
-                             segment,
-                             StringComparison.Ordinal));
-
-                 if (tree != null)
-                 {
-                     newRoot = tree;
-                 }
-                 else
-                 {
-                     return null;
-                 }
-             }
-
-             return newRoot;
-         }
-
-        public static Leaf FindFile(this Tree instance, string subPath)
+        public static GitObject FindSubPath(this Tree instance, string subPath)
         {
             var segments =
                 subPath.Split(
-                    new[] {"/"},
-                    StringSplitOptions.RemoveEmptyEntries)
-                       .ToList();
+                    new[] { '/' },
+                    StringSplitOptions.RemoveEmptyEntries);
 
-            // Extract the file name from the path.
-            var fileName = segments[segments.Count - 1];
-
-            // Remove file name from path.
-            segments.RemoveAt(segments.Count - 1);
-
-            var newSubPath = string.Join("/", segments);
-
-            var newRoot = instance.FindSubPath(newSubPath);
-            if (newRoot == null)
+            var obj = instance;
+            foreach (var segment in segments)
             {
-                return null;
+                foreach (var entry in obj)
+                {
+                    if (entry.Name.Equals(segment, StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (entry.TargetType == TreeEntryTargetType.Tree)
+                        {
+                            obj = (Tree)entry.Target;
+                            break;
+                        }
+                    }
+                }
             }
 
-            // Finde the requested file in the current tree.
-            return
-                newRoot.Leaves.FirstOrDefault(
-                    child =>
-                    child.Name.Equals(
-                        fileName,
-                        StringComparison.OrdinalIgnoreCase));
+            return obj;
+        }
+
+        public static RepositoryBlob FindFile(this Tree instance, string subPath)
+        {
+            var repositoryBlob = new RepositoryBlob();
+
+            var segments =
+                subPath.Split(
+                    new[] { '/' },
+                    StringSplitOptions.RemoveEmptyEntries);
+
+            var obj = instance;
+            foreach (var segment in segments)
+            {
+                foreach (var entry in obj)
+                {
+                    if (entry.Name.Equals(segment, StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (entry.TargetType == TreeEntryTargetType.Tree)
+                        {
+                            obj = (Tree)entry.Target;
+                            break;
+                        }
+
+                        if (entry.TargetType == TreeEntryTargetType.Blob)
+                        {
+                            var blob = (Blob)entry.Target;
+
+                            repositoryBlob.FileName = entry.Name;
+                            repositoryBlob.RawContent = blob.Content;
+
+                            using (var ms = new MemoryStream(blob.Content))
+                            using (var reader = new StreamReader(ms, true))
+                            {
+                                repositoryBlob.Content = reader.ReadToEnd();
+                            }
+
+                            repositoryBlob.FileSize =
+                                string.Format(
+                                    "{0:0.###} kb",
+                                    ((double)blob.Content.LongLength / 1024));
+
+                            return repositoryBlob;
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }
