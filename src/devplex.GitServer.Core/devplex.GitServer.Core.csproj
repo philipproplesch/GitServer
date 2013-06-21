@@ -66,6 +66,7 @@
     <Compile Include="Git\GitRepository.cs" />
     <Compile Include="Git\IGitRepository.cs" />
     <Compile Include="IO\DirectoryCrawler.cs" />
+    <Compile Include="Models\FileDiff.cs" />
     <Compile Include="Models\OrganizationRepository.cs" />
     <Compile Include="Models\ReducedCommit.cs" />
     <Compile Include="Models\RepositoryBlob.cs" />

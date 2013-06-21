@@ -43,11 +43,13 @@ namespace devplex.GitServer.Mvc.Controllers
             string hash, string path)
         {
             var repository = new GitRepository(path);
-            repository.GetCommitDetails(hash);
 
-            // TODO
+            var model = new CommitDetailsViewModel {
+                RepositoryPath = repository.RootPath,
+                Files = repository.GetCommitDetails(hash),
+            };
 
-            return HttpNotFound("TODO ;)");
+            return View(model);
         }
 
         public ActionResult Tree(

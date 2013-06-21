@@ -18,7 +18,8 @@ namespace devplex.GitServer.Core.Git
 
         private readonly Func<Repository, string, Branch> _getBranch =
             (repository, branchName)
-            => {
+            =>
+            {
                 Branch branch = null;
                 if (!string.IsNullOrEmpty(branchName) && repository.Branches[branchName] != null)
                 {
@@ -99,8 +100,51 @@ namespace devplex.GitServer.Core.Git
             return result.Skip(skip).Take(take);
         }
 
-        public object GetCommitDetails(string hash)
+        public IEnumerable<FileDiff> GetCommitDetails(string hash)
         {
+            using (var repository = Open())
+            {
+                var commit =
+                    repository.Commits
+                              .FirstOrDefault(
+                                  x =>
+                                  x.Sha.Equals(
+                                      hash,
+                                      StringComparison.OrdinalIgnoreCase));
+
+                if (commit == null)
+                {
+                    return null;
+                }
+
+                var parentCommit = commit.Parents.FirstOrDefault();
+
+                var changes =
+                    repository.Diff.Compare(
+                        parentCommit != null ? parentCommit.Tree : null,
+                        commit.Tree);
+
+                if (changes != null)
+                {
+                    var result = new List<FileDiff>();
+                    foreach (var change in changes)
+                    {
+                        var diff = new FileDiff
+                        {
+                            Path = change.Path,
+                            Patch = change.Patch,
+                            Additions = change.LinesAdded,
+                            Deletions = change.LinesDeleted
+
+                        };
+
+                        result.Add(diff);
+                    }
+
+                    return result;
+                }
+            }
+
             return null;
         }
 
@@ -146,14 +190,56 @@ namespace devplex.GitServer.Core.Git
                         // TODO: Get file/directory details!
                         // https://github.com/libgit2/libgit2sharp/issues/89
 
-                        obj.Commit = new ReducedCommit
-                        {
-                            Hash = commit.Sha,
-                            ShortHash = commit.Sha,
-                            Message = commit.MessageShort,
-                            CommitAuthor = commit.Committer.Name,
-                            CommitDate = commit.Committer.When.UtcDateTime,
-                        };
+                        // TODO: Get short hash.
+
+                        // =============================
+
+                        //obj.Commit = new ReducedCommit {
+                        //    Hash = commit.Sha,
+                        //    ShortHash = commit.Id.ToString(),
+                        //    Message = commit.MessageShort,
+                        //    CommitAuthor = commit.Committer.Name,
+                        //    CommitDate = commit.Committer.When.UtcDateTime,
+                        //};
+
+                        // =============================
+
+                        //foreach (var actualCommit in branch.Commits)
+                        //{
+                        //    var parentCommit = actualCommit.Parents.FirstOrDefault();
+                        //    if (parentCommit == null)
+                        //    {
+                        //        // Assume that the object was part of the initial commit.
+                        //        obj.Commit = new ReducedCommit
+                        //        {
+                        //            Hash = actualCommit.Sha,
+                        //            ShortHash = actualCommit.Sha,
+                        //            Message = actualCommit.MessageShort,
+                        //            CommitAuthor = actualCommit.Committer.Name,
+                        //            CommitDate = actualCommit.Committer.When.UtcDateTime,
+                        //        };
+
+                        //        break;
+                        //    }
+
+                        //    var changes =
+                        //        repository.Diff.Compare(
+                        //            parentCommit.Tree,
+                        //            actualCommit.Tree);
+
+                        //    if (changes.Any(change => change.Path.Equals(entry.Path)))
+                        //    {
+                        //        obj.Commit = new ReducedCommit {
+                        //            Hash = actualCommit.Sha,
+                        //            ShortHash = actualCommit.Sha,
+                        //            Message = actualCommit.MessageShort,
+                        //            CommitAuthor = actualCommit.Committer.Name,
+                        //            CommitDate = actualCommit.Committer.When.UtcDateTime,
+                        //        };
+
+                        //        break;
+                        //    }
+                        //}
                     }
 
                     objects.Add(obj);
@@ -210,8 +296,8 @@ namespace devplex.GitServer.Core.Git
                             return string.Empty;
                         }
 
-                        var blob = (Blob) entry.Target;
-                        
+                        var blob = (Blob)entry.Target;
+
                         using (var ms = new MemoryStream(blob.Content))
                         using (var reader = new StreamReader(ms, true))
                         {
@@ -229,7 +315,8 @@ namespace devplex.GitServer.Core.Git
             var now = DateTime.Now;
 
             Action<Tree, string, ZipOutputStream> compressTree = null;
-            compressTree = (tree, path, output) => {
+            compressTree = (tree, path, output) =>
+            {
 
                 foreach (var child in tree)
                 {
@@ -240,7 +327,7 @@ namespace devplex.GitServer.Core.Git
                     }
                     else if (child.TargetType == TreeEntryTargetType.Blob)
                     {
-                        var blob = (Blob) child.Target;
+                        var blob = (Blob)child.Target;
 
                         var name =
                             string
@@ -249,7 +336,8 @@ namespace devplex.GitServer.Core.Git
 
                         var bytes = blob.Content;
 
-                        var entry = new ZipEntry(name) {
+                        var entry = new ZipEntry(name)
+                        {
                             Size = bytes.Length,
                             DateTime = now
                         };

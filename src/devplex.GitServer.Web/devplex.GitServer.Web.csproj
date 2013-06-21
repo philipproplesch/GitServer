@@ -230,6 +230,7 @@
     <None Include="Scripts\gitserver\devplex.gitserver.coffee" />
     <Content Include="Scripts\gitserver\devplex.gitserver.tree.coffee" />
     <Content Include="Scripts\gitserver\devplex.gitserver.repositories.coffee" />
+    <Content Include="Views\Repository\Commit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\devplex.GitServer.Core\devplex.GitServer.Core.csproj">
