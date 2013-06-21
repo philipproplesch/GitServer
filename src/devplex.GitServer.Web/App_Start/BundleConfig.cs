@@ -6,6 +6,8 @@ namespace devplex.GitServer.Web
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.IgnoreList.Ignore("*.coffee");
+
             bundles.Add(
                 new StyleBundle("~/content/css")
                     .Include(
@@ -28,8 +30,8 @@ namespace devplex.GitServer.Web
                         "~/Scripts/foundation/foundation.*",
                         "~/Scripts/Prettify/prettify.js",
                         "~/Scripts/jquery.timeago.js",
-                        "~/Scripts/devplex.gitserver.js",
-                        "~/Scripts/devplex.gitserver.*"));
+                        "~/Scripts/gitserver/devplex.gitserver.js",
+                        "~/Scripts/gitserver/devplex.gitserver.*"));
         }
     }
 }

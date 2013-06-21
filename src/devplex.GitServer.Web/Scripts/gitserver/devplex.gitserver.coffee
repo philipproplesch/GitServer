@@ -1,0 +1,5 @@
+﻿(($) ->
+
+  $('time').timeago()
+
+)(window.jQuery)

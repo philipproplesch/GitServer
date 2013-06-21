@@ -72,6 +72,13 @@ namespace devplex.GitServer.Web
                 defaults: new { controller = "Repository", action = "Commit" }
             );
 
+            // API ;)
+            routes.MapRoute(
+                name: "RepositoriesByOrganization",
+                url: "api/repositories/{organization}",
+                defaults: new { controller = "Home", action = "Repositories", organization = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

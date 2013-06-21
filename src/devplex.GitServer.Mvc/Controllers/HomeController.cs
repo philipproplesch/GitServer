@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using devplex.GitServer.Core.IO;
-using devplex.GitServer.Core.Models;
-using devplex.GitServer.Mvc.ViewModels;
 
 namespace devplex.GitServer.Mvc.Controllers
 {
@@ -12,27 +8,24 @@ namespace devplex.GitServer.Mvc.Controllers
         public ActionResult Index()
         {
             var crawler = new DirectoryCrawler();
+            return View(crawler.GetOrganizations());
+        }
 
-            var model = new RepositoriesViewModel();
-            
-            var data = new Dictionary<string, IEnumerable<OrganizationRepository>>();
-            foreach (var organization in crawler.GetOrganizations())
+        public JsonResult Repositories(string organization)
+        {
+            var crawler = new DirectoryCrawler();
+
+            var repositories =
+                crawler.GetRepositoriesByOrganization(organization);
+
+            foreach (var repository in repositories)
             {
-                var repositories =
-                    crawler
-                        .GetRepositoriesByOrganization(organization)
-                        .Where(x => x.HasBranches)
-                        .ToList();
-
-                if (repositories.Any())
-                {
-                    data.Add(organization, repositories);
-                }
+                repository.Path = Url.Action("Index", "Repository", new { path = repository.Name });
             }
 
-            model.Organizations = data;
-
-            return View(model);
+            return Json(
+                repositories,
+                JsonRequestBehavior.AllowGet);
         }
     }
 }
