@@ -15,15 +15,17 @@
     
     $.getJSON url, (data) ->
       $.each data, (index, repository) ->
-        a = $('<a />')
-        a.attr 'href', repository.Path
-        a.text repository.Name
-
         li = $('<li />')
 
-        a.appendTo li
+        if (repository.HasBranches is true)
+          a = $('<a />')
+          a.attr 'href', repository.Path
+          a.text repository.Name
+          a.appendTo li
+        else
+          li.text repository.Name
+        
         li.appendTo list
-
         spinner.hide()
 
 )(window.jQuery)

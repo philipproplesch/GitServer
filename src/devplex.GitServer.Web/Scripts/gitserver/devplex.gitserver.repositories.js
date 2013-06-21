@@ -12,11 +12,15 @@
     return $.getJSON(url, function(data) {
       return $.each(data, function(index, repository) {
         var a, li;
-        a = $('<a />');
-        a.attr('href', repository.Path);
-        a.text(repository.Name);
         li = $('<li />');
-        a.appendTo(li);
+        if (repository.HasBranches === true) {
+          a = $('<a />');
+          a.attr('href', repository.Path);
+          a.text(repository.Name);
+          a.appendTo(li);
+        } else {
+          li.text(repository.Name);
+        }
         li.appendTo(list);
         return spinner.hide();
       });
