@@ -4,6 +4,13 @@
     <h1 class="small-headline">@Model.RepositoryPath</h1>
   </div>
 </div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="section-container horizontal-nav" data-section="horizontal-nav">
+      @Html.Partial("_RepositoryNavigation")
+    </div>
+  </div>
+</div>
 @foreach (var file in Model.Files)
 {
   <div class="row">
