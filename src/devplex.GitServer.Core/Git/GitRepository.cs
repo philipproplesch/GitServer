@@ -104,13 +104,15 @@ namespace devplex.GitServer.Core.Git
         {
             using (var repository = Open())
             {
+                var branch = _getBranch(repository, _branchName);
+
                 var commit =
-                    repository.Commits
-                              .FirstOrDefault(
-                                  x =>
-                                  x.Sha.Equals(
-                                      hash,
-                                      StringComparison.OrdinalIgnoreCase));
+                    branch.Commits
+                          .FirstOrDefault(
+                              x =>
+                              x.Sha.Equals(
+                                  hash,
+                                  StringComparison.OrdinalIgnoreCase));
 
                 if (commit == null)
                 {

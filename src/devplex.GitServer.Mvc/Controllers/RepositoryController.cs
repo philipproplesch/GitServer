@@ -40,11 +40,12 @@ namespace devplex.GitServer.Mvc.Controllers
         }
 
         public ActionResult Commit(
-            string hash, string path)
+            string branch, string hash, string path)
         {
-            var repository = new GitRepository(path);
+            var repository = new GitRepository(path,branch);
 
             var model = new CommitDetailsViewModel {
+                Branch = branch,
                 RepositoryPath = repository.RootPath,
                 Files = repository.GetCommitDetails(hash),
             };

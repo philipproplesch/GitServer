@@ -68,7 +68,7 @@ namespace devplex.GitServer.Web
 
             routes.MapRoute(
                 name: "RepositoryCommits",
-                url: "commit/{hash}/{*path}",
+                url: "commit/{branch}/{hash}/{*path}",
                 defaults: new { controller = "Repository", action = "Commit" }
             );
 
