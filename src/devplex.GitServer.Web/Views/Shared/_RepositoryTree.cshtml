@@ -1,5 +1,14 @@
 ﻿@model RepositoryTreeViewModel
 <table id="tree" style="width: 100%;">
+  @if (Model.ParentSubPath != null)
+  {
+    <tr>
+      <td></td>
+      <td>
+        @Html.ActionLink("..", "Tree", "Repository", new { branch = Model.Branch, path = string.Concat(Model.RepositoryPath, "/", Model.ParentSubPath) }, null)
+      </td>
+    </tr>
+  }
   @foreach (var element in Model.Tree.Directories.OrderBy(x => x.Order).ThenBy(x => x.Name))
   {
     <tr>

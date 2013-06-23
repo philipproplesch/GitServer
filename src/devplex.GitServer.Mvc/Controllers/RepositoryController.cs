@@ -58,9 +58,27 @@ namespace devplex.GitServer.Mvc.Controllers
         {
             var repository = new GitRepository(path, branch);
 
+            string parentSubPath = null;
+
+            if (!string.IsNullOrEmpty(repository.SubPath))
+            {
+                parentSubPath = repository.SubPath;
+
+                var index = repository.SubPath.LastIndexOf('/');
+                if (index == -1)
+                {
+                    parentSubPath = string.Empty;
+                }
+                else if (index > -1)
+                {
+                    parentSubPath = repository.SubPath.Substring(0, index);
+                }
+            }
+
             var model = new RepositoryTreeViewModel {
                 Branch = branch,
                 RepositoryPath = repository.RootPath,
+                ParentSubPath = parentSubPath,
                 Tree = repository.GetRepositoryContent(commits)
             };
 

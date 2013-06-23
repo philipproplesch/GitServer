@@ -47,6 +47,11 @@ namespace devplex.GitServer.Core.Git
             : this(requestedPath, string.Empty)
         { }
 
+        public string SubPath
+        {
+            get { return _path.SubPath; }
+        }
+
         public string RootPath
         {
             get { return _path.RootPath; }
