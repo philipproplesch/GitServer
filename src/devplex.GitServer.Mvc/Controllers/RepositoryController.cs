@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using devplex.GitServer.Core.Git;
+using devplex.GitServer.Core.Versioning;
 using devplex.GitServer.Mvc.ViewModels;
 
 namespace devplex.GitServer.Mvc.Controllers
@@ -14,7 +14,7 @@ namespace devplex.GitServer.Mvc.Controllers
         public ActionResult Index(
             string path)
         {
-            var repository = new GitRepository(path);
+            var repository = new GitVersioningSystem(path);
 
             var model = new RepositoryViewModel {
                 RepositoryPath = repository.RootPath,
@@ -28,7 +28,7 @@ namespace devplex.GitServer.Mvc.Controllers
         public ActionResult Log(
             string branch, string path, int skip = 0, int take = 50)
         {
-            var repository = new GitRepository(path, branch);
+            var repository = new GitVersioningSystem(path, branch);
 
             var model = new CommitHistoryViewModel {
                 Branch = branch,
@@ -42,7 +42,7 @@ namespace devplex.GitServer.Mvc.Controllers
         public ActionResult Commit(
             string branch, string hash, string path)
         {
-            var repository = new GitRepository(path,branch);
+            var repository = new GitVersioningSystem(path,branch);
 
             var model = new CommitDetailsViewModel {
                 Branch = branch,
@@ -56,7 +56,7 @@ namespace devplex.GitServer.Mvc.Controllers
         public ActionResult Tree(
             string branch, string path, bool commits = false)
         {
-            var repository = new GitRepository(path, branch);
+            var repository = new GitVersioningSystem(path, branch);
 
             string parentSubPath = null;
 
@@ -93,7 +93,7 @@ namespace devplex.GitServer.Mvc.Controllers
         public ActionResult Blob(
             string branch, string path)
         {
-            var repository = new GitRepository(path, branch);
+            var repository = new GitVersioningSystem(path, branch);
 
             var content = repository.GetBlobContent();
             if (content == null)
@@ -109,7 +109,7 @@ namespace devplex.GitServer.Mvc.Controllers
         public ActionResult RawBlob(
             string branch, string path)
         {
-            var repository = new GitRepository(path, branch);
+            var repository = new GitVersioningSystem(path, branch);
 
             var content = repository.GetBlobContent();
             if (content == null)
@@ -123,7 +123,7 @@ namespace devplex.GitServer.Mvc.Controllers
         public ActionResult ZipArchive(
             string branch, string path)
         {
-            var repository = new GitRepository(path, branch);
+            var repository = new GitVersioningSystem(path, branch);
             var archive = repository.GenerateZipArchive();
             
             return File(archive.Data, "application/zip", archive.Name);

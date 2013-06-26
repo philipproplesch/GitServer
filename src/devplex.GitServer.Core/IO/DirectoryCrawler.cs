@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using devplex.GitServer.Core.Configuration;
-using devplex.GitServer.Core.Git;
 using devplex.GitServer.Core.Models;
+using devplex.GitServer.Core.Versioning;
 
 namespace devplex.GitServer.Core.IO
 {
@@ -58,7 +58,7 @@ namespace devplex.GitServer.Core.IO
             if (directory.Name.EndsWith(".git"))
             {
                 // Repository
-                var repository = new GitRepository(relativePath);
+                var repository = new GitVersioningSystem(relativePath);
 
                 directories.Add(
                     new OrganizationRepository

@@ -86,7 +86,7 @@
     <Compile Include="Common\BaseTreeViewModel.cs" />
     <Compile Include="Viewers\ImageViewer.cs" />
     <Compile Include="Viewers\MarkdownViewer.cs" />
-    <Compile Include="Viewers\RawViewer.cs" />
+    <Compile Include="Viewers\CodeViewer.cs" />
     <Compile Include="ViewModels\CommitDetailsViewModel.cs" />
     <Compile Include="ViewModels\CommitHistoryViewModel.cs" />
     <Compile Include="ViewModels\RepositoryTreeViewModel.cs" />

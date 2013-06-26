@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using LibGit2Sharp;
 using devplex.GitServer.Core.Models;
 
-namespace devplex.GitServer.Core.Git
+namespace devplex.GitServer.Core.Versioning
 {
-    public interface IGitRepository
+    public interface IVersioningSystem
     {
-        string RootPath { get; }
-        string AbsoluteRootPath { get; }
-
-        Repository Init();
-        Repository Open();
+        RepositoryPath Path { get; set; }
 
         IEnumerable<string> GetBranches();
         IEnumerable<CommitMessage> GetCommitMessages(int skip, int take);

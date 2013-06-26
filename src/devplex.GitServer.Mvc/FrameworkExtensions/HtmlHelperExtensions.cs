@@ -5,8 +5,8 @@ using MarkdownSharp;
 using devplex.GitServer.Core.Common;
 using devplex.GitServer.Core.Configuration;
 using devplex.GitServer.Core.FrameworkExtensions;
-using devplex.GitServer.Core.Git;
 using devplex.GitServer.Core.Models;
+using devplex.GitServer.Core.Versioning;
 
 namespace devplex.GitServer.Mvc.FrameworkExtensions
 {
@@ -77,7 +77,7 @@ namespace devplex.GitServer.Mvc.FrameworkExtensions
         public static string Version(
             this HtmlHelper instance)
         {
-            var type = typeof (GitRepository);
+            var type = typeof (GitVersioningSystem);
             var version = type.Assembly.GetName().Version;
 
             return string.Format(

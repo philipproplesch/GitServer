@@ -5,7 +5,7 @@ using devplex.GitServer.Core.Models;
 
 namespace devplex.GitServer.Mvc.Viewers
 {
-    public class RawViewer : IContentViewer
+    public class CodeViewer : IContentViewer
     {
         public MvcHtmlString Render(RepositoryBlob blob)
         {

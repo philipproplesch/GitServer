@@ -9,12 +9,11 @@ using devplex.GitServer.Core.Common;
 using devplex.GitServer.Core.Extensions;
 using devplex.GitServer.Core.Models;
 
-namespace devplex.GitServer.Core.Git
+namespace devplex.GitServer.Core.Versioning
 {
-    public class GitRepository : IGitRepository
+    public class GitVersioningSystem : IVersioningSystem
     {
         private readonly string _branchName;
-        private readonly RepositoryPath _path;
 
         private readonly Func<Repository, string, Branch> _getBranch =
             (repository, branchName)
@@ -37,40 +36,37 @@ namespace devplex.GitServer.Core.Git
                 return branch;
             };
 
-        public GitRepository(string requestedPath, string branchName)
+        public GitVersioningSystem(string requestedPath, string branchName)
         {
             _branchName = branchName;
-            _path = RepositoryPath.Resolve(requestedPath);
+            Path = RepositoryPath.Resolve(requestedPath);
         }
 
-        public GitRepository(string requestedPath)
+        public GitVersioningSystem(string requestedPath)
             : this(requestedPath, string.Empty)
         { }
 
         public string SubPath
         {
-            get { return _path.SubPath; }
+            get { return Path.SubPath; }
         }
 
         public string RootPath
         {
-            get { return _path.RootPath; }
+            get { return Path.RootPath; }
         }
 
         public string AbsoluteRootPath
         {
-            get { return _path.AbsoluteRootPath; }
+            get { return Path.AbsoluteRootPath; }
         }
 
-        public Repository Init()
+        private Repository Open()
         {
-            return Repository.Init(_path.AbsoluteRootPath, true);
+            return new Repository(Path.AbsoluteRootPath);
         }
 
-        public Repository Open()
-        {
-            return new Repository(_path.AbsoluteRootPath);
-        }
+        public RepositoryPath Path { get; set; }
 
         public IEnumerable<string> GetBranches()
         {
@@ -165,9 +161,9 @@ namespace devplex.GitServer.Core.Git
                 var commit = branch.Tip;
 
                 var root = commit.Tree;
-                if (!string.IsNullOrEmpty(_path.SubPath))
+                if (!string.IsNullOrEmpty(Path.SubPath))
                 {
-                    root = root.FindSubPath(_path.SubPath) as Tree;
+                    root = root.FindSubPath(Path.SubPath) as Tree;
                     if (root == null)
                     {
                         return null;
@@ -263,14 +259,14 @@ namespace devplex.GitServer.Core.Git
                 var branch = _getBranch(repository, _branchName);
                 var commit = branch.Tip;
 
-                var file = commit.Tree.FindFile(_path.SubPath);
+                var file = commit.Tree.FindFile(Path.SubPath);
                 if (file == null)
                 {
                     return null;
                 }
 
                 file.Branch = _branchName;
-                file.RepositoryPath = _path.RootPath;
+                file.RepositoryPath = Path.RootPath;
 
                 return file;
             }
@@ -285,9 +281,9 @@ namespace devplex.GitServer.Core.Git
                 var commit = branch.Tip;
 
                 var root = commit.Tree;
-                if (!string.IsNullOrEmpty(_path.SubPath))
+                if (!string.IsNullOrEmpty(Path.SubPath))
                 {
-                    root = root.FindSubPath(_path.SubPath) as Tree;
+                    root = root.FindSubPath(Path.SubPath) as Tree;
                     if (root == null)
                     {
                         return null;
@@ -365,7 +361,7 @@ namespace devplex.GitServer.Core.Git
                     Name =
                         string.Format(
                             "{0}-{1}.zip",
-                            _path.RepositoryName,
+                            Path.RepositoryName,
                             _branchName)
                 };
 
