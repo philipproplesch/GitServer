@@ -30,6 +30,7 @@ namespace devplex.GitServer.Web
                         "~/Scripts/foundation/foundation.*",
                         "~/Scripts/Prettify/prettify.js",
                         "~/Scripts/jquery.timeago.js",
+                        "~/Scripts/jquery.pjax.js",
                         "~/Scripts/gitserver/devplex.gitserver.js",
                         "~/Scripts/gitserver/devplex.gitserver.*"));
         }

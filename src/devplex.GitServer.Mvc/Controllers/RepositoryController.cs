@@ -82,7 +82,8 @@ namespace devplex.GitServer.Mvc.Controllers
                 Tree = repository.GetRepositoryContent(commits)
             };
 
-            if (commits)
+            var pjax = Request.Headers["X-PJAX"] != null;
+            if (pjax || commits)
             {
                 return PartialView("_RepositoryTree", model);
             }
