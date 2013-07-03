@@ -17,6 +17,9 @@
       <small>devplex.GitServer @Html.Version()</small>
     </div>
   </div>
+  <script>
+    window.fetchRepositoriesUrl = '@Url.Action("Repositories", "Home")';
+  </script>
   @Scripts.Render("~/scripts/app")
   <script>
     $(document).foundation();
