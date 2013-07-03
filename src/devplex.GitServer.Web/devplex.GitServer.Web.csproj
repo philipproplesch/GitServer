@@ -137,6 +137,10 @@
     <Content Include="Content\Prettify\Themes\sunburst.css" />
     <Content Include="Content\styles.css" />
     <Content Include="Global.asax" />
+    <Content Include="Content\font\fontawesome-webfont.woff" />
+    <Content Include="Content\font\fontawesome-webfont.ttf" />
+    <Content Include="Content\font\fontawesome-webfont.eot" />
+    <Content Include="Content\font\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\FS.pubxml" />
     <Content Include="Scripts\gitserver\devplex.gitserver.blob.js">
       <DependentUpon>devplex.gitserver.blob.coffee</DependentUpon>
@@ -255,18 +259,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\font\fontawesome-webfont.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\font\fontawesome-webfont.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\font\fontawesome-webfont.eot" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\font\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Help\Index.cshtml" />
