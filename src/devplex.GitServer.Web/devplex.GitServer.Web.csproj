@@ -128,6 +128,9 @@
     <Content Include="Content\font-awesome-ie7.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fontawesome\font-awesome.css" />
+    <Content Include="Content\fontawesome\font-awesome.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\font\fontawesome-webfont.svg" />
     <Content Include="Content\gitignore.txt" />
     <Content Include="Content\images\devplex-git-icon.png" />
@@ -140,10 +143,10 @@
     <Content Include="Content\Prettify\Themes\sunburst.css" />
     <Content Include="Content\styles.css" />
     <Content Include="Global.asax" />
-    <Content Include="Content\font\fontawesome-webfont.woff" />
-    <Content Include="Content\font\fontawesome-webfont.ttf" />
-    <Content Include="Content\font\fontawesome-webfont.eot" />
-    <Content Include="Content\font\FontAwesome.otf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\FS.pubxml" />
     <Content Include="Scripts\gitserver\devplex.gitserver.blob.js">
       <DependentUpon>devplex.gitserver.blob.coffee</DependentUpon>

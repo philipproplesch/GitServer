@@ -15,7 +15,7 @@ namespace devplex.GitServer.Web
                         "~/Content/styles.css",
                         "~/Content/Prettify/prettify.css",
                         "~/Content/Prettify/Themes/sons-of-obsidian.css",
-                        "~/Content/font-awesome.css"));
+                        "~/Content/fontawesome/font-awesome.css"));
 
             bundles.Add(
                 new ScriptBundle("~/scripts/modernizr")

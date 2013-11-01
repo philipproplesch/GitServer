@@ -1,28 +1,28 @@
 ﻿<section>
   <p class="title" data-section-title>
     <a href="@Url.Action("Index", "Repository", new { path = Model.RepositoryPath }, null)">
-      <i class="icon-home"></i><span class="section-name">Overview</span>
+      <i class="fa fa-home"></i><span class="section-name">Overview</span>
     </a>
   </p>
 </section>
 <section>
   <p class="title" data-section-title>
     <a href="@Url.Action("Tree", "Repository", new { branch = Model.Branch, path = Model.RepositoryPath }, null)">
-      <i class="icon-file"></i><span class="section-name">Files</span>
+      <i class="fa fa-file"></i><span class="section-name">Files</span>
     </a>
   </p>
 </section>
 <section>
   <p class="title" data-section-title>
     <a href="@Url.Action("Log", "Repository", new { branch = Model.Branch, path = Model.RepositoryPath }, null)">
-      <i class="icon-time"></i><span class="section-name">Commits</span>
+      <i class="fa fa-clock-o"></i><span class="section-name">Commits</span>
     </a>
   </p>
 </section>
 <section>
   <p class="title" data-section-title>
     <a href="@Url.Action("ZipArchive", "Repository", new { branch = Model.Branch, path = Model.RepositoryPath }, null)">
-      <i class="icon-archive"></i><span class="section-name">Download ZIP</span>
+      <i class="fa fa-archive"></i><span class="section-name">Download ZIP</span>
     </a>
   </p>
 </section>
