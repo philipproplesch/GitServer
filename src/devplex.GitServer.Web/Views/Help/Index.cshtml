@@ -2,57 +2,38 @@
 @model dynamic
 
 <div class="row">
-  <div class="large-12 columns">
-    <h1>FAQ</h1>
+    <div class="large-12 columns">
+        <h1>FAQ</h1>
 
-<<<<<<< HEAD
-<h2>How to fix the SSL3 error?</h2>
-<p>
-  Open or create the file
-</p>
-<code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.GetUserName())\.gitconfig</code>
-<p>Add the following lines:</p>
-<code>
-  [http]<br/>
-  sslVerify = true<br/>
-  sslCAinfo = C:/Users/@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.GetUserName())/devplex-ssl.pem<br/>
-</code>
-<p>
-  Open or create the file
-</p>
-<code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.GetUserName())\devplex-ssl.pem</code>
-<p>Add the following certificates:</p>
-<ul>
-  <li>devplex Root CA
-    <ul>  <li>devplex Sub CA 01</li>
-      <ul><li>devplex Git SSL Certificate</li></ul></ul>
-  </li>
-=======
-    <h2>How to fix the SSL3 error?</h2>
-    <p>
-      Open or create the file 
-    </p>
-    <code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name)\.gitconfig</code>
-    <p>Add the following lines:</p>
-    <code>[http]
-  sslVerify = true
-  sslCAinfo = C:/Users/@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name)/devplex-ssl.pem
-    </code>
-    <p>
-      Open or create the file 
-    </p>
-    <code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name)\devplex-ssl.pem</code>
-    <p>Add the following certificates:</p>
+        <h2>How to fix the SSL3 error?</h2>
+        <p>
+            Open or create the file
+        </p>
+        <code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name.Substring(User.Identity.Name.IndexOf(@"\") + 1))\.gitconfig</code>
+        <p>Add the following lines:</p>
+        <code>[http]<br />
+            sslVerify = true<br />
+            sslCAinfo = C:/Users/@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name.Substring(User.Identity.Name.IndexOf(@"\") + 1))/devplex-ssl.pem<br />
+        </code>
+        <p>or use these commands:</p>
+        <code>git config --global http.sslVerify true
+            <br />
+            git config --global http.sslCAinfo c:/Users/devplex/@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name.Substring(User.Identity.Name.IndexOf(@"\") + 1))/devplex-ssl.pem
+        </code>
+        <p>
+            Open or create the file
+        </p>
+        <code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name.Substring(User.Identity.Name.IndexOf(@"\") + 1))\devplex-ssl.pem</code>
+        <p>Add the following certificates:</p>
+        <ul>
+            <li>devplex Root CA
     <ul>
-      <li>devplex Root CA
-    <ul>
-      <li>devplex Sub CA 01</li>
-      <ul>
-        <li>devplex Git SSL Certificate</li>
-      </ul>
+        <li>devplex Sub CA 01</li>
+        <ul>
+            <li>devplex Git SSL Certificate</li>
+        </ul>
     </ul>
-      </li>
->>>>>>> refs/remotes/origin/develop
+            </li>
 
       <li>DigiCert HighAssurance EV Root CA
     <ul>
@@ -281,36 +262,22 @@ InuA6gcF1PnH8FNZX7t3ft6TcEFOI8t4eXnELurXZioY99HFfOISeIKNHeyCngGi
 n2Xkw9dJh1tybLEvrG8=
 -----END CERTIFICATE-----
 </textarea>
-<<<<<<< HEAD
+
 <h2>How to create a global ignore file?</h2>
 <p>
   Open or create the file
 </p>
-<code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.GetUserName())\.gitconfig</code>
+<code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name.Substring(User.Identity.Name.IndexOf(@"\") + 1))\.gitconfig</code>
 <p>Add the following lines:</p>
 <code>
   [core]<br/>
-  excludesfile = C:/Users/@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.GetUserName())/gitignore.txt<br/>
+  excludesfile = C:/Users/@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name.Substring(User.Identity.Name.IndexOf(@"\") + 1))/gitignore.txt<br/>
 </code>
 <p>
-  <a href="@Url.Content("~/Content/gitignore.txt")" >Download this file</a> and save it as:
+    <a href="@Url.Content("~/Content/gitignore.txt")" >Download this file</a> and save it as:
 </p>
-<code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.GetUserName())\gitignore.txt</code>
-=======
-    <h2>How to create a global ignore file?</h2>
-    <p>
-      Open or create the file 
-    </p>
-    <code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name)\.gitconfig</code>
-    <p>Add the following lines:</p>
-    <code>[core]
-  excludesfile = C:/Users/@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name)/gitignore.txt
-    </code>
-    <p>
-      <a href="@Url.Content("~/Content/gitignore.txt")" >Download this file</a> and save it as:
-    </p>
-    <code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name)\gitignore.txt</code>
->>>>>>> refs/remotes/origin/develop
+<code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name.Substring(User.Identity.Name.IndexOf(@"\") + 1))\gitignore.txt</code>
+
 
     <h2>How to use the windows credential store to remember passwords?</h2>
     <p>
@@ -333,7 +300,7 @@ n2Xkw9dJh1tybLEvrG8=
     </p>
     <code>git add --all .</code>
 
-<<<<<<< HEAD
+
 <h2>How to commit/push files to a repository?</h2>
 <p>
   Run the following command on the command prompt to add all changes to the commit:
@@ -358,33 +325,6 @@ n2Xkw9dJh1tybLEvrG8=
   NOTE: If you just cloned a new empty (bare) repository you MUST run:
 </p>
 <code>git push origin master</code>
-=======
-    <h2>How to commit/push files to a repository?</h2>
-    <p>
-      Run the following command on the command prompt to add all changes to the commit:
-    </p>
-    <code>git add --all .</code>
-    <p>
-      Run the following command on the command prompt to commit to the local repository:
-    </p>
-    <code>git commit -m {YourMessage}</code>
-    <p>Use the folloning prefixes:</p>
-    <ul>
-      <li>S: Specification</li>
-      <li>F: Feature</li>
-      <li>R: Refactoring</li>
-      <li>B: Bugfix</li>
-    </ul>
-    <p>
-      Run the following command on the command prompt to push to remote repository:
-    </p>
-    <code>git push</code>
-    <p>
-      NOTE: If you just cloned a new empty (bare) repository you MUST run:
-    </p>
-    <code>git push origin master</code>
->>>>>>> refs/remotes/origin/develop
-
 
     <h2>How to update a local repository with changes from remote?</h2>
     <p>
@@ -419,7 +359,6 @@ n2Xkw9dJh1tybLEvrG8=
     <code>git checkout {NameOfTheBranch}</code>
 
 
-<<<<<<< HEAD
 <h2>How to merge a branches?</h2>
 <p>
   Run the following command on the command prompt to switch over to the main branch:
@@ -429,17 +368,6 @@ n2Xkw9dJh1tybLEvrG8=
   Run the following command on the command prompt to merge a branch into the main branch:
 </p>
 <code>git merge {NameOfTheHotfixOrFeatureBranch}</code>
-=======
-    <h2>How to merge a branches?</h2>
-    <p>
-      Run the following command on the command prompt to swith over to the main branch:
-    </p>
-    <code>git checkout {NameOfTheMasterBranch}</code>
-    <p>
-      Run the following command on the command prompt to merge a branch into the main branch:
-    </p>
-    <code>git merge {NameOfTheHotfixOrFeatureBranch}</code>
->>>>>>> refs/remotes/origin/develop
 
     <h2>How to delete a branch?</h2>
     <p>
@@ -453,12 +381,12 @@ n2Xkw9dJh1tybLEvrG8=
     </p>
     <code>[w] + [q]</code>
 
-<<<<<<< HEAD
+
 <h2>How to configure Beyond Compare a visual merge tool?</h2>
 <p>
   Open or create the file
 </p>
-<code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.GetUserName())\.gitconfig</code>
+<code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name.Substring(User.Identity.Name.IndexOf(@"\") + 1))\.gitconfig</code>
 <p>Add the following lines:</p>
 <code>
 [merge]<br/>
@@ -498,46 +426,3 @@ n2Xkw9dJh1tybLEvrG8=
   Run the following command to revert all local changes:
 </p>
 <code>git reset --hard HEAD</code>
-=======
-    <h2>How to configure Beyond Compare a visual merge tool?</h2>
-    <p>
-      Open or create the file 
-    </p>
-    <code>C:\Users\@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name)\.gitconfig</code>
-    <p>Add the following lines:</p>
-    <code>[merge]
-  tool = bc3
-[mergetool.bc3]
-  path = "C:/Program Files (x86)/Beyond Compare 3/bcomp.exe"
-  cmd = "\"C:/Program Files (x86)/Beyond Compare 3/bcomp.exe\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\""
-  trustExitCode = true
-
-[diff]
-  tool = bc3
-[difftool]
-  prompt = false
-[difftool.bc3]
-  cmd = "\"C:/Program Files (x86)/Beyond Compare 3/bcomp.exe\" \"$LOCAL\" \"$REMOTE\""
-    </code>
-    <p>
-      Run the following command to diff a file:
-    </p>
-    <code>git difftool {PathToFileToDiff}</code>
-    <p>
-      Run the following command on the command merge a file:
-    </p>
-    <code>git mergetool {PathToFileToDiff}</code>
-
-    <h2>How to revert/see to a specific version of a file?</h2>
-    <p>
-      Run the following command to see to a specific version:
-    </p>
-    <code>git show {HASH}:./{RelativePathToFile}</code>
-    <code>git show HEAD@@{YYYY-MM-DD}:./{RelativePathToFile}</code>
-    <p>
-      Run the following command to revert to a specific version:
-    </p>
-    <code>git checkout {HASH}:./{RelativePathToFile}</code>
-  </div>
-</div>
->>>>>>> refs/remotes/origin/develop
