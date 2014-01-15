@@ -14,6 +14,13 @@ namespace devplex.GitServer.Core.IO
         {
             var root = new DirectoryInfo(Settings.Section.RepositoryPath);
 
+            //Todo: skat some kind of logging
+            if (!root.Exists)
+            {
+                yield return "Root directory not found, web.config -> devplex.GitServer repositoryPath";
+                yield break;
+            }
+
             foreach (var directory in root.EnumerateDirectories())
             {
                 try
