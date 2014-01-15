@@ -18,7 +18,7 @@
         <p>or use these commands:</p>
         <code>git config --global http.sslVerify true
             <br />
-            git config --global http.sslCAinfo c:/Users/devplex/@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name.Substring(User.Identity.Name.IndexOf(@"\") + 1))/devplex-ssl.pem
+            git config --global http.sslCAinfo c:/Users/@(string.IsNullOrWhiteSpace(User.Identity.Name) ? "{YourAccount}" : User.Identity.Name.Substring(User.Identity.Name.IndexOf(@"\") + 1))/devplex-ssl.pem
         </code>
         <p>
             Open or create the file
