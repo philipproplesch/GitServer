@@ -10,7 +10,7 @@ namespace devplex.GitServer.Core.Versioning
 
         IEnumerable<string> GetBranches();
         IEnumerable<CommitMessage> GetCommitMessages(int skip, int take);
-        IEnumerable<FileDiff> GetCommitDetails(string hash);
+        CommitDetails GetCommitDetails(string hash);
 
         RepositoryTree GetRepositoryContent(bool includeCommitDetails);
         RepositoryBlob GetBlobContent();

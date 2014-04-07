@@ -6,6 +6,7 @@ namespace devplex.GitServer.Mvc.ViewModels
 {
     public class CommitDetailsViewModel : BaseRepositoryDetails
     {
+		public CommitMessage CommitMessage { get; set; }
         public IEnumerable<FileDiff> Files { get; set; }
     }
 }

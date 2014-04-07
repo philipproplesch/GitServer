@@ -86,23 +86,16 @@ namespace devplex.GitServer.Core.Versioning
                 var branch = _getBranch(repository, _branchName);
 
                 result.AddRange(
-                    branch.Commits.Select(
-                        commit => new CommitMessage
-                        {
-                            Hash = commit.Sha,
-                            ShortHash = commit.Sha,
-                            Message = commit.Message,
-                            AuthorName = commit.Author.Name,
-                            AuthorMailAddress = commit.Author.Email,
-                            Timestamp = commit.Author.When.UtcDateTime
-                        }));
+                    branch.Commits.Select(commit => commit.ToCommitMessage()));
             }
 
             return result.Skip(skip).Take(take);
         }
 
-        public IEnumerable<FileDiff> GetCommitDetails(string hash)
+        public CommitDetails GetCommitDetails(string hash)
         {
+	        var details = new CommitDetails();
+
             using (var repository = Open())
             {
                 var branch = _getBranch(repository, _branchName);
@@ -119,6 +112,8 @@ namespace devplex.GitServer.Core.Versioning
                 {
                     return null;
                 }
+
+	            details.Message = commit.ToCommitMessage();
 
                 var parentCommit = commit.Parents.FirstOrDefault();
 
@@ -144,11 +139,11 @@ namespace devplex.GitServer.Core.Versioning
                         result.Add(diff);
                     }
 
-                    return result;
+	                details.FileDiffs = result;
                 }
             }
 
-            return null;
+            return details;
         }
 
         public RepositoryTree GetRepositoryContent(bool includeCommitDetails)

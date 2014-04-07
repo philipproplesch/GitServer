@@ -43,11 +43,13 @@ namespace devplex.GitServer.Mvc.Controllers
             string branch, string hash, string path)
         {
             var repository = new GitVersioningSystem(path,branch);
+            var details = repository.GetCommitDetails(hash);
 
             var model = new CommitDetailsViewModel {
                 Branch = branch,
                 RepositoryPath = repository.RootPath,
-                Files = repository.GetCommitDetails(hash),
+                Files = details.FileDiffs,
+                CommitMessage = details.Message
             };
 
             return View(model);

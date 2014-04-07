@@ -60,10 +60,12 @@
     <Compile Include="Configuration\ViewerElementCollection.cs" />
     <Compile Include="Configuration\ExtensionCollection.cs" />
     <Compile Include="Configuration\ExtensionElement.cs" />
+    <Compile Include="Extensions\CommitExtensions.cs" />
     <Compile Include="Extensions\TreeExtensions.cs" />
     <Compile Include="FrameworkExtensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="FrameworkExtensions\HttpResponseBaseExtensions.cs" />
     <Compile Include="FrameworkExtensions\StringExtensions.cs" />
+    <Compile Include="Models\CommitDetails.cs" />
     <Compile Include="Versioning\GitVersioningSystem.cs" />
     <Compile Include="IO\DirectoryCrawler.cs" />
     <Compile Include="Models\FileDiff.cs" />
