@@ -94,7 +94,7 @@ namespace devplex.GitServer.Core.Versioning
 
         public CommitDetails GetCommitDetails(string hash)
         {
-	        var details = new CommitDetails();
+            var details = new CommitDetails();
 
             using (var repository = Open())
             {
@@ -113,7 +113,7 @@ namespace devplex.GitServer.Core.Versioning
                     return null;
                 }
 
-	            details.Message = commit.ToCommitMessage();
+                details.Message = commit.ToCommitMessage();
 
                 var parentCommit = commit.Parents.FirstOrDefault();
 
@@ -139,7 +139,7 @@ namespace devplex.GitServer.Core.Versioning
                         result.Add(diff);
                     }
 
-	                details.FileDiffs = result;
+                    details.FileDiffs = result;
                 }
             }
 
