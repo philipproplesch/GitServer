@@ -118,7 +118,9 @@
     <Content Include="Content\Images\devplex-git-icon_30x30.png" />
     <Content Include="Content\Images\devplex-git-logo.png" />
     <None Include="Content\Styles\main.scss" />
+    <Content Include="Content\Styles\main.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\devplex.GitServer.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +140,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\devplex.GitServer.app.coffee" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\devplex.GitServer.js.map" />
+    <Content Include="Views\Shared\_TopBar.cshtml" />
+    <Content Include="Content\Styles\_top-bar.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

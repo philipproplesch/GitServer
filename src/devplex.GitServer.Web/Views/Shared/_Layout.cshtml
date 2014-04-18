@@ -10,17 +10,19 @@
   @Styles.Render("~/content/css")
   @Scripts.Render("~/scripts/modernizr")
 </head>
-<body>
-  @RenderBody()
-  <div class="row">
-    <div class="large-12 columns">
-      <hr />
-      @*<small>devplex.GitServer @Html.Version()</small>*@
+  <body>
+    @Html.Partial("_TopBar")
+    @RenderBody()
+    <div class="row">
+      <div class="large-12 columns">
+        <hr />
+        @*<small>devplex.GitServer @Html.Version()</small>*@
+        <small>devplex.GitServer 0.x.x.x</small>
+      </div>
     </div>
-  </div>
-  @Scripts.Render("~/scripts/app")
-  <script>
-    $(document).foundation();
-  </script>
-</body>
+    @Scripts.Render("~/scripts/app")
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
 </html>

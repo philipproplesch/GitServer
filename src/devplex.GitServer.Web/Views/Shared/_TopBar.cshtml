@@ -1,0 +1,23 @@
+﻿<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1>@Html.ActionLink("devplex.GitServer", "Index", "Home")</h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <ul class="right">
+      <li><a href="https://github.com/devplex/GitServer/issues" target="_blank"><i class="fa fa-github"></i> Issues</a></li>
+      <li class="divider hide-for-small"></li>
+      <li class="has-dropdown">
+        @Html.ActionLink("Help", "Index", "Help")
+
+        <ul class="dropdown">
+          <li><a href="http://git-scm.com/book" target="_blank">Pro Git</a></li>
+          <li><a href="http://try.github.io/" target="_blank">Learn Git</a></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</nav>
