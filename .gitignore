@@ -160,4 +160,8 @@ tmp/
 #Sass
 .sass-cache/
 
-src/devplex.GitServer.Web/Vendor
+node_modules/
+src/devplex.GitServer.Web/bower_components
+src/devplex.GitServer.Web/Content/Styles/main.css
+src/devplex.GitServer.Web/Scripts/devplex.GitServer.js
+src/devplex.GitServer.Web/Scripts/devplex.GitServer.js.map

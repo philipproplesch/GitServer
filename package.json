@@ -1,0 +1,23 @@
+{
+  "name": "devplex.GitServer",
+  "version": "0.0.0",
+  "description": "GitServer\r =========",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://philipproplesch@github.com/devplex/GitServer.git"
+  },
+  "author": "Philip Proplesch",
+  "bugs": {
+    "url": "https://github.com/devplex/GitServer/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-sass": "~0.7.3",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-coffee": "~0.10.1"
+  }
+}

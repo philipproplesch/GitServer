@@ -11,7 +11,7 @@
   },
   "CoffeeScript": {
     "CompileOnBuild": false,
-    "CompileOnSave": true,
+    "CompileOnSave": false,
     "GenerateSourceMaps": false,
     "MinifyInPlace": false,
     "OutputDirectory": "",
@@ -94,11 +94,11 @@
   },
   "Sass": {
     "CompileOnBuild": false,
-    "CompileOnSave": true,
+    "CompileOnSave": false,
     "GenerateSourceMaps": false,
     "MinifyInPlace": false,
     "OutputDirectory": null,
-    "ShowPreviewPane": true
+    "ShowPreviewPane": false
   },
   "TypeScript": {
     "BraceCompletion": true,
