@@ -159,3 +159,5 @@ tmp/
 
 #Sass
 .sass-cache/
+
+src/devplex.GitServer.Web/Vendor

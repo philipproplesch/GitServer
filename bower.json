@@ -1,0 +1,19 @@
+{
+  "name": "devplex.GitServer",
+  "version": "0.0.0",
+  "homepage": "https://github.com/devplex/GitServer",
+  "authors": [
+    "Philip Proplesch <philip@d3v.biz>"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.2.2",
+    "angular": "~1.2.16"
+  }
+}
