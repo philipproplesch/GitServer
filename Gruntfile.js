@@ -18,10 +18,10 @@ module.exports = function(grunt) {
 	coffee: {
 	  compileWithMaps: {
         options: {
-          sourceMap: true
+          join: true
         },
         files: {
-          'Scripts/devplex.GitServer.js': 'Scripts/devplex.GitServer.*.coffee'
+          'Scripts/devplex.GitServer.js': ['Scripts/**/*.coffee']
         }
       }
 	},

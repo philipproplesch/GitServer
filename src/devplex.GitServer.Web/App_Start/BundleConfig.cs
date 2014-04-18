@@ -23,6 +23,8 @@ namespace devplex.GitServer.Web
                     "~/bower_components/fastclick/lib/fastclick.js",
                     "~/bower_components/foundation/js/foundation.js",
                     "~/bower_components/angular/angular.js",
+                    "~/bower_components/angular-route/angular-route.js",
+                    "~/bower_components/angular-resource/angular-resource.js",
                     "~/Scripts/devplex.GitServer.js"));
         }
     }
