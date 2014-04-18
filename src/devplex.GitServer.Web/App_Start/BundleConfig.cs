@@ -10,29 +10,20 @@ namespace devplex.GitServer.Web
 
             bundles.Add(
                 new StyleBundle("~/content/css")
-                    .Include(
-                        "~/Content/app.css",
-                        "~/Content/styles.css",
-                        "~/Content/Prettify/prettify.css",
-                        "~/Content/Prettify/Themes/sons-of-obsidian.css",
-                        "~/Content/fontawesome/font-awesome.css"));
+                    .Include());
 
             bundles.Add(
                 new ScriptBundle("~/scripts/modernizr")
-                    .Include(
-                        "~/Scripts/vendor/custom.modernizr.js"));
+                    .Include("~/Vendor/modernizr/modernizr.js"));
 
             bundles.Add(
                 new ScriptBundle("~/scripts/app")
                     .Include(
-                        "~/Scripts/vendor/jquery.js",
-                        "~/Scripts/foundation/foundation.js",
-                        "~/Scripts/foundation/foundation.*",
-                        "~/Scripts/Prettify/prettify.js",
-                        "~/Scripts/jquery.timeago.js",
-                        "~/Scripts/jquery.pjax.js",
-                        "~/Scripts/gitserver/devplex.gitserver.js",
-                        "~/Scripts/gitserver/devplex.gitserver.*"));
+                    "~/Vendor/jquery/dist/jquery.js",
+                    "~/Vendor/fastclick/lib/fastclick.js",
+                    "~/Vendor/foundation/js/foundation.js",
+                    "~/Vendor/angular/angular.js",
+                    "~/Scripts/devplex.GitServer.*"));
         }
     }
 }

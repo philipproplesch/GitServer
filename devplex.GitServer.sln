@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "devplex.GitServer.Web", "src\devplex.GitServer.Web\devplex.GitServer.Web.csproj", "{30E3F4E3-3C2D-487D-9A62-AA878D02096E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "devplex.GitServer.Mvc", "src\devplex.GitServer.Mvc\devplex.GitServer.Mvc.csproj", "{4BEA9FA7-19C9-4145-891F-247CD9E7A83C}"
@@ -14,12 +16,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E42926
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FDEFA1CD-08D3-4F7B-B987-C7BC7DCC7D06}"
-	ProjectSection(SolutionItems) = preProject
-		WE-settings.xml = WE-settings.xml
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "devplex.GitServer.Transport", "src\devplex.GitServer.Transport\devplex.GitServer.Transport.csproj", "{340CEAE8-CB34-47E4-B4F8-0D22802ADCCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{00A387E5-215E-4CEE-ACAD-EEC0B3FCE83D}"
+	ProjectSection(SolutionItems) = preProject
+		WebEssentials-Settings.json = WebEssentials-Settings.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

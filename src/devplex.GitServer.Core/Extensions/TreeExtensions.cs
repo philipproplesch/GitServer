@@ -58,20 +58,21 @@ namespace devplex.GitServer.Core.Extensions
                         if (entry.TargetType == TreeEntryTargetType.Blob)
                         {
                             var blob = (Blob)entry.Target;
-
+                            
                             repositoryBlob.FileName = entry.Name;
-                            repositoryBlob.RawContent = blob.Content;
+                            repositoryBlob.Content = blob.GetContentText();
 
-                            using (var ms = new MemoryStream(blob.Content))
-                            using (var reader = new StreamReader(ms, true))
+                            using (var stream = blob.GetContentStream())
+                            using(var ms = new MemoryStream())
                             {
-                                repositoryBlob.Content = reader.ReadToEnd();
+                                stream.CopyTo(ms);
+                                repositoryBlob.RawContent = ms.ToArray();
                             }
 
                             repositoryBlob.FileSize =
                                 string.Format(
                                     "{0:0.###} kb",
-                                    ((double)blob.Content.LongLength / 1024));
+                                    ((double)blob.Size / 1024));
 
                             return repositoryBlob;
                         }

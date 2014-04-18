@@ -1,9 +1,11 @@
 ﻿<!DOCTYPE html>
-
-<html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" ng-app="GitServer">
 <head>
-  <title>devplex.GitServer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, nofollow" />
+  <title>devplex.GitServer</title>
   <link rel="icon" href="@Url.Content("~/Content/images/devplex-git-icon.png")" type="image/png" />
   @Styles.Render("~/content/css")
   @Scripts.Render("~/scripts/modernizr")
@@ -17,9 +19,6 @@
       <small>devplex.GitServer @Html.Version()</small>
     </div>
   </div>
-  <script>
-    window.fetchRepositoriesUrl = '@Url.Action("Repositories", "Home")';
-  </script>
   @Scripts.Render("~/scripts/app")
   <script>
     $(document).foundation();
