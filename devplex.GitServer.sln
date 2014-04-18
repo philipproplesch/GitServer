@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "devplex.GitServer.Web", "src\devplex.GitServer.Web\devplex.GitServer.Web.csproj", "{30E3F4E3-3C2D-487D-9A62-AA878D02096E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "devplex.GitServer.Web", "src\devplex.GitServer.Web\devplex.GitServer.Web.csproj", "{29D0DA06-96AF-41DC-9A17-0BA04672D753}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "devplex.GitServer.Mvc", "src\devplex.GitServer.Mvc\devplex.GitServer.Mvc.csproj", "{4BEA9FA7-19C9-4145-891F-247CD9E7A83C}"
 EndProject
@@ -29,10 +29,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{30E3F4E3-3C2D-487D-9A62-AA878D02096E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{30E3F4E3-3C2D-487D-9A62-AA878D02096E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{30E3F4E3-3C2D-487D-9A62-AA878D02096E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30E3F4E3-3C2D-487D-9A62-AA878D02096E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4BEA9FA7-19C9-4145-891F-247CD9E7A83C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4BEA9FA7-19C9-4145-891F-247CD9E7A83C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BEA9FA7-19C9-4145-891F-247CD9E7A83C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{340CEAE8-CB34-47E4-B4F8-0D22802ADCCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{340CEAE8-CB34-47E4-B4F8-0D22802ADCCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{340CEAE8-CB34-47E4-B4F8-0D22802ADCCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29D0DA06-96AF-41DC-9A17-0BA04672D753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29D0DA06-96AF-41DC-9A17-0BA04672D753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29D0DA06-96AF-41DC-9A17-0BA04672D753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29D0DA06-96AF-41DC-9A17-0BA04672D753}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
