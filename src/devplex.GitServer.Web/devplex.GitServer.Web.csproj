@@ -121,6 +121,7 @@
     <Content Include="Content\Styles\main.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\devplex.GitServer.js" />
+    <Content Include="Templates\project.html" />
     <Content Include="Templates\home.html" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -147,6 +148,8 @@
     <Content Include="Scripts\controllers\home.coffee" />
     <Content Include="Scripts\devplex.GitServer.js.map" />
     <Content Include="Scripts\resources\organization.coffee" />
+    <Content Include="Scripts\controllers\project.coffee" />
+    <Content Include="Scripts\resources\project.coffee" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

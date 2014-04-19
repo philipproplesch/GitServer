@@ -1,5 +1,9 @@
 ﻿<input type="search" ng-model="q" placeholder="search organization or project" />
 <div ng-repeat="organization in organizations | filter: q" ng-if="organization.projects.length > 0">
   <h2 ng-bind="organization.name"></h2>
-  <ul ng-repeat="project in organization.projects  | filter: q" ng-bind="project.name"></ul>
+  <ul>
+    <li ng-repeat="project in organization.projects | filter: q">
+      <a href="#/{{organization.slug}}/{{project.slug}}" ng-bind="project.name"></a>
+    </li>
+  </ul>
 </div>

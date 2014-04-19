@@ -8,6 +8,7 @@ namespace devplex.GitServer.Web.Controllers
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string Slug { get; set; }
         public List<Project> Projects { get; set; }
 
         public Organization()
@@ -21,10 +22,13 @@ namespace devplex.GitServer.Web.Controllers
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string Slug { get; set; }
+        public string[] Branches { get; set; }
 
         public Project()
         {
             Id = Guid.NewGuid();
+            Branches = new [] {"master", "next", "feature/foo", "feature/bar"};
         }
     }
 
@@ -36,37 +40,45 @@ namespace devplex.GitServer.Web.Controllers
 
             var projects = new List<Project> {
                 new Project {
-                    Name = "First"
+                    Name = "First",
+                    Slug = "first"
                 },
                 new Project {
-                    Name = "Second"
+                    Name = "Second",
+                    Slug = "second"
                 },
                 new Project {
-                    Name = "Third"
+                    Name = "Third",
+                    Slug = "third"
                 }
             };
 
             response.Add(new Organization {
                 Name = "Acme Inc.",
+                Slug = "acme-inc",
                 Projects = projects
             });
 
             response.Add(new Organization {
                 Name = "devplex",
+                Slug = "devplex",
                 Projects = projects
             });
 
             response.Add(new Organization {
                 Name = "Foo Corp.",
+                Slug = "foo-corp",
                 Projects = projects
             });
 
             response.Add(new Organization {
-                Name = "Microsoft"
+                Name = "Microsoft",
+                Slug = "msft"
             });
 
             response.Add(new Organization {
-                Name = "Google"
+                Name = "Google",
+                Slug = "google"
             });
 
             return response;
